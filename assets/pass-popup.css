@@ -1,0 +1,141 @@
+/* SWYFT ONE entry popup — deliberately isolated from each page's existing theme. */
+dialog.pass-popup {
+  width: min(420px, calc(100vw - 30px));
+  max-width: none;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 20px;
+  color: #102d47;
+  background: transparent;
+  box-shadow: 0 28px 90px rgba(4, 22, 38, .28);
+}
+dialog.pass-popup::backdrop {
+  background: rgba(5, 22, 37, .48);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+dialog.pass-popup[open] {
+  animation: pass-popup-enter .24s cubic-bezier(.2, .75, .25, 1) both;
+}
+.pass-popup-card {
+  position: relative;
+  overflow: hidden;
+  padding: 31px 29px 22px;
+  border: 1px solid rgba(11, 34, 56, .08);
+  border-radius: 20px;
+  background: #fff;
+}
+.pass-popup-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  content: "";
+  background: linear-gradient(90deg, #d2a653 0%, #efd58c 55%, #0b6d9f 100%);
+}
+.pass-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid #e5ebef;
+  border-radius: 50%;
+  color: #536675;
+  background: #f7f9fa;
+  font: 400 21px/1 Arial, sans-serif;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+.pass-popup-close:hover { color: #0b2238; background: #edf2f5; transform: rotate(5deg); }
+.pass-popup-close:focus-visible,
+.pass-popup-cta:focus-visible,
+.pass-popup-later:focus-visible,
+a.hero-image-note:focus-visible {
+  outline: 3px solid #167db1;
+  outline-offset: 3px;
+}
+.pass-popup-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 42px 13px 0;
+  color: #557081;
+  font: 800 10px/1.4 Manrope, "DM Sans", Arial, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.pass-popup-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d2a653;
+  box-shadow: 0 0 0 4px rgba(210, 166, 83, .15);
+}
+.pass-popup-card h2 {
+  margin: 0 0 12px;
+  color: #0b2238;
+  font: 800 clamp(24px, 5vw, 29px)/1.14 Manrope, "DM Sans", Arial, sans-serif;
+  letter-spacing: -.045em;
+}
+.pass-popup-card p {
+  margin: 0 0 21px;
+  color: #5c6f7d;
+  font: 400 14px/1.7 "DM Sans", Arial, sans-serif;
+}
+.pass-popup-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 48px;
+  padding: 13px 16px;
+  border: 1px solid #0b2238;
+  border-radius: 10px;
+  color: #fff;
+  background: #0b2238;
+  font: 800 12px/1.3 Manrope, "DM Sans", Arial, sans-serif;
+  text-decoration: none;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.pass-popup-cta span { color: #f0cd7c; font-size: 17px; }
+.pass-popup-cta:hover { color: #fff; background: #103b5c; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(11, 34, 56, .16); }
+.pass-popup-later {
+  display: block;
+  margin: 11px auto 0;
+  padding: 7px 12px;
+  border: 0;
+  color: #6e7d87;
+  background: transparent;
+  font: 700 12px/1.3 "DM Sans", Arial, sans-serif;
+  cursor: pointer;
+}
+.pass-popup-later:hover { color: #0b2238; text-decoration: underline; text-underline-offset: 3px; }
+.pass-popup-footnote {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid #edf1f3;
+  color: #8a969e;
+  font: 800 8px/1.4 Manrope, "DM Sans", Arial, sans-serif;
+  letter-spacing: .16em;
+  text-align: center;
+}
+@keyframes pass-popup-enter {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 480px) {
+  .pass-popup-card { padding: 28px 22px 19px; }
+  .pass-popup-card h2 { font-size: 25px; }
+  .pass-popup-card p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.pass-popup[open] { animation: none; }
+  .pass-popup-close, .pass-popup-cta { transition: none; }
+}
