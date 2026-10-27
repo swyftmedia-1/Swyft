@@ -10,8 +10,8 @@
   const localHosts = new Set(['localhost', '127.0.0.1']);
 
   if (localHosts.has(hostname)) {
-    window.SWYFT_CMS_API_URL = 'http://127.0.0.1:3000';
-  } else {
     window.SWYFT_CMS_API_URL = 'https://swyftmedia.onrender.com';
+  } else {
+    window.SWYFT_CMS_API_URL = 'http://127.0.0.1:3000';
   }
 })();
