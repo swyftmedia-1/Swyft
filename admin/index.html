@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Business Stories Admin | Swyft Media</title>
+<script src="../cms-config.js"></script>
+<style>
+:root{--ink:#101010;--muted:#646464;--paper:#f5f5f2;--line:#e5e5e1;--gold:#f5c400;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}.top{background:#080808;color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--gold)}.top small{color:#b4b4b4}.wrap{max-width:1120px;margin:36px auto;padding:0 20px}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 10px 32px rgba(0,0,0,.04)}.narrow{max-width:480px;margin:7vh auto}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:900;color:#6a6a6a}.h1{font-size:clamp(30px,4vw,42px);font-weight:900;letter-spacing:-.04em;line-height:1.08;margin:8px 0 14px}.muted{color:var(--muted)}label{display:block;font-weight:750;font-size:13px;margin:16px 0 6px}input,textarea{display:block;width:100%;border:1px solid #d8d8d3;border-radius:10px;padding:12px 13px;background:#fff;color:#161616;outline:none}input:focus,textarea:focus{border-color:#111;box-shadow:0 0 0 3px rgba(245,196,0,.22)}textarea{min-height:240px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.btn{border:0;border-radius:999px;padding:12px 18px;background:#090909;color:#fff;font-weight:800}.btn.gold{background:var(--gold);color:#111}.btn.light{background:#eee;color:#111}.btn.danger{background:#fee2e2;color:#991b1b}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.notice{padding:12px 14px;border-radius:10px;margin:14px 0;font-size:14px}.notice.warn{background:#fff4c2;color:#6f4b00}.notice.error{background:#ffe7e7;color:#8a1717}.notice.ok{background:#e6f8eb;color:#17652d}.hidden{display:none!important}.sectionhead{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:24px;align-items:start}.stories{display:grid;gap:12px}.story{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.story h3{margin:0 0 5px;font-size:17px;line-height:1.25}.pill{display:inline-block;border-radius:999px;background:#eee;padding:3px 9px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.pill.pub{background:#e1f8e8;color:#17652d}.pill.draft{background:#fff1bd;color:#785100}.story-controls{display:flex;gap:8px;flex-wrap:wrap}.story-controls button{border:0;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}.help{font-size:12px;color:#666;margin-top:6px}.checkline{display:flex;align-items:center;gap:10px;margin-top:18px}.checkline input{width:18px;height:18px;margin:0}.checkline label{margin:0}.cover-preview{max-height:120px;max-width:100%;border-radius:10px;margin-top:10px;display:none}.foot{text-align:center;color:#777;font-size:12px;margin:24px auto 36px}@media(max-width:800px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}.panel{padding:20px}.top{padding:16px 18px}.wrap{margin:22px auto;padding:0 14px}.story{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top"><div><a class="brand" href="../index.html" style="color:#fff;text-decoration:none">SWYFT <span>MEDIA</span></a><small>Business Stories publishing</small></div><button id="logoutBtn" class="btn light hidden" type="button">Sign out</button></header>
+<main class="wrap">
+  <div id="apiWarning" class="notice warn hidden"></div>
+  <section id="loginPanel" class="panel narrow">
+    <p class="eyebrow">Private publishing area</p><h1 class="h1">Admin sign in</h1><p class="muted">Sign in with the dedicated CMS username and password provided by your website administrator. No GitHub account is required.</p>
+    <div id="loginMessage" class="notice error hidden"></div>
+    <form id="loginForm" autocomplete="on">
+      <label for="username">Username</label><input id="username" name="username" autocomplete="username" required>
+      <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required>
+      <div class="actions"><button id="loginBtn" class="btn gold" type="submit">Sign in</button></div>
+    </form>
+  </section>
+
+  <section id="appPanel" class="hidden">
+    <div class="sectionhead"><div><p class="eyebrow">Swyft Media CMS</p><h1 class="h1">Business Stories</h1><p class="muted">Create, edit, save drafts and publish articles to the website.</p></div><button id="newBtn" class="btn gold" type="button">+ New story</button></div>
+    <div id="appMessage" class="notice hidden"></div>
+    <div class="layout">
+      <section class="panel"><div class="sectionhead"><h2 style="margin:0;font-size:22px;font-weight:900">Your stories</h2><button id="refreshBtn" class="btn light" type="button">Refresh</button></div><div id="storyList" class="stories"><p class="muted">Loading stories…</p></div></section>
+      <section class="panel"><p class="eyebrow" id="formEyebrow">New article</p><h2 id="formTitle" style="font-size:25px;font-weight:900;margin:4px 0 8px">Create a story</h2><p class="muted" style="font-size:13px">Required fields are marked. Separate paragraphs with a blank line.</p>
+        <form id="storyForm">
+          <input id="originalSlug" type="hidden">
+          <label for="title">Article title *</label><input id="title" required maxlength="180" placeholder="Write a clear title">
+          <div class="row"><div><label for="slug">URL slug *</label><input id="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="180" placeholder="example-business-story"><p class="help">Lowercase letters, numbers and hyphens only.</p></div><div><label for="date">Publication date *</label><input id="date" type="date" required></div></div>
+          <label for="description">Short description / SEO summary</label><textarea id="description" rows="3" style="min-height:88px" maxlength="320" placeholder="A short summary for the story card"></textarea>
+          <label for="coverFile">Cover image</label><input id="coverFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><p class="help">JPG, PNG, WebP or GIF, up to 5 MB. The image is stored by the CMS server.</p><img id="coverPreview" class="cover-preview" alt="Cover preview"><input id="coverImage" type="hidden">
+          <label for="body">Article content *</label><textarea id="body" required minlength="20" placeholder="Write your article here. Use a blank line between paragraphs."></textarea>
+          <div class="checkline"><input id="published" type="checkbox"><label for="published">Publish this story on the live website</label></div>
+          <div class="actions"><button id="saveBtn" class="btn gold" type="submit">Save story</button><button id="draftBtn" class="btn light" type="button">Save as draft</button><button id="resetBtn" class="btn light" type="button">Clear form</button></div>
+        </form>
+      </section>
+    </div>
+  </section>
+</main>
+<p class="foot">Swyft Media · Restricted publishing access · Keep your login credentials private.</p>
+<script>
+(() => {
+  const API = String(window.SWYFT_CMS_API_URL || '').trim().replace(/\/+$/, '');
+  const $ = (id) => document.getElementById(id);
+  const loginPanel = $('loginPanel'), appPanel = $('appPanel'), apiWarning = $('apiWarning');
+  let stories = [];
+  let currentStory = null;
+  const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const showMessage = (where, message, type='ok') => { const el=$(where); el.className='notice '+type; el.textContent=message; el.classList.remove('hidden'); };
+  const hideMessage = (where) => $(where).classList.add('hidden');
+  const toDate = () => { const now=new Date(); return new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10); };
+  const request = async (path, options={}) => {
+    if (!API) throw new Error('CMS API is not configured. Check cms-config.js.');
+    let response;
+    try {
+      response = await fetch(API + path, {
+        credentials: 'include',
+        ...options,
+        headers: { ...(options.body instanceof FormData ? {} : {'Content-Type':'application/json'}), ...(options.headers || {}) }
+      });
+    } catch (_) {
+      throw new Error(`Could not reach the CMS API at ${API}. Confirm the server is running and the API URL matches this local hostname.`);
+    }
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(data.error || `Request failed (${response.status}).`);
+      error.status = response.status;
+      throw error;
+    }
+    return data;
+  };
+  const updateAuthView = (signedIn) => { loginPanel.classList.toggle('hidden', signedIn); appPanel.classList.toggle('hidden', !signedIn); $('logoutBtn').classList.toggle('hidden', !signedIn); };
+  const resetForm = () => {
+    currentStory = null; $('storyForm').reset(); $('originalSlug').value=''; $('date').value=toDate(); $('coverImage').value=''; $('coverPreview').removeAttribute('src'); $('coverPreview').style.display='none'; $('formEyebrow').textContent='New article'; $('formTitle').textContent='Create a story'; $('saveBtn').textContent='Save story'; $('published').checked=false;
+  };
+  const slugify = (value) => String(value || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  $('title').addEventListener('input', () => { if (!$('originalSlug').value) $('slug').value=slugify($('title').value); });
+  $('coverFile').addEventListener('change', () => { const file=$('coverFile').files[0]; if (!file) return; const preview=$('coverPreview'); preview.src=URL.createObjectURL(file); preview.style.display='block'; });
+  const renderStories = () => {
+    const list=$('storyList');
+    if (!stories.length) { list.innerHTML='<p class="muted">No articles yet. Create your first Business Story using the form.</p>'; return; }
+    list.innerHTML=stories.map((story) => `<article class="story"><div><h3>${esc(story.title)}</h3><p class="muted" style="margin:0 0 9px;font-size:12px">${esc(story.date || '')} · <a style="text-decoration:underline;text-underline-offset:3px" target="_blank" rel="noopener noreferrer" href="../blog/story.html?slug=${encodeURIComponent(story.slug)}">View story ↗</a></p><span class="pill ${story.published?'pub':'draft'}">${story.published?'Published':'Draft'}</span></div><div class="story-controls"><button type="button" data-edit="${esc(story.slug)}" class="btn light">Edit</button><button type="button" data-delete="${esc(story.slug)}" class="btn danger">Delete</button></div></article>`).join('');
+    list.querySelectorAll('[data-edit]').forEach((button) => button.addEventListener('click', () => loadIntoForm(button.dataset.edit)));
+    list.querySelectorAll('[data-delete]').forEach((button) => button.addEventListener('click', () => deleteStory(button.dataset.delete)));
+  };
+  const loadStories = async () => {
+    $('storyList').innerHTML='<p class="muted">Loading stories…</p>';
+    try {
+      const data = await request('/api/admin/stories');
+      stories = Array.isArray(data) ? data : (data.stories || []);
+      renderStories();
+      hideMessage('appMessage');
+    } catch (error) {
+      $('storyList').innerHTML='';
+      if (error.status === 401) {
+        updateAuthView(false);
+        showMessage('loginMessage', 'Your sign-in session was not retained. Sign in again; for local testing, open the admin page using localhost or 127.0.0.1 consistently and use development cookie settings.', 'error');
+      } else {
+        showMessage('appMessage', error.message, 'error');
+      }
+    }
+  };
+  const loadIntoForm = (slug) => {
+    const story=stories.find((item) => item.slug===slug); if (!story) return; currentStory=story;
+    $('originalSlug').value=story.slug; $('title').value=story.title||''; $('slug').value=story.slug||''; $('date').value=story.date||toDate(); $('description').value=story.description||''; $('body').value=story.body||''; $('published').checked=Boolean(story.published); $('coverImage').value=story.coverImage||''; $('coverFile').value='';
+    $('coverPreview').src=story.coverImage||''; $('coverPreview').style.display=story.coverImage?'block':'none'; $('formEyebrow').textContent='Edit article'; $('formTitle').textContent='Update story'; $('saveBtn').textContent='Update story'; hideMessage('appMessage'); window.scrollTo({top:$('storyForm').getBoundingClientRect().top+window.scrollY-24,behavior:'smooth'});
+  };
+  const deleteStory = async (slug) => {
+    const story=stories.find((item)=>item.slug===slug); if (!story || !window.confirm(`Delete “${story.title}”? This cannot be undone.`)) return;
+    try { await request('/api/admin/stories/'+encodeURIComponent(slug), {method:'DELETE'}); showMessage('appMessage','Story deleted.','ok'); if ($('originalSlug').value===slug) resetForm(); await loadStories(); } catch(error) { showMessage('appMessage',error.message,'error'); }
+  };
+  $('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    hideMessage('loginMessage');
+    $('loginBtn').disabled = true;
+    try {
+      await request('/api/auth/login', { method:'POST', body:JSON.stringify({ username:$('username').value.trim(), password:$('password').value }) });
+      // Verify the HttpOnly cookie was stored and returned before revealing the dashboard.
+      await request('/api/auth/me');
+      $('password').value = '';
+      updateAuthView(true);
+      resetForm();
+      await loadStories();
+    } catch (error) {
+      updateAuthView(false);
+      const message = error.status === 401 && /session|Not signed in/i.test(error.message)
+        ? 'The login response was received, but the session cookie was not accepted by the browser. For local testing, use the same hostname for the admin page and API, then restart the backend with COOKIE_SECURE=false.'
+        : error.message;
+      showMessage('loginMessage', message, 'error');
+    } finally {
+      $('loginBtn').disabled = false;
+    }
+  });
+  $('logoutBtn').addEventListener('click', async () => { try { await request('/api/auth/logout',{method:'POST',body:'{}'}); } catch(_) {} updateAuthView(false); $('password').value=''; });
+  $('refreshBtn').addEventListener('click', loadStories); $('newBtn').addEventListener('click', () => { resetForm(); hideMessage('appMessage'); window.scrollTo({top:$('storyForm').getBoundingClientRect().top+window.scrollY-24,behavior:'smooth'}); }); $('resetBtn').addEventListener('click', resetForm); $('draftBtn').addEventListener('click', () => { $('published').checked=false; $('storyForm').requestSubmit(); });
+  $('storyForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); hideMessage('appMessage'); $('saveBtn').disabled=true;
+    try {
+      let coverImage=$('coverImage').value;
+      const file=$('coverFile').files[0];
+      if (file) { const formData=new FormData(); formData.append('image',file); const uploaded=await request('/api/admin/upload',{method:'POST',body:formData}); coverImage=uploaded.url; }
+      const payload={title:$('title').value.trim(),slug:$('slug').value.trim(),date:$('date').value,description:$('description').value.trim(),body:$('body').value.trim(),coverImage,published:$('published').checked};
+      const oldSlug=$('originalSlug').value;
+      if (oldSlug) await request('/api/admin/stories/'+encodeURIComponent(oldSlug),{method:'PUT',body:JSON.stringify(payload)});
+      else await request('/api/admin/stories',{method:'POST',body:JSON.stringify(payload)});
+      showMessage('appMessage',payload.published?'Story saved and published.':'Draft saved successfully.','ok'); await loadStories(); resetForm();
+    } catch(error) { showMessage('appMessage',error.message,'error'); }
+    finally { $('saveBtn').disabled=false; }
+  });
+  if (!API) { apiWarning.textContent='Setup required: the private login will work after the CMS API has been deployed and its URL is entered in cms-config.js. No password is stored in this static file.'; apiWarning.classList.remove('hidden'); $('loginBtn').disabled=true; }
+  else { request('/api/auth/me').then(() => { updateAuthView(true); return loadStories(); }).catch(() => updateAuthView(false)); }
+  resetForm();
+})();
+</script>
+</body>
+</html>
