@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWYFT ONE | Business Pass</title>
+<meta name="description" content="Discover SWYFT ONE, Swyft Media's creative business pass for connected branding, digital marketing, content and public relations support.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://swyftmedia.in/swyft-pass.html">
+<meta property="og:site_name" content="Swyft Media Productions">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SWYFT ONE | Business Pass | Swyft Media">
+<meta property="og:description" content="Discover SWYFT ONE, a connected creative business pass for branding, digital marketing, content and public relations support.">
+<meta property="og:url" content="https://swyftmedia.in/swyft-pass.html">
+<meta property="og:image" content="https://swyftmedia.in/swyft-media-logo-horizontal.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SWYFT ONE | Business Pass | Swyft Media">
+<meta name="twitter:description" content="A connected creative business pass for branding, digital marketing, content and public relations support.">
+<meta name="twitter:image" content="https://swyftmedia.in/swyft-media-logo-horizontal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--navy:#071b30;--navy2:#0d3454;--blue:#117db8;--gold:#d2a653;--ink:#102d47;--muted:#6d7e8d;--line:#dbe5eb;--soft:#f5f8fa}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f8fa;color:var(--ink);font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,90%);margin:auto}
+.section{padding:88px 0;position:relative;overflow:hidden}
+.kicker{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:2.4px;font:800 10px Manrope;color:#1775aa}
+.kicker:before{content:"";width:30px;height:1px;background:var(--gold)}
+.title{font:800 clamp(36px,5vw,62px)/1 Manrope;letter-spacing:-3px;color:#092a46;margin:12px 0 15px}
+.muted{max-width:680px;color:var(--muted);font-size:14px;line-height:1.7}
+.reveal{opacity:0;transform:translateY(24px);transition:.7s ease}
+.reveal.visible{opacity:1;transform:none}
+.hero{min-height:90svh;padding:28px 0 55px;background:
+radial-gradient(circle at 82% 22%,rgba(36,158,218,.18),transparent 25%),
+linear-gradient(135deg,#fafdff,#edf6fb 58%,#fbfaf6)}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 30px}
+.nav-brand{font:800 14px Manrope;letter-spacing:1.8px;color:#0b3354}
+.nav-brand span{color:var(--blue)}
+.nav-tag{font-size:9px;letter-spacing:2px;color:#728696;text-transform:uppercase}
+.hero-grid{display:grid;grid-template-columns:1fr .95fr;gap:55px;align-items:center;min-height:70vh}
+.hero h1{font:800 clamp(54px,7vw,88px)/.88 Manrope;letter-spacing:-5px;margin:17px 0}
+.hero h1 em{font:500 .66em/1 "Playfair Display";color:#197db8;letter-spacing:-2px}
+.hero-copy{font-size:16px;color:#617586;line-height:1.7;max-width:610px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:23px 0}
+.pill{padding:9px 12px;border:1px solid #d2e0e8;background:rgba(255,255,255,.82);border-radius:999px;font:800 9px Manrope;letter-spacing:1px}
+.cta{display:inline-flex;align-items:center;gap:14px;background:var(--navy);color:#fff;padding:14px 18px;border-radius:12px;font:800 10px Manrope;letter-spacing:1px;box-shadow:0 16px 35px rgba(7,27,48,.18);transition:.3s}
+.cta:hover{transform:translateY(-3px);box-shadow:0 22px 45px rgba(7,27,48,.25)}
+.visual{height:480px;display:grid;place-items:center;position:relative}
+/* SWYFT premium branding card — matched to intro-premium(2) */
+.visual{perspective:1400px}
+.hero-card{
+  position:relative;width:350px;height:225px;border-radius:27px;padding:27px;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(255,255,255,.30),transparent 18%),
+    radial-gradient(circle at 18% 82%,rgba(39,184,236,.30),transparent 30%),
+    linear-gradient(135deg,#071f3b 0%,#0a4f83 42%,#0aa5dc 100%);
+  border:1px solid rgba(255,255,255,.32);
+  box-shadow:0 12px 20px rgba(0,0,0,.20),0 35px 80px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(0,0,0,.18);
+  transform:rotate(-7deg);transform-style:preserve-3d;z-index:4;overflow:hidden;isolation:isolate;
+  animation:heroCardFloat 5s ease-in-out infinite;color:#fff;
+}
+.hero-card:before{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-90px;top:-100px;pointer-events:none}
+.hero-card:after{content:"";position:absolute;inset:-70%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.18) 48%,transparent 54%);transform:translateX(-45%) rotate(8deg);animation:heroCardShine 6s ease-in-out infinite;pointer-events:none;z-index:0}
+.hero-card>*{position:relative;z-index:2}
+.hero-card small{position:absolute;top:25px;left:27px;font:800 9px/1 Manrope;letter-spacing:2px;color:#fff}
+.hero-card small:after{content:"PREMIUM CREATIVE ACCESS";display:block;margin-top:3px;font:600 5px/1 "DM Sans";letter-spacing:1.2px;color:rgba(255,255,255,.65)}
+.hero-card .chip{position:absolute;left:27px;top:72px;width:43px;height:32px;border-radius:8px;background:linear-gradient(135deg,#f8df9b,#b98a32 48%,#ffe8a6);box-shadow:inset 0 1px 2px rgba(255,255,255,.7),0 3px 8px rgba(0,0,0,.22);overflow:hidden}
+.hero-card .chip:before,.hero-card .chip:after{content:"";position:absolute;left:7px;right:7px;height:1px;background:rgba(86,54,11,.5)}
+.hero-card .chip:before{top:10px}.hero-card .chip:after{top:20px}
+.hero-card .chip i{position:absolute;top:4px;bottom:4px;left:20px;width:1px;background:rgba(86,54,11,.45)}
+.hero-card .contactless{position:absolute;left:78px;top:76px;width:22px;height:22px;transform:rotate(90deg)}
+.hero-card .contactless:before,.hero-card .contactless:after{content:"";position:absolute;border:2px solid rgba(255,255,255,.78);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-45deg)}
+.hero-card .contactless:before{inset:3px}.hero-card .contactless:after{inset:7px}
+.hero-card .number{position:absolute;left:27px;right:27px;top:125px;margin:0;font:600 17px/1 "DM Sans";letter-spacing:3px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.22)}
+.hero-card .valid{position:absolute;left:28px;bottom:24px;font:600 6px/1.2 "DM Sans";letter-spacing:1px;color:rgba(255,255,255,.7);text-transform:uppercase}
+.hero-card .valid strong{display:block;margin-top:3px;font:700 10px/1 "DM Sans";letter-spacing:1px;color:#fff}
+.hero-card .holder{position:absolute;left:80px;bottom:25px;font:700 8px/1 "DM Sans";letter-spacing:1.3px;color:#fff;text-transform:uppercase}
+.hero-card .brandmark{position:absolute;right:20px;bottom:17px;width:112px;height:30px;display:flex;align-items:center;justify-content:center;padding:4px 7px;border-radius:7px;background:rgba(255,255,255,.92);box-shadow:0 5px 14px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.75);z-index:3}
+.hero-card .brandmark img{display:block;width:100%;height:100%;object-fit:contain}
+.hero-card .card-glow{position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 35px rgba(255,255,255,.08);pointer-events:none}
+@keyframes heroCardFloat{50%{transform:rotate(-3deg) translateY(-12px)}}
+@keyframes heroCardShine{0%,55%{transform:translateX(-55%) rotate(8deg)}75%,100%{transform:translateX(55%) rotate(8deg)}}
+
+.visual:before{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(20,119,176,.14);border-radius:50%}
+.visual:after{content:"";position:absolute;width:330px;height:330px;border:1px solid rgba(20,119,176,.08);border-radius:50%}
+.card{position:relative;width:350px;height:225px;padding:26px;border-radius:26px;z-index:3;transform:rotate(-7deg);color:#fff;background:linear-gradient(135deg,#06192d,#0b3b60 55%,#1687c2);border:1px solid rgba(255,255,255,.2);box-shadow:0 38px 85px rgba(7,42,69,.3);overflow:hidden;animation:float 5s ease-in-out infinite}
+.card:before{content:"";position:absolute;right:-75px;top:-90px;width:250px;height:250px;border:1px solid rgba(255,255,255,.16);border-radius:50%;box-shadow:0 0 0 25px rgba(255,255,255,.025),0 0 0 50px rgba(255,255,255,.015)}
+.card:after{content:"";position:absolute;left:-20%;top:62%;width:145%;height:1px;background:rgba(255,255,255,.22);transform:rotate(-15deg)}
+.card small{font:800 9px Manrope;letter-spacing:2px;position:relative;z-index:2}
+.card strong{display:block;font:800 28px Manrope;letter-spacing:-1px;margin-top:58px;position:relative;z-index:2}
+.card span{font-size:10px;color:#d7eaf5;position:relative;z-index:2}
+.card b{position:absolute;right:22px;bottom:20px;color:#f1ca70;font:800 9px Manrope;letter-spacing:1.3px;z-index:2}
+.node{position:absolute;z-index:4;padding:9px 11px;background:rgba(255,255,255,.9);border:1px solid #d5e4eb;border-radius:10px;box-shadow:0 12px 28px rgba(13,65,95,.09);font:800 8px Manrope;letter-spacing:1px;color:#175a82}
+.n1{top:55px;left:8%}.n2{right:2%;top:38%}.n3{bottom:48px;left:13%}.n4{left:0;top:58%}
+@keyframes float{50%{transform:rotate(-3deg) translateY(-10px)}}
+.band{background:#081a2c;color:#dce8ef;border-block:1px solid #172b3d;overflow:hidden}
+.band-track{display:flex;width:max-content;animation:move 28s linear infinite}
+.band span{padding:14px 25px;font:800 9px Manrope;letter-spacing:2px;white-space:nowrap}
+.band i{font-style:normal;color:var(--gold);margin-left:20px}
+@keyframes move{to{transform:translateX(-50%)}}
+
+.dark{background:var(--navy);color:#fff}
+.dark .title{color:#fff}.dark .muted{color:#b9cbd7}.dark .kicker{color:#e3bd6a}
+.dark .kicker:before{background:#e3bd6a}
+.why-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:center}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.compare-box{padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045)}
+.compare-box.accent{background:linear-gradient(145deg,#0b3658,#0e79b4);border-color:rgba(255,255,255,.16);box-shadow:0 25px 50px rgba(0,0,0,.2)}
+.compare-box small{font:800 9px Manrope;letter-spacing:2px;color:#9fb5c4}
+.compare-box ul{padding:0;margin:18px 0 0;list-style:none}
+.compare-box li{font-size:11px;color:#c8d7e0;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.compare-box li:last-child{border:0}
+
+.included{background:#fff}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:35px}
+.mini{padding:20px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#fff,#f5f8fa);box-shadow:0 10px 25px rgba(12,55,80,.045);transition:.3s;position:relative;overflow:hidden}
+.mini:before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.mini:hover{transform:translateY(-4px);box-shadow:0 18px 35px rgba(12,55,80,.09)}
+.mini b{font:800 11px Manrope;color:#b18435;letter-spacing:1px}
+.mini h4{font:800 14px Manrope;margin:10px 0 5px}.mini p{font-size:10px;color:#71808c;line-height:1.5;margin:0}
+
+.plans{background:var(--soft)}
+.plan-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:30px 0 15px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:14px;padding:15px 13px;text-align:left;cursor:pointer;transition:.3s;box-shadow:0 7px 18px rgba(15,54,78,.04)}
+.tab:hover{transform:translateY(-2px)}
+.tab.active{background:linear-gradient(135deg,#071b30,#0e5a88);color:#fff;border-color:#0e5a88;box-shadow:0 16px 30px rgba(7,40,65,.18)}
+.tab b{display:block;font:800 15px Manrope}.tab small{display:block;margin-top:4px;font-size:9px;opacity:.75}
+.plan{display:grid;grid-template-columns:.75fr 1.25fr;gap:15px;padding:15px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 18px 45px rgba(13,55,77,.07)}
+.pass-info{min-height:285px;padding:25px;border-radius:18px;color:#fff;background:linear-gradient(145deg,#061a2d,#0a3a5c 60%,#147fb9);position:relative;overflow:hidden;box-shadow:0 20px 45px rgba(7,40,65,.18)}
+.pass-info:before{content:"";position:absolute;width:62px;height:42px;left:25px;top:60px;border-radius:7px;background:linear-gradient(135deg,#ead59d,#b88730)}
+.pass-info:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-125px;bottom:-125px}
+.pass-info small{font:800 8px Manrope;letter-spacing:2px}.pass-info h3{font:800 35px Manrope;letter-spacing:-2px;margin:65px 0 5px}.credit{font:800 24px Manrope}.ideal{font-size:10px;color:#d2e5f0;line-height:1.5;margin-top:12px;max-width:280px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:9px}.feature{padding:15px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#fff,#f6f8fa)}.feature b{font-size:11px}.feature span{display:block;font-size:9px;color:#758692;margin-top:4px;line-height:1.4}
+
+
+/* Business Pass selection card — realistic premium debit-card treatment */
+.pass-info{
+  min-height:285px;padding:25px;border-radius:18px;color:#fff;
+  background:
+    radial-gradient(circle at 84% 18%,rgba(255,255,255,.20),transparent 20%),
+    radial-gradient(circle at 16% 86%,rgba(39,184,236,.20),transparent 30%),
+    linear-gradient(145deg,#061a2d 0%,#0a3a5c 58%,#147fb9 100%);
+  position:relative;overflow:hidden;box-shadow:0 20px 45px rgba(7,40,65,.18),inset 0 1px 0 rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.18);isolation:isolate;
+}
+.pass-info:before{content:"";position:absolute;width:270px;height:270px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-135px;top:-145px;box-shadow:0 0 0 24px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.015);pointer-events:none}
+.pass-info:after{content:"";position:absolute;left:-18%;top:63%;width:140%;height:1px;background:rgba(255,255,255,.18);transform:rotate(-15deg);pointer-events:none}
+.pass-info>*{position:relative;z-index:2}
+.pass-info .pass-chip{position:absolute;left:25px;top:60px;width:43px;height:32px;border-radius:8px;background:linear-gradient(135deg,#f8df9b,#b98a32 48%,#ffe8a6);box-shadow:inset 0 1px 2px rgba(255,255,255,.75),0 3px 8px rgba(0,0,0,.22);overflow:hidden;z-index:3}
+.pass-info .pass-chip:before,.pass-info .pass-chip:after{content:"";position:absolute;left:7px;right:7px;height:1px;background:rgba(86,54,11,.5)}
+.pass-info .pass-chip:before{top:10px}.pass-info .pass-chip:after{top:20px}
+.pass-info .pass-chip i{position:absolute;top:4px;bottom:4px;left:20px;width:1px;background:rgba(86,54,11,.45)}
+.pass-info .pass-contactless{position:absolute;left:76px;top:65px;width:22px;height:22px;transform:rotate(90deg);z-index:3}
+.pass-info .pass-contactless:before,.pass-info .pass-contactless:after{content:"";position:absolute;border:2px solid rgba(255,255,255,.72);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-45deg)}
+.pass-info .pass-contactless:before{inset:3px}.pass-info .pass-contactless:after{inset:7px}
+.pass-info .pass-logo{position:absolute;right:18px;bottom:17px;width:115px;height:31px;display:flex;align-items:center;justify-content:center;padding:4px 7px;border-radius:7px;background:rgba(255,255,255,.93);box-shadow:0 5px 14px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.75);z-index:3}
+.pass-info .pass-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.pass-info .pass-label{position:absolute;right:22px;top:24px;font:800 8px/1 Manrope;letter-spacing:1.7px;color:rgba(255,255,255,.72);z-index:3}
+.pass-info .pass-number{position:absolute;left:25px;right:155px;top:112px;font:600 16px/1 "DM Sans";letter-spacing:2.5px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.2);z-index:3}
+.pass-info .pass-glow{position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 30px rgba(255,255,255,.07);pointer-events:none;z-index:1}
+.pass-info h3{margin:145px 0 5px!important;position:relative;z-index:3}
+.pass-info .credit,.pass-info .ideal{position:relative;z-index:3}.pass-info .ideal{max-width:205px}
+@media(max-width:600px){.pass-info{min-height:285px}.pass-info .pass-logo{width:105px;height:28px;right:15px}.pass-info .pass-number{font-size:14px;letter-spacing:2px}}
+
+.wallet{background:#fff}
+.wallet-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:55px;align-items:center}
+.services{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.service{padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#f8fafb;font-size:9px;font-weight:800;color:#536978}
+.wallet-card{background:linear-gradient(145deg,#071b30,#0d4166 60%,#0d77af);color:#fff;border-radius:22px;padding:26px;box-shadow:0 28px 55px rgba(7,35,57,.2);position:relative;overflow:hidden}
+.wallet-card:after{content:"";position:absolute;width:280px;height:280px;border:1px solid rgba(255,255,255,.1);border-radius:50%;right:-140px;top:-120px}
+.wallet-card small{font:800 8px Manrope;letter-spacing:2px;color:#bcd0dc}.amount{font:800 48px Manrope;letter-spacing:-3px;margin:12px 0}.wallet-tags{display:flex;flex-wrap:wrap;gap:6px}.wallet-tags span{font-size:8px;border:1px solid rgba(255,255,255,.18);padding:7px 9px;border-radius:999px;color:#d4e5ee}.topup{display:flex;gap:7px;margin-top:17px;position:relative;z-index:2}.topup button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#fff;border-radius:9px;padding:8px 10px;font-size:9px;font-weight:800;cursor:pointer}.topup button:hover{background:rgba(255,255,255,.14)}
+
+.loop{background:#f1ede7}.steps{display:grid;grid-template-columns:repeat(6,1fr);margin-top:32px;border-block:1px solid #d8d1c9}.step{padding:22px 14px;border-right:1px solid #d8d1c9}.step:last-child{border:0}.step b{font:800 23px Manrope;color:#b98b35}.step h4{font:800 12px Manrope;margin:12px 0 5px}.step p{font-size:9px;line-height:1.5;color:#6e7b84;margin:0}
+
+.faq{background:#fff}.faq-wrap{max-width:900px}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;padding:17px 0;border:0;background:none;text-align:left;display:flex;justify-content:space-between;gap:20px;font:800 12px Manrope;color:#17344f;cursor:pointer}.faq-q span{font-size:19px;font-weight:400;transition:.3s}.faq-a{max-height:0;overflow:hidden;color:#72818b;font-size:10px;line-height:1.6;transition:.35s}.faq-item.open .faq-a{max-height:80px;padding-bottom:16px}.faq-item.open .faq-q span{transform:rotate(45deg)}
+
+.terms{padding:40px 0;background:#f5f8fa;border-top:1px solid var(--line)}
+details{max-width:900px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px}summary{cursor:pointer;font:800 11px Manrope;color:#17344f}details ul{margin:12px 0 0;padding-left:18px}details li{font-size:9px;color:#6e7d88;line-height:1.6;margin:7px 0}
+
+.final{padding:75px 0;background:linear-gradient(135deg,#061a2d,#0d4d77 65%,#0f79b1);color:#fff}.final-grid{display:flex;justify-content:space-between;align-items:center;gap:30px}.final .title{color:#fff}.final p{color:#cbdde7;max-width:650px;font-size:13px;line-height:1.6}.final .cta{background:#fff;color:#092a46}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--gold);z-index:100}
+@media(max-width:900px){.hero-grid,.why-grid,.plan,.wallet-grid{grid-template-columns:1fr}.visual{height:390px;order:-1}.grid6{grid-template-columns:1fr 1fr}.plan-tabs{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2n){border-right:0}.step{border-bottom:1px solid #d8d1c9}.final-grid{display:block}}
+
+@media(max-width:900px){.hero-card{width:290px;height:190px}.hero-card .number{top:112px;font-size:15px}.hero-card .brandmark{right:18px;bottom:16px}}
+@media(max-width:600px){.section{padding:68px 0}.nav-tag{display:none}.hero h1{letter-spacing:-3.5px}.visual{height:330px}.visual:before{width:290px;height:290px}.visual:after{width:220px;height:220px}.card{width:265px;height:170px;padding:20px}.card strong{font-size:21px;margin-top:38px}.node{font-size:7px}.n1{top:20px}.n2{right:0}.n3{bottom:20px}.n4{left:-5px}.grid6,.plan-tabs,.features,.steps,.compare{grid-template-columns:1fr}.step{border-right:0}.topup{flex-wrap:wrap}}
+
+/* Mobile readability and responsive safety overrides */
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  body { min-width: 0; }
+
+  .wrap {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 1.8px;
+  }
+
+  .title {
+    font-size: clamp(32px, 10vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -1.8px;
+  }
+
+  .muted {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 18px 0 42px;
+  }
+
+  .nav {
+    padding-bottom: 18px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+  }
+
+  .hero-grid {
+    gap: 20px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 13vw, 64px);
+    line-height: .94;
+    letter-spacing: -3px;
+    margin: 14px 0;
+  }
+
+  .hero-copy {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .pill {
+    padding: 9px 12px;
+    font-size: 10px;
+    letter-spacing: .7px;
+  }
+
+  .cta {
+    font-size: 11px;
+    padding: 13px 16px;
+  }
+
+  .visual {
+    height: 300px;
+    width: 100%;
+  }
+
+  .visual:before {
+    width: 260px;
+    height: 260px;
+  }
+
+  .visual:after {
+    width: 195px;
+    height: 195px;
+  }
+
+  .card {
+    width: min(290px, 82vw);
+    height: 184px;
+    padding: 19px;
+  }
+
+  .card small {
+    font-size: 10px;
+  }
+
+  .card strong {
+    font-size: 22px;
+    margin-top: 38px;
+  }
+
+  .card span {
+    font-size: 11px;
+  }
+
+  .card b {
+    font-size: 9px;
+  }
+
+  .node {
+    padding: 8px 9px;
+    font-size: 9px;
+    letter-spacing: .7px;
+  }
+
+  .band span {
+    padding: 13px 20px;
+    font-size: 10px;
+    letter-spacing: 1.4px;
+  }
+
+  .why-grid {
+    gap: 28px;
+  }
+
+  .compare-box {
+    padding: 20px;
+  }
+
+  .compare-box small {
+    font-size: 10px;
+  }
+
+  .compare-box li {
+    font-size: 13px;
+    line-height: 1.45;
+    padding: 9px 0;
+  }
+
+  .grid6 {
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .mini {
+    padding: 18px;
+  }
+
+  .mini b {
+    font-size: 11px;
+  }
+
+  .mini h4 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .mini p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .plan-tabs {
+    gap: 8px;
+    margin: 24px 0 12px;
+  }
+
+  .tab {
+    padding: 14px 12px;
+  }
+
+  .tab b {
+    font-size: 15px;
+  }
+
+  .tab small {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .plan {
+    padding: 10px;
+  }
+
+  .pass-info {
+    min-height: 265px;
+    padding: 22px;
+  }
+
+  .pass-info small {
+    font-size: 9px;
+  }
+
+  .pass-info h3 {
+    font-size: 32px;
+    margin-top: 62px;
+  }
+
+  .credit {
+    font-size: 23px;
+  }
+
+  .ideal {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .feature {
+    padding: 14px;
+  }
+
+  .feature b {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .feature span {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .wallet-grid {
+    gap: 28px;
+  }
+
+  .service {
+    padding: 8px 10px;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .wallet-card {
+    padding: 22px;
+  }
+
+  .wallet-card small {
+    font-size: 9px;
+  }
+
+  .amount {
+    font-size: clamp(38px, 12vw, 48px);
+  }
+
+  .wallet-tags span {
+    font-size: 10px;
+    padding: 7px 9px;
+  }
+
+  .topup button {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+
+  .steps {
+    margin-top: 26px;
+  }
+
+  .step {
+    padding: 19px 15px;
+  }
+
+  .step b {
+    font-size: 22px;
+  }
+
+  .step h4 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .step p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .faq-q {
+    padding: 16px 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .faq-q span {
+    font-size: 21px;
+    flex: 0 0 auto;
+  }
+
+  .faq-a {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 240px;
+  }
+
+  details {
+    padding: 14px 15px;
+  }
+
+  summary {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  details li {
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 7px 0;
+  }
+
+  .final {
+    padding: 58px 0;
+  }
+
+  .final-grid {
+    gap: 24px;
+  }
+
+  .final p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .compare-box li { font-size: 12px; }
+  .mini p { font-size: 11px; }
+  .feature span { font-size: 10px; }
+  .step p { font-size: 10px; }
+  .faq-a { font-size: 11px; }
+  details li { font-size: 10px; }
+}
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Global responsive media safety */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+@media(prefers-reduced-motion:reduce){.hero-card{animation:none!important}}
+
+
+/* Site-wide navigation on the SWYFT ONE page. Keep the original pass design below intact. */
+.site-header{position:sticky;top:0;z-index:1000;width:100%;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(11,34,56,.10);box-shadow:0 5px 24px rgba(11,34,56,.035);color:#15283a}
+.header-inner{width:100%;max-width:1440px;min-height:82px;margin:0 auto;padding:10px clamp(16px,3.4vw,48px);display:flex;align-items:center;gap:clamp(12px,1.5vw,24px)}
+.brand{display:flex;align-items:center;flex:0 0 auto;min-width:0}
+.brand img{display:block;width:clamp(165px,16vw,220px);height:auto;max-height:56px;object-fit:contain;object-position:left center}
+.main-nav{display:flex;align-items:center;justify-content:center;gap:clamp(10px,1.4vw,20px);margin-left:auto;min-width:0}
+.main-nav a{position:relative;display:inline-flex;align-items:center;min-height:38px;padding:8px 0;color:#3d5060;white-space:nowrap;font-size:12px;font-weight:700;line-height:1.2}
+.main-nav a:after{position:absolute;left:0;bottom:3px;width:100%;height:2px;content:"";background:#d2a653;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.main-nav a:hover:after,.main-nav a[aria-current="page"]:after{transform:scaleX(1)}
+.main-nav a[aria-current="page"]{color:#071b30}
+.social-links{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.social-links a{display:grid;place-items:center;width:31px;height:31px;border:1px solid #e0e7ec;border-radius:50%;color:#071b30;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.social-links a:hover{background:#071b30;border-color:#071b30;color:#fff;transform:translateY(-2px)}
+.social-links svg{display:block;width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.menu-toggle{display:none;align-items:center;justify-content:center;background:#fff;border:1px solid #dbe5eb;border-radius:11px;padding:9px;color:#071b30;cursor:pointer}
+.menu-toggle svg{display:block;width:22px;height:22px}
+@media(max-width:1180px){.header-inner{gap:13px}.brand img{width:176px}.main-nav{gap:11px}.main-nav a{font-size:11px}.social-links{gap:4px}.social-links a{width:28px;height:28px}}
+@media(max-width:940px){.header-inner{min-height:75px;flex-wrap:wrap;justify-content:space-between;gap:8px 12px}.brand img{width:190px;max-height:49px}.menu-toggle{display:inline-flex;margin-left:auto;order:2}.social-links{order:1;margin-left:auto}.main-nav{display:none;order:3;flex:1 0 100%;align-items:stretch;flex-direction:column;gap:0;margin:0;padding:6px 0 12px;border-top:1px solid #e4eaf0}.main-nav.is-open{display:flex}.main-nav a{min-height:42px;padding:12px 4px;border-bottom:1px solid #e7edf1;font-size:13px}.main-nav a:after{display:none}.main-nav a[aria-current="page"]{color:#0b6a9c}.social-links a{width:30px;height:30px}}
+@media(max-width:420px){.header-inner{padding:9px 13px}.brand img{width:158px;max-height:42px}.social-links{gap:4px}.social-links a{width:27px;height:27px}.menu-toggle{padding:7px}}
+@media(prefers-reduced-motion:reduce){.main-nav a:after,.social-links a{transition:none}}
+
+
+/* Shared Swyft header system: same dimensions and typography as every page */
+.header-inner{max-width:1360px!important;min-height:78px!important;gap:clamp(12px,1.35vw,20px)!important;padding:10px clamp(18px,3vw,42px)!important}
+.header-inner .brand img{width:clamp(142px,12.4vw,166px)!important;max-width:166px!important;max-height:44px!important;height:auto!important;object-fit:contain!important}
+.header-inner .main-nav{gap:clamp(8px,1.05vw,15px)!important;margin-left:auto!important}
+.header-inner .main-nav a{font-family:Manrope,'DM Sans',Arial,sans-serif!important;font-size:10.5px!important;font-weight:750!important;line-height:1!important;letter-spacing:.035em!important;text-transform:uppercase!important;padding:12px 0!important;border-bottom:0!important;border-radius:0!important;background:transparent!important;color:#314758!important;transition:color .18s!important}
+.header-inner .main-nav a:hover,.header-inner .main-nav a[aria-current="page"]{font-weight:750!important;color:#0b2238!important;background:transparent!important}
+.header-inner .main-nav a:after{display:block!important;left:0!important;bottom:4px!important;height:2px!important;background:#f4c84b!important;transform:scaleX(0)!important;transform-origin:left!important;transition:transform .18s ease!important}
+.header-inner .main-nav a:hover:after,.header-inner .main-nav a[aria-current="page"]:after{transform:scaleX(1)!important}
+@media(max-width:1180px){.header-inner .brand img{width:146px!important}.header-inner .main-nav{gap:9px!important}.header-inner .main-nav a{font-size:9.5px!important}}
+@media(max-width:940px){.header-inner{min-height:74px!important;gap:8px 14px!important}.header-inner .brand img{width:148px!important;max-height:42px!important}.header-inner .main-nav{gap:0!important}.header-inner .main-nav a{font-size:12px!important;line-height:1.3!important;padding:12px 5px!important;font-weight:750!important}.header-inner .main-nav a[aria-current="page"]{color:#0b2238!important}.header-inner .main-nav a:after{display:none!important}}
+@media(max-width:580px){.header-inner{padding:9px 16px!important;gap:8px!important}.header-inner .brand img{width:140px!important;max-height:40px!important}}
+
+
+/* Site-wide navigation refinement on the standalone Swyft Pass page. */
+@media (min-width:981px) {
+  .header-inner {max-width:1400px;gap:clamp(12px,1.35vw,20px);padding:10px clamp(18px,2.5vw,36px);}
+  .header-inner .brand img {width:clamp(155px,12vw,178px)!important;max-height:46px!important;}
+  .header-inner .main-nav {flex:1 1 auto;min-width:0;margin-left:clamp(0px,.55vw,8px)!important;gap:clamp(10px,1.05vw,15px)!important;justify-content:space-between;}
+  .header-inner .main-nav a {font-size:12px!important;font-weight:800!important;letter-spacing:.015em!important;line-height:1.15!important;padding:12px 0!important;}
+  .header-inner .social-links {flex:0 0 auto;margin-left:clamp(0px,.35vw,5px);gap:6px;}
+  .header-inner .social-links a {width:29px;height:29px;}
+}
+@media (min-width:981px) and (max-width:1120px) {
+  .header-inner {gap:10px;padding-left:18px;padding-right:18px;}
+  .header-inner .brand img {width:148px!important;}
+  .header-inner .main-nav {gap:9px!important;margin-left:0!important;}
+  .header-inner .main-nav a {font-size:11.5px!important;letter-spacing:0!important;}
+  .header-inner .social-links {gap:4px;}
+  .header-inner .social-links a {width:26px;height:26px;}
+}
+@media (max-width:980px) {
+  .header-inner {min-height:74px;flex-wrap:wrap;justify-content:space-between;gap:8px 12px;padding:10px clamp(16px,3vw,26px);}
+  .header-inner .brand img {width:clamp(145px,18vw,174px)!important;max-height:44px!important;}
+  .header-inner .menu-toggle {display:block;margin-left:auto;order:2;}
+  .header-inner .social-links {order:3;margin-left:0;gap:5px;}
+  .header-inner .social-links a {width:28px;height:28px;}
+  .header-inner .main-nav {display:none;order:4;flex:1 0 100%;width:100%;min-width:100%;margin:0!important;padding:8px 0 12px;align-items:stretch;flex-direction:column;gap:0!important;}
+  .header-inner .main-nav.is-open {display:flex;}
+  .header-inner .main-nav a {font-size:13.5px!important;font-weight:800!important;letter-spacing:.015em!important;text-transform:none!important;line-height:1.3!important;padding:13px 5px!important;border-bottom:1px solid #e4eaf0;background:transparent!important;}
+  .header-inner .main-nav a:after {display:none!important;}
+}
+@media (max-width:580px) {
+  .header-inner {padding:9px 15px;gap:8px;}
+  .header-inner .brand img {width:139px!important;max-height:40px!important;}
+  .header-inner .menu-toggle {padding:8px;}
+  .header-inner .social-links {gap:4px;}
+  .header-inner .social-links a {width:25px;height:25px;}
+}
+.nav {justify-content:flex-end;}
+
+
+/* Matching site footer for Swyft Pass, including mobile behavior. */
+.footer {margin-top:0;background:#081b2d;color:#fff;padding:52px 0 22px;}
+.footer > .container {width:min(1180px,calc(100% - 44px));margin-inline:auto;}
+.footer-grid {display:grid;grid-template-columns:1.15fr .8fr .8fr 1fr;gap:30px;padding-bottom:34px;}
+.footer-logo {width:min(138px,100%);max-height:42px;object-fit:contain;background:#fff;border-radius:7px;padding:5px;}
+.footer-about p,.footer-col p {color:#b7c7d3;font-size:13px;line-height:1.8;margin:15px 0;}
+.footer-social {display:flex;gap:8px;margin-top:18px;}
+.footer-social a {width:34px;height:34px;border:1px solid #526879;border-radius:50%;display:grid;place-items:center;color:#fff;}
+.footer-social a:hover {background:#f4c84b;border-color:#f4c84b;color:#0b2238;}
+.footer-social svg {width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.footer-col h3 {font-size:12px;text-transform:uppercase;letter-spacing:.14em;margin:4px 0 17px;color:#fff;}
+.footer-col a {display:block;font-size:13px;color:#b7c7d3;margin:10px 0;}
+.footer-col a:hover {color:#fff;text-decoration:underline;text-decoration-color:#f4c84b;text-underline-offset:4px;}
+.footer-col p a {display:inline;margin:0;color:inherit;font-size:inherit;line-height:inherit;}
+.footer-bottom {border-top:1px solid #ffffff20;padding-top:18px;display:flex;justify-content:space-between;gap:20px;color:#91a5b5;font-size:11px;}
+@media(max-width:1120px){.footer-grid{grid-template-columns:1.15fr .85fr .85fr;gap:24px}.footer-col:last-child{grid-column:2/4}}
+@media(max-width:760px){.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}.footer-col:last-child{grid-column:auto}}
+@media(max-width:580px){.footer{padding:40px 0 20px}.footer-grid{grid-template-columns:1fr;gap:22px}.footer-col:last-child{grid-column:auto}.footer-bottom{flex-direction:column;gap:5px}.footer > .container{width:calc(100% - 34px)}}
+
+</style>
+<link rel="stylesheet" href="assets/pass-popup.css">
+<link rel="stylesheet" href="assets/sitewide-nav.css">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header" id="global-site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Swyft Media home"><img src="swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" decoding="async"></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="swyft-main-nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="main-nav" id="swyft-main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog/index.html">Business Stories</a>
+      <a href="swyft-pass.html" aria-current="page">Swyft Pass</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="social-links" aria-label="Swyft Media social links">
+      <a href="https://www.instagram.com/swyftmediapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></a>
+      <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg></a>
+      <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg></a>
+    </div>
+  </div>
+</header>
+
+
+<section class="hero">
+<div class="wrap">
+  <nav class="nav">
+    
+    <div class="nav-tag">SWYFT ONE · BUSINESS PASS</div>
+  </nav>
+  <div class="hero-grid">
+    <div class="reveal">
+      <div class="kicker">India's First Creative Wallet for Businesses</div>
+      <h1>One Partner<br><em>All year...</em></h1>
+      <p class="hero-copy">Reserve once. Create all year. A connected creative system designed to replace fragmented vendors, repeated quotations and scattered execution.</p>
+      <div class="pills"><span class="pill">BRANDING</span><span class="pill">MARKETING</span><span class="pill">CONTENT</span><span class="pill">DIGITAL</span><span class="pill">PR</span></div>
+      <a class="cta" href="#plans">EXPLORE THE PASS <span>→</span></a>
+    </div>
+    <div class="visual reveal">
+      <div class="node n1">BRANDING</div><div class="node n2">DIGITAL</div><div class="node n3">CONTENT</div><div class="node n4">PR + MARKETING</div>
+      <div class="hero-card" aria-label="SWYFT ONE Business Pass premium debit card">
+        <small>SWYFT ONE</small>
+        <div class="chip"><i></i></div>
+        <div class="contactless" aria-hidden="true"></div>
+        <strong class="number">XXXX&nbsp;&nbsp;••••&nbsp;&nbsp;XXXX</strong>
+        <span class="valid">CREATIVE ACCESS<strong>01/28</strong></span>
+        <span class="holder">BUSINESS MEMBER</span>
+        <span class="brandmark" aria-label="Swyft Media logo"><img src="assets/pass-wordmark.webp" alt="Swyft Media" width="900" height="192" decoding="async"></span>
+        <span class="card-glow"></span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="band"><div class="band-track">
+<span>BRANDING <i>✦</i></span><span>DESIGN <i>✦</i></span><span>PHOTOGRAPHY <i>✦</i></span><span>VIDEOGRAPHY <i>✦</i></span><span>WEB DEVELOPMENT <i>✦</i></span><span>PUBLIC RELATIONS <i>✦</i></span><span>DIGITAL MARKETING <i>✦</i></span><span>CEO BRANDING <i>✦</i></span>
+<span>BRANDING <i>✦</i></span><span>DESIGN <i>✦</i></span><span>PHOTOGRAPHY <i>✦</i></span><span>VIDEOGRAPHY <i>✦</i></span><span>WEB DEVELOPMENT <i>✦</i></span><span>PUBLIC RELATIONS <i>✦</i></span><span>DIGITAL MARKETING <i>✦</i></span><span>CEO BRANDING <i>✦</i></span>
+</div></div>
+
+<section class="section dark">
+<div class="wrap why-grid">
+  <div class="reveal"><div class="kicker">Why SWYFT ONE</div><h2 class="title">Replace vendor chaos with one creative system.</h2><p class="muted">Instead of managing multiple vendors, quotations, negotiations and timelines, consolidate annual creative requirements with one trusted partner.</p></div>
+  <div class="compare reveal">
+    <div class="compare-box"><small>TRADITIONAL WAY</small><ul><li>Multiple Agencies</li><li>Multiple Quotations</li><li>Repeated Negotiations</li><li>Different Quality Standards</li><li>Fragmented Communication</li></ul></div>
+    <div class="compare-box accent"><small>THE SWYFT ONE WAY</small><ul><li>One Creative Partner</li><li>One Creative Wallet</li><li>One Relationship Manager</li><li>One Creative Team</li><li>Consistent Brand Quality</li></ul></div>
+  </div>
+</div>
+</section>
+
+<section class="section included">
+<div class="wrap">
+  <div class="reveal"><div class="kicker">Business Pass Benefits</div><h2 class="title">Built for continuity.</h2><p class="muted">The important benefits, condensed into one premium business experience.</p></div>
+  <div class="grid6">
+    <div class="mini reveal"><b>01</b><h4>12-Month Validity</h4><p>Use your Business Pass throughout its active validity period.</p></div>
+    <div class="mini reveal"><b>02</b><h4>Dedicated Relationship Manager</h4><p>One point of contact for ongoing creative work and support.</p></div>
+    <div class="mini reveal"><b>03</b><h4>Priority Scheduling</h4><p>Priority access for eligible projects with preferred turnaround.</p></div>
+    <div class="mini reveal"><b>04</b><h4>Flexible Creative Wallet</h4><p>Redeem your Wallet Balance across eligible services and track usage.</p></div>
+    <div class="mini reveal"><b>05</b><h4>Annual Creative Planning</h4><p>Keep your brand, content and communication requirements connected.</p></div>
+    <div class="mini reveal"><b>06</b><h4>Premium Support & Consultation</h4><p>Professional creative consultation and business support.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="section plans" id="plans">
+<div class="wrap">
+  <div class="reveal"><div class="kicker">Choose Your Business Pass</div><h2 class="title">Four levels. One system.</h2><p class="muted">Select a pass to explore its investment, positioning and included benefits.</p></div>
+  <div class="plan-tabs reveal">
+    <button class="tab" data-plan="Launch"><b>Launch</b><small>₹50,000 + GST</small></button>
+    <button class="tab active" data-plan="Growth"><b>Growth</b><small>₹1,00,000 + GST · Most Popular</small></button>
+    <button class="tab" data-plan="Elite"><b>Elite</b><small>₹2,50,000 + GST</small></button>
+    <button class="tab" data-plan="Infinity"><b>Infinity</b><small>₹5,00,000 + GST onwards</small></button>
+  </div>
+  <div class="plan reveal">
+    <div class="pass-info">
+      <small>SELECTED BUSINESS PASS</small>
+      <span class="pass-label">SWYFT ONE</span>
+      <span class="pass-chip" aria-hidden="true"><i></i></span>
+      <span class="pass-contactless" aria-hidden="true"></span>
+      <span class="pass-number" aria-hidden="true">XXXX&nbsp;&nbsp;••••&nbsp;&nbsp;XXXX</span>
+      <h3 id="planName">Growth</h3>
+      <div class="credit" id="planCredit">₹1,00,000 + GST</div>
+      <div class="ideal" id="planIdeal">Our most preferred Business Pass. Designed for businesses requiring ongoing creative execution.</div>
+      <span class="pass-logo" aria-label="Swyft Media logo"><img src="assets/pass-wordmark.webp" alt="Swyft Media" width="900" height="192" decoding="async" loading="lazy"></span>
+      <span class="pass-glow"></span>
+    </div>
+    <div class="features" id="features"></div>
+  </div>
+</div>
+</section>
+
+<section class="section wallet">
+<div class="wrap wallet-grid">
+  <div class="reveal"><div class="kicker">Your Business Wallet</div><h2 class="title">One balance... <br>A whole creative ecosystem</br></h2><p class="muted">Redeem your Wallet Balance across eligible services from brand identity and graphic design to production, digital marketing, PR and customised business solutions.</p>
+  <div class="services">
+    <span class="service">Brand Identity</span><span class="service">Graphic Design</span><span class="service">Corporate Films</span><span class="service">Photography</span><span class="service">Videography</span><span class="service">Corporate AV</span><span class="service">Documentary Films</span><span class="service">Web Development</span><span class="service">Printing</span><span class="service">Public Relations</span><span class="service">Press Conferences</span><span class="service">Corporate Gifting</span><span class="service">Podcast Production</span><span class="service">Exhibition Branding</span><span class="service">CEO Branding</span><span class="service">Creative Consultancy</span><span class="service">Digital Marketing</span>
+  </div></div>
+  <div class="wallet-card reveal">
+    <small>WALLET BALANCE</small><div class="amount" id="amount">₹25,000</div>
+    <div class="wallet-tags"><span>TRACKABLE</span><span>TOP-UP READY</span><span>12-MONTH VALIDITY</span></div>
+    <div class="topup"><button data-add="5000">+ ₹5,000</button><button data-add="10000">+ ₹10,000</button><button data-add="25000">+ ₹25,000</button></div>
+  </div>
+</div>
+</section>
+
+<section class="section loop">
+<div class="wrap">
+  <div class="reveal"><div class="kicker">How It Works</div><h2 class="title">Choose. Create. Track. Repeat.</h2></div>
+  <div class="steps">
+    <div class="step reveal"><b>01</b><h4>Choose</h4><p>Select your Business Pass.</p></div>
+    <div class="step reveal"><b>02</b><h4>Activate</h4><p>Activate your Creative Wallet.</p></div>
+    <div class="step reveal"><b>03</b><h4>Request</h4><p>Request any eligible service.</p></div>
+    <div class="step reveal"><b>04</b><h4>Adjust</h4><p>Wallet value is adjusted against approved work.</p></div>
+    <div class="step reveal"><b>05</b><h4>Track</h4><p>Monitor your remaining Wallet Balance.</p></div>
+    <div class="step reveal"><b>06</b><h4>Top Up</h4><p>Add balance and continue creating.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="section faq">
+<div class="wrap faq-wrap">
+  <div class="reveal"><div class="kicker">FAQ</div><h2 class="title">Everything important, clearly</h2></div>
+  <div class="faq-item reveal"><button class="faq-q">Can multiple departments use one Business Pass?<span>+</span></button><div class="faq-a">Yes. Your organisation may authorise multiple users to access the same Business Wallet.</div></div>
+  <div class="faq-item reveal"><button class="faq-q">Can I redeem any service?<span>+</span></button><div class="faq-a">Any eligible service listed in the Service Catalogue can be redeemed using your Wallet Balance.</div></div>
+  <div class="faq-item reveal"><button class="faq-q">Can I increase my Wallet Balance later?<span>+</span></button><div class="faq-a">Yes. Top-ups are available from ₹25,000 Credits + GST onwards throughout the validity period.</div></div>
+  <div class="faq-item reveal"><button class="faq-q">Does the Wallet expire?<span>+</span></button><div class="faq-a">Yes. The Business Pass remains valid for 12 months from the activation date.</div></div>
+  <div class="faq-item reveal"><button class="faq-q">Can unused Wallet Balance be refunded?<span>+</span></button><div class="faq-a">No. The Business Wallet is non-refundable and intended for use during the validity period.</div></div>
+</div>
+</section>
+
+<section class="terms">
+<details><summary>TERMS & CONDITIONS</summary><ul>
+<li>Business Pass validity is 12 months from the date of activation.</li>
+<li>Wallet Balances are non-refundable and non-transferable.</li>
+<li>Wallet Top-Ups are available throughout the validity period.</li>
+<li>Production timelines depend on project scope and scheduling.</li>
+<li>Third-party costs such as printing, fabrication, venue hire, media buying, travel, accommodation and statutory permissions are charged separately unless specifically included in the agreed scope.</li>
+<li>Custom projects outside the published catalogue will be assessed individually, with the applicable Wallet Value confirmed before work begins.</li>
+<li>Swyft Media reserves the right to revise Wallet Values for future Business Pass purchases while honouring the agreed catalogue during an active Business Pass period.</li>
+</ul></details>
+</section>
+
+<section class="final">
+<div class="wrap final-grid">
+  <div class="reveal"><div class="kicker">SWYFT ONE</div><h2 class="title">Let's build your brand together </h2><p>Your business deserves more than another vendor. It deserves a long-term creative partner committed to helping your brand grow.</p></div>
+  <a class="cta reveal" href="#plans">EXPLORE YOUR PASS →</a>
+</div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" aria-label="Swyft Media home"><img class="footer-logo" src="swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" loading="lazy" decoding="async"></a>
+        <p>From PR to pixels, we help brands build a clear voice, a stronger presence and measurable momentum.</p>
+        <div class="footer-social" aria-label="Swyft Media social links">
+          <a href="https://www.instagram.com/swyftmediapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></a>
+          <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg></a>
+          <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h3>What we do</h3><a href="services.html">Brand strategy</a><a href="services.html">Digital marketing</a><a href="services.html">Public relations</a><a href="services.html">Web development</a><a href="services.html">SEO &amp; performance</a></div>
+      <div class="footer-col"><h3>Explore</h3><a href="about.html">About us</a><a href="projects.html">Projects</a><a href="people.html">Our people</a><a href="blog/index.html">Business Stories</a><a href="admin/">Publisher access</a><a href="swyft-pass.html">Swyft Pass</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h3>Talk to our team</h3>
+        <p><strong>Ahmedabad</strong><br>707, Iscon Elegance, Near Shapath-V, S.G. Highway, Ahmedabad 380015<br><a href="tel:+917096427107">+91 70964 27107</a><br><a href="tel:+919978994010">+91 99789 94010</a><br><a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a></p>
+        <p><strong>Gandhidham</strong><br>Plot No. 108, Sector 1A, Gandhidham-Kutch, Gujarat 370201<br><a href="tel:+919512470015">+91 95124 70015</a><br><a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-current-year>2026</span> Swyft Media Productions. All rights reserved.</span><span>Branding · Digital · PR · Creative</span></div>
+  </div>
+</footer>
+
+<script>
+const plans={
+Launch:{credit:"₹50,000 + GST",ideal:"Ideal for businesses beginning their branding journey.",features:["Dedicated Relationship Manager","12-Month Validity","Priority Scheduling","Easy Top-Up Facility","Wallet Tracking"]},
+Growth:{credit:"₹1,00,000 + GST",ideal:"Our most preferred Business Pass. Designed for businesses requiring ongoing creative execution.",features:["Quarterly Creative Planning","Priority Project Allocation","Preferred Turnaround","Creative Performance Review","Business Support Priority"]},
+Elite:{credit:"₹2,50,000 + GST",ideal:"Designed for organisations where branding is a continuous business function.",features:["Senior Account Manager","Quarterly Strategy Review","Priority Production Slots","Executive Project Management","Premium Creative Consultation"]},
+Infinity:{credit:"₹5,00,000 + GST onwards",ideal:"A bespoke Business Pass for organisations with continuous creative and communication requirements.",features:["Dedicated Client Success Manager","Annual Creative Roadmap","Executive Strategy Meetings","Highest Production Priority","Preferred Scheduling","Tailored Creative Solutions"]}
+};
+const nameEl=document.getElementById("planName"),creditEl=document.getElementById("planCredit"),idealEl=document.getElementById("planIdeal"),featuresEl=document.getElementById("features");
+function renderPlan(name){
+ const p=plans[name];
+ nameEl.textContent=name;creditEl.textContent=p.credit;idealEl.textContent=p.ideal;
+ featuresEl.innerHTML=p.features.map((f,i)=>`<div class="feature"><b>${String(i+1).padStart(2,"0")} · ${f}</b><span>Included in the selected Business Pass.</span></div>`).join("");
+}
+document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>{
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ tab.classList.add("active");renderPlan(tab.dataset.plan);
+}));
+renderPlan("Growth");
+
+let amount=25000;
+document.querySelectorAll("[data-add]").forEach(btn=>btn.addEventListener("click",()=>{
+ amount+=Number(btn.dataset.add);
+ document.getElementById("amount").textContent="₹"+amount.toLocaleString("en-IN");
+}));
+
+document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>q.parentElement.classList.toggle("open")));
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
+ if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}
+}),{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+window.addEventListener("scroll",()=>{
+ const h=document.documentElement.scrollHeight-window.innerHeight;
+ document.getElementById("progress").style.width=(h>0?window.scrollY/h*100:0)+"%";
+});
+</script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

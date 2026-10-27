@@ -1,0 +1,12 @@
+{
+  "name": "swyftmedia-static-website",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Swyft Media responsive multi-page HTML website and GitHub-backed Business Stories publishing workflow.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build-blogs.mjs",
+    "build:stories": "node scripts/build-blogs.mjs",
+    "preview": "npx --yes http-server . -p 4173 -c-1"
+  }
+}

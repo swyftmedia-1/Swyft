@@ -1,0 +1,78 @@
+media:
+  - name: blog_images
+    label: Blog images
+    input: media/blog
+    output: /media/blog
+    rename: safe
+    extensions: [jpg, jpeg, png, webp, avif]
+    categories: [image]
+
+content:
+  - name: business_stories
+    label: Business Stories
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.slug}.md"
+      field: create
+    view:
+      primary: title
+      sort: date
+      order: desc
+    exclude: [README.md]
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        description: "Lowercase words separated by hyphens, e.g. brand-strategy-guide"
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: "Use lowercase letters, numbers and hyphens only."
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+      - name: description
+        label: SEO description / excerpt
+        type: text
+        required: true
+        description: "Write a unique, useful summary in approximately 140–160 characters."
+      - name: featured_image
+        label: Featured image
+        type: image
+        options:
+          media: blog_images
+      - name: author
+        label: Author
+        type: string
+      - name: category
+        label: Category
+        type: string
+      - name: tags
+        label: Tags
+        type: string
+        description: "Optional. Separate tags with commas."
+      - name: published
+        label: Published
+        type: boolean
+        description: "Turn on to include this article on the live site and sitemap."
+      - name: body
+        label: Article body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: blog_images
+          path: blog
+          rename: safe
+          switcher: true
+
+settings:
+  content:
+    merge: true

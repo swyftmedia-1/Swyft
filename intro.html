@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWYFT ONE Intro | Swyft Media</title>
+<meta name="theme-color" content="#071b30">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Explore SWYFT ONE, Swyft Media's creative business pass. Reserve once and access connected creative support throughout the year.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#071b30;color:#fff;font-family:"DM Sans",sans-serif}
+body{overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.intro{min-height:100svh;position:relative;overflow:hidden;background:
+radial-gradient(circle at 76% 24%,rgba(39,164,235,.24),transparent 27%),
+radial-gradient(circle at 18% 84%,rgba(212,164,73,.12),transparent 22%),
+linear-gradient(135deg,#06182b,#0a3155 52%,#061522)}
+.noise{position:absolute;inset:0;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+.grid{position:absolute;inset:-30%;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:70px 70px;transform:rotate(-8deg);mask-image:linear-gradient(to bottom,transparent,black 20%,black 75%,transparent)}
+.container{width:min(1200px,90%);margin:auto}
+.top{position:relative;z-index:3;padding:28px 0;display:flex;justify-content:space-between;align-items:center}
+.brand{
+  display:flex;
+  align-items:center;
+  width:225px;
+  height:48px;
+  flex:0 0 auto;
+}
+.brand img{
+  display:block;
+  width:100%; 
+  height:100%;
+  object-fit:contain;
+  object-position:left center;
+}
+.top .tag{white-space:nowrap}
+.tag{font-size:10px;letter-spacing:2px;color:#bcd4e5;text-transform:uppercase}
+.main{position:relative;z-index:2;min-height:calc(100svh - 90px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px;padding:40px 0 70px}
+.eyebrow{display:flex;align-items:center;gap:11px;font-size:10px;font-weight:800;letter-spacing:3px;color:#d7b15d;text-transform:uppercase}
+.eyebrow:before{content:"";width:38px;height:1px;background:#d7b15d}
+h1{font:700 clamp(54px,8vw,80px)/.88 Manrope;letter-spacing:-4px;margin:20px 0 22px}
+h1 em{font:500 .68em/1 "Playfair Display";letter-spacing:-2px;color:#72c8f3}
+.lead{max-width:600px;font-size:17px;line-height:1.65;color:#c6d7e3}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0}
+.pill{padding:10px 13px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(255,255,255,.05);font-size:10px;font-weight:800;letter-spacing:1px}
+.cta{display:inline-flex;align-items:center;gap:15px;padding:16px 20px;border-radius:14px;background:#fff;color:#08243d;font:800 12px Manrope;letter-spacing:.8px;transition:.35s;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+.cta:hover{transform:translateY(-4px);box-shadow:0 25px 55px rgba(0,0,0,.3)}
+.cta i{font-style:normal;font-size:18px}
+.visual{height:590px;position:relative;display:grid;place-items:center}
+.orbit{position:absolute;width:min(520px,90vw);aspect-ratio:1;border:1px solid rgba(103,195,239,.22);border-radius:50%;animation:spin 26s linear infinite}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid rgba(103,195,239,.12);border-radius:50%}
+.orbit:before{inset:45px}.orbit:after{inset:100px}
+.ring{position:absolute;width:590px;height:210px;border:1px solid rgba(212,164,73,.17);border-radius:50%;transform:rotate(-22deg);animation:float 5s ease-in-out infinite}
+.card{position:relative;width:350px;height:225px;border-radius:27px;padding:27px;background:linear-gradient(135deg,#0a3765,#087fc4 64%,#27b8ec);box-shadow:0 40px 100px rgba(0,0,0,.36);transform:rotate(-7deg);z-index:4;animation:cardFloat 5s ease-in-out infinite}
+.card:before{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-90px;top:-100px}
+.card small{font:800 10px Manrope;letter-spacing:2px}.card strong{display:block;font:800 29px Manrope;letter-spacing:-1px;margin-top:58px}.card span{display:block;margin-top:7px;font-size:10px;color:#d7eaf6}.gold{position:absolute;right:23px;bottom:20px;color:#f0c86d;font:800 10px Manrope;letter-spacing:1.5px}
+.node{position:absolute;padding:11px 13px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(7,27,48,.72);backdrop-filter:blur(12px);font:800 9px Manrope;letter-spacing:1.5px;color:#cce7f6;z-index:5;box-shadow:0 14px 35px rgba(0,0,0,.16)}
+.n1{top:90px;left:13%}.n2{right:4%;top:42%}.n3{bottom:95px;left:20%}.n4{left:2%;top:58%}.n5{right:19%;bottom:55px}
+.scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:7px;color:#9eb8c9;font-size:9px;letter-spacing:2px}
+.mouse{width:19px;height:30px;border:1px solid rgba(255,255,255,.4);border-radius:14px;position:relative}.mouse:after{content:"";position:absolute;width:3px;height:6px;border-radius:3px;background:#fff;left:7px;top:6px;animation:scroll 1.5s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{50%{transform:rotate(-22deg) translateY(-12px)}}@keyframes cardFloat{50%{transform:rotate(-3deg) translateY(-12px)}}@keyframes scroll{0%,100%{transform:translateY(0);opacity:1}70%{transform:translateY(9px);opacity:.15}}
+@media(max-width:900px){.main{grid-template-columns:1fr;padding-top:10px}.visual{height:430px;order:-1}.card{width:290px;height:190px}.card strong{margin-top:43px;font-size:24px}.ring{width:430px;height:160px}.node{font-size:8px}.n1{top:30px}.n3{bottom:35px}.n5{bottom:25px}}
+@media(max-width:600px){
+  .top{padding:18px 0 10px}
+  .brand{width:190px;height:41px}
+  .top .tag{display:none}
+  h1{letter-spacing:-3.5px}.lead{font-size:15px}.visual{height:350px}.orbit{width:300px}.ring{width:340px;height:130px}.card{width:255px;height:165px;padding:21px}.card strong{font-size:21px;margin-top:35px}.n1{left:0}.n2{right:0}.n4{left:-8px}.n5{right:0}.tag{display:none}}
+
+
+/* Mobile readability and responsive safety overrides */
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  body { min-width: 0; }
+
+  p, li, label, input, textarea, select, button {
+    font-size: max(14px, 1rem);
+    line-height: 1.55;
+  }
+
+  small {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  h1 { font-size: clamp(32px, 10vw, 52px); line-height: 1.05; }
+  h2 { font-size: clamp(26px, 8vw, 40px); line-height: 1.12; }
+  h3 { font-size: clamp(21px, 6vw, 30px); line-height: 1.2; }
+  h4 { font-size: clamp(18px, 5vw, 24px); line-height: 1.25; }
+
+  img, svg, video, canvas, iframe { max-width: 100%; height: auto; }
+  table { max-width: 100%; overflow-x: auto; display: block; }
+  a, button { min-height: 40px; }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  p, li { font-size: max(13px, 0.95rem); line-height: 1.5; }
+  small { font-size: 11px; }
+}
+
+
+/* Premium debit-card treatment */
+.visual{perspective:1400px}
+.card{
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid rgba(255,255,255,.32);
+  background:
+    radial-gradient(circle at 82% 18%,rgba(255,255,255,.30),transparent 18%),
+    radial-gradient(circle at 18% 82%,rgba(39,184,236,.30),transparent 30%),
+    linear-gradient(135deg,#071f3b 0%,#0a4f83 42%,#0aa5dc 100%);
+  box-shadow:
+    0 12px 20px rgba(0,0,0,.20),
+    0 35px 80px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -1px 0 rgba(0,0,0,.18);
+  transform-style:preserve-3d;
+}
+.card:after{
+  content:"";
+  position:absolute;
+  inset:-70%;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.18) 48%,transparent 54%);
+  transform:translateX(-45%) rotate(8deg);
+  animation:cardShine 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:0;
+}
+.card > *{position:relative;z-index:2}
+.card .chip{
+  position:absolute;left:27px;top:72px;width:43px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,#f8df9b,#b98a32 48%,#ffe8a6);
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.7),0 3px 8px rgba(0,0,0,.22);
+}
+.card .chip:before,.card .chip:after{
+  content:"";position:absolute;left:7px;right:7px;height:1px;background:rgba(86,54,11,.5)
+}
+.card .chip:before{top:10px}.card .chip:after{top:20px}
+.card .chip i{
+  position:absolute;top:4px;bottom:4px;left:20px;width:1px;background:rgba(86,54,11,.45)
+}
+.card .contactless{
+  position:absolute;left:78px;top:76px;width:22px;height:22px;transform:rotate(90deg);
+}
+.card .contactless:before,.card .contactless:after{
+  content:"";position:absolute;border:2px solid rgba(255,255,255,.78);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-45deg)
+}
+.card .contactless:before{inset:3px}.card .contactless:after{inset:7px}
+.card .number{
+  position:absolute;left:27px;right:27px;top:125px;margin:0!important;
+  font:600 17px/1 "DM Sans";letter-spacing:3px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.22)
+}
+.card .valid{
+  position:absolute;left:28px;bottom:24px;font-size:6px!important;line-height:1.2;color:rgba(255,255,255,.7)!important;
+  text-transform:uppercase;letter-spacing:1px;margin:0!important
+}
+.card .valid strong{display:block;font:700 10px/1 "DM Sans";letter-spacing:1px;margin:3px 0 0;color:#fff}
+.card .holder{
+  position:absolute;left:80px;bottom:25px;font:700 8px/1 "DM Sans";letter-spacing:1.3px;color:#fff;text-transform:uppercase
+}
+.card .brandmark{
+  position:absolute;right:20px;bottom:17px;
+  width:112px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  padding:4px 7px;
+  border-radius:7px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 5px 14px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.75);
+  z-index:3;
+}
+.card .brandmark img{
+  display:block;
+  width:100%;height:100%;
+  object-fit:contain;
+}
+.card .gold{display:none}
+.card small{position:absolute;top:25px;left:27px;font-size:9px!important}
+.card small:after{
+  content:"PREMIUM CREATIVE ACCESS";display:block;margin-top:3px;font:600 5px/1 "DM Sans";letter-spacing:1.2px;color:rgba(255,255,255,.65)
+}
+.card .card-glow{
+  position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 35px rgba(255,255,255,.08);pointer-events:none
+}
+.premium-badge{
+  position:absolute;z-index:6;top:28px;right:7%;padding:9px 12px;border-radius:999px;
+  border:1px solid rgba(240,200,109,.42);background:rgba(7,27,48,.55);backdrop-filter:blur(14px);
+  color:#f4d88d;font:800 8px/1 Manrope;letter-spacing:1.7px;box-shadow:0 12px 30px rgba(0,0,0,.18)
+}
+.visual:after{
+  content:"";position:absolute;width:270px;height:270px;border-radius:50%;
+  background:rgba(39,184,236,.16);filter:blur(55px);z-index:0;animation:pulseGlow 4s ease-in-out infinite
+}
+.node{transition:.35s;box-shadow:0 14px 35px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.08)}
+.node:hover{transform:translateY(-5px) scale(1.03);border-color:rgba(114,200,243,.45)}
+.eyebrow{position:relative}
+.eyebrow:after{
+  content:"";width:7px;height:7px;border-radius:50%;background:#72c8f3;box-shadow:0 0 16px #72c8f3;animation:blink 2s infinite
+}
+@keyframes cardShine{0%,55%{transform:translateX(-55%) rotate(8deg)}75%,100%{transform:translateX(55%) rotate(8deg)}}
+@keyframes pulseGlow{50%{transform:scale(1.18);opacity:.7}}
+@keyframes blink{50%{opacity:.35;transform:scale(.75)}}
+@media(max-width:600px){
+  .premium-badge{top:8px;right:4%;font-size:7px;padding:8px 10px}
+  .card{width:285px;height:179px;padding:20px;transform:rotate(-5deg)}
+  .card small{top:20px;left:20px;font-size:8px!important}
+  .card .chip{left:20px;top:58px;width:39px;height:29px}
+  .card .contactless{left:69px;top:61px}
+  .card .number{left:20px;right:20px;top:103px;font-size:14px;letter-spacing:2.5px}
+  .card .valid{left:21px;bottom:19px}
+  .card .holder{left:69px;bottom:20px;font-size:7px}
+  .card .brandmark{
+    right:14px;bottom:14px;width:92px;height:25px;padding:3px 5px;border-radius:6px;
+  }
+  .card .brandmark img{width:100%;height:100%;}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.orbit,.ring,.mouse:after,.card:after,.visual:after,.eyebrow:after{animation:none!important}
+}
+
+/* =========================================================
+   PERFORMANCE + RESPONSIVE HARDENING
+   Visual/theme-preserving: layout and branding are unchanged.
+   ========================================================= */
+html{overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto}
+button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (hover:none){
+  .cta:hover,.tab:hover,.mini:hover,.topup button:hover,.node:hover{transform:none}
+}
+@media (max-width:900px){
+  .wrap,.container{max-width:100%}
+  input,select,textarea,button{max-width:100%}
+}
+@media (max-width:600px){
+  .wrap{width:min(calc(100% - 32px),1120px)}
+  .container{width:min(calc(100% - 32px),1200px)}
+  .cta{max-width:100%;white-space:normal}
+  .pills,.meta,.services,.wallet-tags,.topup{max-width:100%}
+  .hero-card,.card{max-width:calc(100vw - 40px)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+@supports (content-visibility:auto){
+  .band,.dark,.included,.plans,.wallet,.loop,.faq,.terms,.final{content-visibility:auto;contain-intrinsic-size:700px}
+}
+
+
+/* Final mobile-safety refinements — preserves the existing design */
+.top{gap:20px;min-width:0}
+.brand{min-width:0}
+.brand img{max-width:100%;min-width:0}
+.main > div{min-width:0}
+.lead{overflow-wrap:break-word}
+.meta{min-width:0}
+.pill{max-width:100%;white-space:normal}
+.visual{min-width:0;width:100%}
+.node{max-width:42vw;white-space:normal;text-align:center}
+.card{max-width:calc(100% - 24px)}
+
+@media (max-width:900px){
+  .top{width:min(calc(100% - 32px),1200px)}
+  .main{width:min(calc(100% - 32px),1200px)}
+  .visual{width:100%;max-width:100vw;overflow:visible}
+}
+
+@media (max-width:600px){
+  .top{width:calc(100% - 28px);padding:16px 0 8px;gap:0}
+  .brand{width:min(190px,56vw);height:auto;aspect-ratio:3995/864}
+  .brand img{width:100%;height:100%;object-fit:contain;object-position:left center}
+  .main{width:calc(100% - 28px);padding:4px 0 58px;gap:8px}
+  .main > div:first-child{width:100%;min-width:0}
+  .visual{height:350px;width:100%;max-width:100%;overflow:visible}
+  .orbit{width:min(300px,82vw)}
+  .ring{width:min(340px,94vw);height:min(130px,36vw)}
+  .card{width:min(285px,82vw);height:auto;aspect-ratio:285/179;max-width:82vw}
+  .premium-badge{max-width:62vw;white-space:normal;text-align:center}
+  .node{max-width:31vw;padding:8px 9px;font-size:7px;line-height:1.25}
+  .n1{left:0;top:28px}
+  .n2{right:0;top:40%}
+  .n3{left:4%;bottom:25px}
+  .n4{left:-2px;top:58%}
+  .n5{right:0;bottom:12px}
+  h1{font-size:clamp(34px,10.5vw,52px);line-height:1.02;letter-spacing:-2.8px}
+  h1 em{font-size:.68em;letter-spacing:-1.5px}
+  .lead{font-size:15px;line-height:1.55}
+  .meta{gap:7px;margin:20px 0}
+  .pill{font-size:9px;padding:8px 10px}
+  .cta{width:100%;justify-content:center;padding:14px 16px}
+  .scroll{bottom:12px}
+}
+
+@media (max-width:380px){
+  .brand{width:min(160px,60vw)}
+  .visual{height:315px}
+  .card{width:76vw;max-width:76vw}
+  .node{font-size:6.5px;padding:7px 8px}
+  .premium-badge{font-size:6px;padding:7px 8px}
+}
+
+</style>
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://swyftmedia.in/intro.html">
+<meta property="og:site_name" content="Swyft Media Productions">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SWYFT ONE Intro | Swyft Media">
+<meta property="og:description" content="Explore SWYFT ONE, Swyft Media's creative business pass. Reserve once and access connected creative support throughout the year.">
+<meta property="og:url" content="https://swyftmedia.in/intro.html">
+<meta property="og:image" content="https://swyftmedia.in/swyft-media-logo-horizontal.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SWYFT ONE Intro | Swyft Media">
+<meta name="twitter:description" content="Explore SWYFT ONE, Swyft Media's creative business pass. Reserve once and access connected creative support throughout the year.">
+<meta name="twitter:image" content="https://swyftmedia.in/swyft-media-logo-horizontal.png">
+</head>
+<body>
+<section class="intro">
+<div class="noise"></div><div class="grid"></div>
+<div class="container top">
+  <a class="brand" href="#" aria-label="Swyft Media home">
+   <img src="swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="920" height="199" decoding="async">
+
+  </a>
+  <div class="tag">SWYFT ONE&nbsp;&nbsp;|&nbsp;&nbsp;BUSINESS PASS</div>
+</div>
+<div class="container main">
+  <div>
+    <div class="eyebrow">  INTRODUCING</div>
+    <h1>First Creative Wallet<br><em>All Branding..</em></h1>
+    <p class="lead">Reserve once. Create all year. A connected creative system designed to replace fragmented vendors, repeated quotations and scattered execution.</p>
+    <div class="meta">
+      <span class="pill">BRANDING</span><span class="pill">MARKETING</span><span class="pill">CONTENT</span><span class="pill">DIGITAL</span><span class="pill">PR</span>
+    </div>
+    <a class="cta" href="#" onclick="window.parent.postMessage({ type: 'OPEN_SWYFT_PASS' }, '*'); return false;">
+  UNLOCK YOUR PASS <i>→</i>
+</a>
+  </div>
+  <div class="visual">
+    <div class="orbit"></div><div class="ring"></div>
+    <div class="node n1">BRANDING</div><div class="node n2">DIGITAL SOLUTIONS</div><div class="node n3">CONTENT PRODUCTION</div><div class="node n4">PUBLIC RELATIONS</div><div class="node n5">MARKETING</div>
+    <div class="premium-badge">EXCLUSIVE BUSINESS ACCESS</div>
+    <div class="card" aria-label="SWYFT ONE Business Pass premium debit card">
+      <small>SWYFT ONE</small>
+      <div class="chip"><i></i></div>
+      <div class="contactless" aria-hidden="true"></div>
+      <strong class="number">XXXX&nbsp;&nbsp;••••&nbsp;&nbsp;XXXX</strong>
+      <span class="valid">CREATIVE ACCESS<strong>01/28</strong></span>
+      <span class="holder">BUSINESS MEMBER</span>
+      <span class="brandmark" aria-label="Swyft Media logo"><img src="assets/intro-wordmark.webp" alt="Swyft Media" width="900" height="192" decoding="async"></span>
+      <span class="card-glow"></span>
+    </div>
+  </div>
+</div>
+<div class="scroll"><div class="mouse"></div>SWIPE / SCROLL</div>
+</section>
+</body>
+</html>
