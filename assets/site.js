@@ -142,10 +142,23 @@
   var sessionKey = 'swyftPassPopupSeen';
   var pathname = window.location.pathname.toLowerCase();
 
-  var isPassPage =
-    /(?:^|\/)swyft-pass\.html$/.test(pathname);
+var isPassPage =
+  /(?:^|\/)swyft-pass\.html$/.test(pathname);
 
-  if (isPassPage) return;
+// Show the popup only on the SWYFT Media homepage.
+var hostname = window.location.hostname.toLowerCase();
+
+var isSwyftMediaDomain =
+  hostname === 'swyftmedia.in' ||
+  hostname === 'www.swyftmedia.in';
+
+var isHomePage =
+  pathname === '/' ||
+  pathname === '/home/' ||
+  pathname === '/home' ||
+  pathname === '/index.html';
+
+if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
 
   var popupAlreadySeen = false;
 
