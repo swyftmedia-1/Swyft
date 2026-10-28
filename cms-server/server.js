@@ -1213,7 +1213,7 @@ async function hasValidImageSignature(file) {
 }
 
 /* -------------------------------------------------------
-   ADMIN: IMAGE UPLOAD
+   ADMIN: IMAGE UPLOAD TO GITHUB
 ------------------------------------------------------- */
 
 app.post(
@@ -1222,6 +1222,7 @@ app.post(
   requireAdmin,
   (req, res) => {
     upload.single('image')(req, res, async (error) => {
+      // Handle upload errors.
       if (error) {
         if (
           error instanceof multer.MulterError &&
@@ -1239,6 +1240,7 @@ app.post(
         });
       }
 
+      // Ensure a file was uploaded.
       if (!req.file) {
         return res.status(400).json({
           error: 'Choose an image to upload.'
@@ -1246,30 +1248,94 @@ app.post(
       }
 
       try {
+        // Validate the actual image file signature.
         const validImage = await hasValidImageSignature(req.file);
 
         if (!validImage) {
-          await fs.unlink(req.file.path).catch(() => {});
-
           return res.status(400).json({
-            error: 'The uploaded file is not a valid image of the selected type.'
+            error:
+              'Invalid image file. Upload a valid JPEG, PNG, WebP, or GIF image.'
           });
         }
 
-        const base =
-          PUBLIC_API_URL ||
-          `${req.protocol}://${req.get('host')}`;
+        // Read GitHub configuration from environment variables.
+        const config = getGitHubConfig();
 
-        res.status(201).json({
-          url: `${base}/uploads/${encodeURIComponent(
-            req.file.filename
-          )}`
+        // Supported image formats and their extensions.
+        const extensionByMime = {
+          'image/jpeg': '.jpg',
+          'image/png': '.png',
+          'image/webp': '.webp',
+          'image/gif': '.gif'
+        };
+
+        const extension = extensionByMime[req.file.mimetype];
+
+        if (!extension) {
+          return res.status(400).json({
+            error: 'Unsupported image format.'
+          });
+        }
+
+        // Generate a unique filename to avoid overwriting other images.
+        const filename =
+          `${Date.now()}-${crypto.randomBytes(8).toString('hex')}` +
+          extension;
+
+        // Save images inside the GitHub repository.
+        const repoPath = `content/blog/images/${filename}`;
+
+        // Prepare the GitHub Contents API request.
+        const payload = {
+          message: `Upload CMS image: ${filename}`,
+          content: req.file.buffer.toString('base64'),
+          branch: config.branch
+        };
+
+        // Upload the image to GitHub.
+        await githubRequest(
+          githubFileUrl(config, repoPath),
+          config,
+          {
+            method: 'PUT',
+            body: JSON.stringify(payload)
+          }
+        );
+
+        // Build the public raw image URL.
+        const encodedPath = repoPath
+          .split('/')
+          .map(encodeURIComponent)
+          .join('/');
+
+        const encodedBranch = config.branch
+          .split('/')
+          .map(encodeURIComponent)
+          .join('/');
+
+        const url =
+          `https://raw.githubusercontent.com/` +
+          `${encodeURIComponent(config.owner)}/` +
+          `${encodeURIComponent(config.repo)}/` +
+          `${encodedBranch}/${encodedPath}`;
+
+        // Return the URL for the CMS editor to use in the article.
+        return res.status(201).json({
+          success: true,
+          message: 'Image uploaded successfully.',
+          url,
+          filename,
+          path: repoPath
         });
-      } catch (_) {
-        await fs.unlink(req.file.path).catch(() => {});
+      } catch (uploadError) {
+        console.error(
+          'GitHub image upload failed:',
+          uploadError.message
+        );
 
-        res.status(400).json({
-          error: 'Could not validate the uploaded image.'
+        return res.status(uploadError.status || 502).json({
+          error:
+            'Could not save the image to GitHub. Check the GitHub token permissions, repository settings, branch, and server logs.'
         });
       }
     });
