@@ -3,7 +3,7 @@
 const bcrypt = require('bcryptjs');
 const readline = require('node:readline');
 
-// Standard readline works reliably in Windows PowerShell and VS Code terminals.
+// Standard readline works reliably in Windows PowerShell and VS Code terminals. 
 // Input is visible while typing; do not run while screen-sharing or on a shared terminal.
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const ask = (prompt) => new Promise((resolve) => rl.question(prompt, resolve));
