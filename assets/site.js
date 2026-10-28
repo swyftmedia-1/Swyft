@@ -266,15 +266,14 @@
           'marketing, social media and PR, built to keep ' +
           'your brand moving all year.' +
         '</p>' +
-
-        '<a class="pass-popup-cta" href="' + safePassUrl + '">' +
-           'Explore Swyft Pass ' +
-           '<span aria-hidden="true">↗</span>' +
-        '</a>' +
-
-       '<a class="pass-popup-call" href="tel:+91 88662 05765">' +
-           '<span aria-hidden="true">📞</span> Call Now' +
-        '</a>' +
+          '<a class="pass-popup-cta" href="' + safePassUrl + '">' +
+          '<span class="pass-popup-cta-title">' +
+             'Explore Swyft Pass ↗' +
+         '</span>' +
+           '<span class="pass-popup-cta-phone">' +
+             'Call: +91 8866205765' +
+              '</span>' +
+             '</a>' +
 
         '<button class="pass-popup-later" type="button">' +
           'Maybe later' +
