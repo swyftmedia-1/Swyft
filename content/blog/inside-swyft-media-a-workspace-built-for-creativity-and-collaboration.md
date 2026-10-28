@@ -1,11 +1,14 @@
 ---
 title: "Inside Swyft Media: A Workspace Built for Creativity and Collaboration"
 slug: "inside-swyft-media-a-workspace-built-for-creativity-and-collaboration"
+id: "inside-swyft-media-a-workspace-built-for-creativity-and-collaboration"
 date: 2026-10-27
 description: "Discover the professional workspace of Swyft Media, Ahmedabad, where creativity, collaboration, and strategic thinking come together to deliver impactful media solutions."
-featured_image: "https://swyftmedia.onrender.com/uploads/1793106288285-aa68b7de-8f42-4493-a894-e38db9dce40d.jpg"
+featured_image: "https://raw.githubusercontent.com/swyftmedia-1/Swyft/main/content/blog/upload/1793185936353-772435c926b4ec2a.jpg"
 author: "Swyft Media Productions"
 published: true
+created_at: "2026-10-28T11:12:20.607Z"
+updated_at: "2026-10-28T11:12:20.334Z"
 ---
 
 At Swyft Media, Ahmedabad, we believe that great ideas begin with collaboration, creativity, and the right working environment. Our workspace brings our team together to exchange ideas, develop strategies, and create meaningful brand experiences.
