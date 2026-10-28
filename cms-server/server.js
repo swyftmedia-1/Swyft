@@ -200,7 +200,7 @@ app.use((req, _res, next) => {
 ------------------------------------------------------- */
 
 async function ensureStorage() {
-  await fs.mkdir(UPLOADS_DIR, { recursive: true });
+  await fs.mkdir(DATA_DIR, { recursive: true });
 
   try {
     await fs.access(STORIES_FILE);
@@ -711,27 +711,8 @@ const allowedMimeTypes = new Set([
   'image/gif'
 ]);
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, callback) => {
-    callback(null, UPLOADS_DIR);
-  },
-
-  filename: (_req, file, callback) => {
-    const extensionByMime = {
-      'image/jpeg': '.jpg',
-      'image/png': '.png',
-      'image/webp': '.webp',
-      'image/gif': '.gif'
-    };
-
-    callback(
-      null,
-      `${Date.now()}-${crypto.randomUUID()}${
-        extensionByMime[file.mimetype] || '.img'
-      }`
-    );
-  }
-});
+// Keep uploaded image data in memory before saving to GitHub.
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
@@ -1187,63 +1168,48 @@ app.delete(
 ------------------------------------------------------- */
 
 async function hasValidImageSignature(file) {
-  const handle = await fs.open(file.path, 'r');
+  const bytes = Buffer.isBuffer(file?.buffer)
+    ? file.buffer.subarray(0, 16)
+    : Buffer.alloc(0);
 
-  try {
-    const buffer = Buffer.alloc(16);
+  const isJpeg =
+    bytes.length >= 3 &&
+    bytes[0] === 0xff &&
+    bytes[1] === 0xd8 &&
+    bytes[2] === 0xff;
 
-    const { bytesRead } = await handle.read(
-      buffer,
-      0,
-      buffer.length,
-      0
+  const isPng =
+    bytes.length >= 8 &&
+    bytes.subarray(0, 8).equals(
+      Buffer.from([
+        0x89, 0x50, 0x4e, 0x47,
+        0x0d, 0x0a, 0x1a, 0x0a
+      ])
     );
 
-    const bytes = buffer.subarray(0, bytesRead);
+  const isGif =
+    bytes.length >= 6 &&
+    (
+      bytes.subarray(0, 6).toString('ascii') === 'GIF87a' ||
+      bytes.subarray(0, 6).toString('ascii') === 'GIF89a'
+    );
 
-    const isJpeg =
-      bytes.length >= 3 &&
-      bytes[0] === 0xff &&
-      bytes[1] === 0xd8 &&
-      bytes[2] === 0xff;
+  const isWebp =
+    bytes.length >= 12 &&
+    bytes.subarray(0, 4).toString('ascii') === 'RIFF' &&
+    bytes.subarray(8, 12).toString('ascii') === 'WEBP';
 
-    const isPng =
-      bytes.length >= 8 &&
-      bytes
-        .subarray(0, 8)
-        .equals(
-          Buffer.from([
-            0x89, 0x50, 0x4e, 0x47,
-            0x0d, 0x0a, 0x1a, 0x0a
-          ])
-        );
+  const actualMime = isJpeg
+    ? 'image/jpeg'
+    : isPng
+      ? 'image/png'
+      : isGif
+        ? 'image/gif'
+        : isWebp
+          ? 'image/webp'
+          : '';
 
-    const isGif =
-      bytes.length >= 6 &&
-      (
-        bytes.subarray(0, 6).toString('ascii') === 'GIF87a' ||
-        bytes.subarray(0, 6).toString('ascii') === 'GIF89a'
-      );
-
-    const isWebp =
-      bytes.length >= 12 &&
-      bytes.subarray(0, 4).toString('ascii') === 'RIFF' &&
-      bytes.subarray(8, 12).toString('ascii') === 'WEBP';
-
-    const actualMime = isJpeg
-      ? 'image/jpeg'
-      : isPng
-        ? 'image/png'
-        : isGif
-          ? 'image/gif'
-          : isWebp
-            ? 'image/webp'
-            : '';
-
-    return Boolean(actualMime && actualMime === file.mimetype);
-  } finally {
-    await handle.close();
-  }
+  return Boolean(actualMime && actualMime === file.mimetype);
 }
 
 /* -------------------------------------------------------
