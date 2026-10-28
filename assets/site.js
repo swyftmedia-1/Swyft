@@ -263,13 +263,17 @@
 
         '<p>' +
           'Discover a connected creative wallet for branding, ' +
-          'marketing, content, digital and PR—built to keep ' +
+          'marketing, social media and PR, built to keep ' +
           'your brand moving all year.' +
         '</p>' +
 
         '<a class="pass-popup-cta" href="' + safePassUrl + '">' +
-          'Explore Swyft Pass ' +
-          '<span aria-hidden="true">↗</span>' +
+           'Explore Swyft Pass ' +
+           '<span aria-hidden="true">↗</span>' +
+        '</a>' +
+
+       '<a class="pass-popup-call" href="tel:+91 88662 05765">' +
+           '<span aria-hidden="true">📞</span> Call Now' +
         '</a>' +
 
         '<button class="pass-popup-later" type="button">' +
