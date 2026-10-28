@@ -246,9 +246,10 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // Popup HTML content — keep this innerHTML.
+    // Popup HTML content.
     dialog.innerHTML =
       '<div class="pass-popup-card">' +
+
         '<button class="pass-popup-close" type="button" ' +
           'aria-label="Close popup">&times;</button>' +
 
@@ -266,14 +267,28 @@
           'marketing, social media and PR, built to keep ' +
           'your brand moving all year.' +
         '</p>' +
-          '<a class="pass-popup-cta" href="' + safePassUrl + '">' +
-          '<span class="pass-popup-cta-title">' +
-             'Explore Swyft Pass ↗' +
-         '</span>' +
-           '<span class="pass-popup-cta-phone">' +
-             'Call: +91 8866205765' +
-              '</span>' +
-             '</a>' +
+
+        // One visual box containing two independent links.
+        '<div class="pass-popup-cta">' +
+
+          '<a class="pass-popup-cta-title" href="' +
+            safePassUrl + '">' +
+            'Explore Swyft Pass ' +
+            '<span aria-hidden="true">↗</span>' +
+          '</a>' +
+
+          '<span class="pass-popup-cta-divider" ' +
+            'aria-hidden="true"></span>' +
+
+          '<a class="pass-popup-call-link" ' +
+            'href="tel:+918866205765">' +
+            '<span class="pass-popup-call-label">' +
+              'Call us directly' +
+            '</span>' +
+            '+91 8866205765' +
+          '</a>' +
+
+        '</div>' +
 
         '<button class="pass-popup-later" type="button">' +
           'Maybe later' +
@@ -282,6 +297,7 @@
         '<div class="pass-popup-footnote">' +
           'ONE PASS. YEAR-ROUND POSSIBILITIES.' +
         '</div>' +
+
       '</div>';
 
     document.body.appendChild(dialog);
