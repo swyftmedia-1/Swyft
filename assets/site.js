@@ -145,13 +145,13 @@
     });
   }
 
-  // SWYFT ONE popup.
-  // Show once per tab session after successfully opening.
-  var sessionKey = 'swyftPassPopupSeen';
+    // SWYFT ONE popup.
+  // Display on every homepage load or refresh.
+  // The visit number is stored locally in this browser.
+
   var pathname = window.location.pathname.toLowerCase();
   var hostname = window.location.hostname.toLowerCase();
 
-  // Show only on the SWYFT Media homepage.
   var isSwyftMediaDomain =
     hostname === 'swyftmedia.in' ||
     hostname === 'www.swyftmedia.in';
@@ -165,45 +165,54 @@
   var isPassPage =
     /(?:^|\/)swyft-pass\.html$/.test(pathname);
 
-  if (
-    !isSwyftMediaDomain ||
-    !isHomePage ||
-    isPassPage
-  ) {
+  if (!isSwyftMediaDomain || !isHomePage || isPassPage) {
     return;
   }
 
-  // Check whether the popup has already appeared this tab session.
-  var popupAlreadySeen = false;
+  // Increase the homepage visit number on every page load.
+  // This is a count for this browser, not a global visitor count.
+  var homepageViewCount = 1;
 
   try {
-    popupAlreadySeen =
-      window.sessionStorage.getItem(sessionKey) === '1';
-  } catch (storageError) {
-    // Continue if session storage is unavailable.
-  }
-
-  if (popupAlreadySeen) return;
-
-  // Avoid duplicate popup dialogs.
-  if (document.querySelector('dialog.pass-popup')) return;
-
-  // Show immediately when the DOM is ready.
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      function () {
-        showPassPopup();
-      },
-      { once: true }
+    var savedCount = parseInt(
+      window.localStorage.getItem('swyftHomepageRefreshCount'),
+      10
     );
-  } else {
-    showPassPopup();
+
+    homepageViewCount =
+      Number.isFinite(savedCount) && savedCount >= 0
+        ? savedCount + 1
+        : 1;
+
+    window.localStorage.setItem(
+      'swyftHomepageRefreshCount',
+      String(homepageViewCount)
+    );
+  } catch (storageError) {
+    // The popup still works if browser storage is unavailable.
   }
+
+  // Find the Swyft Pass destination.
+  var navPassLink = document.querySelector(
+    '.main-nav a[href*="swyft-pass.html"]'
+  );
+
+  var passUrl = navPassLink
+    ? navPassLink.href
+    : new URL('/swyft-pass.html', window.location.origin).href;
+
+  // WhatsApp click-to-chat link for SWYFT Media.
+  var whatsappMessage =
+    'Hello Swyft Media, I would like to know more about Swyft Pass.';
+
+  var whatsappUrl =
+    'https://wa.me/918866205765?text=' +
+    encodeURIComponent(whatsappMessage);
 
   function showPassPopup() {
     if (!document.body) return;
 
+    // Prevent duplicate dialogs on the same page load.
     if (document.querySelector('dialog.pass-popup')) return;
 
     // Do not interrupt an open mobile navigation menu.
@@ -216,29 +225,10 @@
       return;
     }
 
-    // Find the Swyft Pass destination.
-    var navPassLink = document.querySelector(
-      '.main-nav a[href*="swyft-pass.html"]'
-    );
-
-    var passUrl;
-
-    if (navPassLink) {
-      passUrl = navPassLink.href;
-    } else {
-      passUrl = new URL(
-        '/swyft-pass.html',
-        window.location.origin
-      ).href;
-    }
-
     var dialog = document.createElement('dialog');
 
     dialog.className = 'pass-popup';
-    dialog.setAttribute(
-      'aria-labelledby',
-      'pass-popup-title'
-    );
+    dialog.setAttribute('aria-labelledby', 'pass-popup-title');
 
     var safePassUrl = passUrl
       .replace(/&/g, '&amp;')
@@ -246,7 +236,12 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // Popup HTML content.
+    var safeWhatsappUrl = whatsappUrl
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
     dialog.innerHTML =
       '<div class="pass-popup-card">' +
 
@@ -259,8 +254,8 @@
         '</div>' +
 
         '<h2 id="pass-popup-title">' +
-         'Your Creative Team <br>One Pass.' +
-         '</h2>' +
+          'Your Creative Team,<br>One Pass.' +
+        '</h2>' +
 
         '<p>' +
           'Discover a connected creative wallet for branding, ' +
@@ -268,7 +263,17 @@
           'your brand moving all year.' +
         '</p>' +
 
-        // One visual box containing two independent links.
+        // Browser-local homepage visit number.
+        '<div class="pass-popup-visit">' +
+          '<span class="pass-popup-visit-label">' +
+            'HOMEPAGE VISIT' +
+          '</span>' +
+          '<span class="pass-popup-visit-number">' +
+            '#' + homepageViewCount +
+          '</span>' +
+        '</div>' +
+
+        // One unified navy box containing all contact actions.
         '<div class="pass-popup-cta">' +
 
           '<a class="pass-popup-cta-title" href="' +
@@ -280,10 +285,24 @@
           '<span class="pass-popup-cta-divider" ' +
             'aria-hidden="true"></span>' +
 
+          '<a class="pass-popup-whatsapp-link" href="' +
+            safeWhatsappUrl + '" target="_blank" ' +
+            'rel="noopener noreferrer">' +
+            '<span class="pass-popup-whatsapp-label">' +
+              'CHAT WITH OUR TEAM' +
+            '</span>' +
+            '<span class="pass-popup-whatsapp-title">' +
+              'Chat on WhatsApp ↗' +
+            '</span>' +
+          '</a>' +
+
+          '<span class="pass-popup-cta-divider" ' +
+            'aria-hidden="true"></span>' +
+
           '<a class="pass-popup-call-link" ' +
             'href="tel:+918866205765">' +
             '<span class="pass-popup-call-label">' +
-              'Call us directly' +
+              'CALL US DIRECTLY' +
             '</span>' +
             '+91 8866205765' +
           '</a>' +
@@ -302,13 +321,8 @@
 
     document.body.appendChild(dialog);
 
-    var popupOpened = false;
-
     function closePopup() {
-      if (
-        typeof dialog.close === 'function' &&
-        dialog.open
-      ) {
+      if (typeof dialog.close === 'function' && dialog.open) {
         dialog.close();
       } else {
         dialog.removeAttribute('open');
@@ -342,36 +356,32 @@
     try {
       if (typeof dialog.showModal === 'function') {
         dialog.showModal();
-        popupOpened = dialog.open;
       } else {
         // Compatibility fallback for older browsers.
         dialog.setAttribute('open', '');
         dialog.setAttribute('role', 'dialog');
         dialog.setAttribute('aria-modal', 'true');
-        popupOpened = true;
       }
     } catch (popupError) {
-      // Try the compatibility fallback if showModal fails.
+      // Fallback if showModal() is unavailable or fails.
       try {
         dialog.setAttribute('open', '');
         dialog.setAttribute('role', 'dialog');
         dialog.setAttribute('aria-modal', 'true');
-        popupOpened = true;
       } catch (fallbackError) {
         dialog.remove();
-        return;
       }
     }
+  }
 
-    // Mark as seen only after opening successfully.
-    if (popupOpened) {
-      try {
-        window.sessionStorage.setItem(sessionKey, '1');
-      } catch (storageError) {
-        // Popup still works if session storage is unavailable.
-      }
-    } else {
-      dialog.remove();
-    }
+  // Open immediately when the DOM is ready.
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      showPassPopup,
+      { once: true }
+    );
+  } else {
+    showPassPopup();
   }
 })();
