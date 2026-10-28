@@ -2,7 +2,7 @@
 dialog.pass-popup {
   width: min(420px, calc(100vw - 30px));
   max-width: none;
-  max-height: calc(100vh - 32px);
+  max-height: calc(100vh - 32px); 
   max-height: calc(100dvh - 32px);
   margin: auto;
   padding: 0;
