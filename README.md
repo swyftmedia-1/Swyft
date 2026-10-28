@@ -42,15 +42,15 @@ The custom username/password CMS is independent of the legacy `.pages.yml` Pages
 1. Back up the current repository before replacing files.
 2. Copy the website source files to the root of the correct Swyft website repository. Preserve the valid `CNAME` file and existing repository settings.
 3. Deploy the static site with the existing GitHub Actions Pages workflow.
-4. Deploy `cms-server/` as a separate Node.js service with a persistent writable disk for articles and uploaded images.
+4. Deploy `cms-server/` as a separate Node.js service. CMS articles and images are written to GitHub, so no Render persistent disk is required.
 5. Configure `cms-config.js` with the public API URL, then redeploy the static website.
 6. Test login, draft saving, publishing, editing, cover image upload and opening a published story.
 
-The CMS stores article data in the backend's persistent `DATA_DIR`. The CMS API host must use persistent storage; ephemeral storage can lose stories and images when the service restarts or redeploys. The live API also needs HTTPS and the exact website origins configured for CORS.
+The CMS stores each article as a Markdown file in `content/blog/` and uploaded images in `content/blog/upload/` through the GitHub Contents API. The Render API does not write CMS content to its local filesystem and does not require a Persistent Disk or `DATA_DIR`. Keep the GitHub token only in Render Environment variables; never commit `.env`. The live API also needs HTTPS, GitHub Contents read/write permission, and the exact website origins configured for CORS.
 
 ## Existing blog content
 
-The previous archive cards remain on Business Stories and open at their original publishing locations. The custom CMS lets the CEO publish new articles separately from GitHub. Articles saved through the separate CMS do not commit to GitHub or automatically run the static build. The current runtime article URLs are functional shareable links; the static sitemap is not automatically extended with CMS API stories.
+The previous archive cards remain on Business Stories and open at their original publishing locations. The custom CMS lets the CEO publish new articles through a separate username/password interface. Each save commits an individual Markdown file to GitHub; publishing triggers the existing Actions workflow to rebuild the blog pages and sitemap.
 
 ## Contact form
 
