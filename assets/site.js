@@ -119,17 +119,18 @@
 
       var data = new FormData(mailForm);
 
-      var lines = [
-        'New website enquiry',
-        '',
-        'Name: ' + (data.get('name') || ''),
-        'Email: ' + (data.get('email') || ''),
-        'Company: ' + (data.get('company') || ''),
-        'Service: ' + (data.get('service') || ''),
-        '',
-        'Project details:',
-        (data.get('message') || '')
-      ];
+     var lines = [
+  'New website enquiry',
+  '',
+  'Name: ' + (data.get('name') || ''),
+  'Phone: ' + (data.get('phone') || ''),
+  'Email: ' + (data.get('email') || ''),
+  'Company: ' + (data.get('company') || ''),
+  'Service required: ' + (data.get('service') || ''),
+  '',
+  'Project details:',
+  (data.get('message') || '')
+];
 
       var subject = encodeURIComponent(
         'New Swyft Media website enquiry'
