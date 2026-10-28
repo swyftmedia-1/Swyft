@@ -259,8 +259,8 @@
         '</div>' +
 
         '<h2 id="pass-popup-title">' +
-          'Your Creative Team,        One Pass.' +
-        '</h2>' +
+         'Your Creative Team <br>One Pass.' +
+         '</h2>' +
 
         '<p>' +
           'Discover a connected creative wallet for branding, ' +
