@@ -28,54 +28,88 @@ function decodeBasicEntities(value = '') {
 function safeUrl(value, image = false) {
   const raw = decodeBasicEntities(String(value || '').trim());
   if (!raw) return '';
-  if (/^(https?:|mailto:)/i.test(raw)) return escapeHtml(raw);
+
+  // Images may use HTTP(S) or relative/root-relative paths only.
+  // Never allow mailto:, javascript:, data: or other URI schemes as an image source.
+  if (image) {
+    if (/^https?:\/\//i.test(raw)) return escapeHtml(raw);
+    if (/^[a-z][a-z0-9+.-]*:/i.test(raw) || raw.startsWith('#')) return '';
+    return escapeHtml(raw);
+  }
+
+  if (/^https?:\/\//i.test(raw) || /^mailto:/i.test(raw)) return escapeHtml(raw);
   if (raw.startsWith('/') || raw.startsWith('#')) return escapeHtml(raw);
+
   // Reject javascript:, data: and other unexpected URI schemes.
-  if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return image ? '' : '#';
+  if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return '#';
+
   return escapeHtml(raw);
 }
 
 function parseScalar(raw = '') {
   const value = raw.trim();
+
   if (!value) return '';
   if (value === 'true') return true;
   if (value === 'false') return false;
+
   if (value.startsWith('"') && value.endsWith('"')) {
-    try { return JSON.parse(value); } catch { return value.slice(1, -1); }
+    try {
+      return JSON.parse(value);
+    } catch {
+      return value.slice(1, -1);
+    }
   }
+
   if (value.startsWith("'") && value.endsWith("'")) {
     return value.slice(1, -1).replace(/''/g, "'");
   }
+
   return value;
 }
 
 function parsePost(filePath) {
   const source = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
   const match = source.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)([\s\S]*)$/);
-  if (!match) throw new Error(`Missing YAML front matter in ${path.relative(ROOT, filePath)}`);
+
+  if (!match) {
+    throw new Error(`Missing YAML front matter in ${path.relative(ROOT, filePath)}`);
+  }
+
   const meta = {};
+
   for (const line of match[1].split(/\r?\n/)) {
     if (!line.trim() || /^\s*#/.test(line)) continue;
+
     const field = line.match(/^([a-zA-Z_][\w-]*):\s*(.*)$/);
     if (!field) continue;
+
     meta[field[1]] = parseScalar(field[2]);
   }
+
   const slug = String(meta.slug || path.basename(filePath, '.md')).trim();
+
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-    throw new Error(`Invalid slug "${slug}" in ${path.relative(ROOT, filePath)}. Use lowercase letters, numbers and hyphens.`);
+    throw new Error(
+      `Invalid slug "${slug}" in ${path.relative(ROOT, filePath)}. Use lowercase letters, numbers and hyphens.`
+    );
   }
+
   const title = String(meta.title || '').trim();
   const description = String(meta.description || '').trim();
   const rawDate = String(meta.date || '').trim();
   const dateMatch = rawDate.match(/^(\d{4}-\d{2}-\d{2})/);
   const date = dateMatch ? dateMatch[1] : rawDate;
   const body = match[2].trim();
+
   if (meta.published === true && (!title || !description || !date || !body)) {
     throw new Error(`Published article ${slug} needs a title, date, description and body.`);
   }
+
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     throw new Error(`Date for ${slug} should use YYYY-MM-DD format.`);
   }
+
   return {
     slug,
     title: title || 'Untitled article',
@@ -93,22 +127,29 @@ function parsePost(filePath) {
 
 function inlineMarkdown(rawText) {
   let text = escapeHtml(rawText);
+
   text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g, (_m, alt, url, title) => {
     const safe = safeUrl(url, true);
+
     if (!safe) return alt;
+
     return `<img src="${safe}" alt="${alt}"${title ? ` title="${title}"` : ''} loading="lazy" decoding="async">`;
   });
+
   text = text.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g, (_m, label, url, title) => {
     const safe = safeUrl(url);
     const isExternal = /^https?:/i.test(decodeBasicEntities(url));
+
     return `<a href="${safe}"${title ? ` title="${title}"` : ''}${isExternal ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`;
   });
+
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/__(.+?)__/g, '<strong>$1</strong>');
   text = text.replace(/~~(.+?)~~/g, '<del>$1</del>');
   text = text.replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
   text = text.replace(/(^|[^_])_([^_\n]+)_/g, '$1<em>$2</em>');
+
   return text;
 }
 
@@ -126,9 +167,14 @@ function markdownToHtml(markdown) {
       paragraph = [];
     }
   };
+
   const flushList = () => {
     if (!listType) return;
-    output.push(`<${listType}>${listItems.map((item) => `<li>${inlineMarkdown(item)}</li>`).join('')}</${listType}>`);
+
+    output.push(
+      `<${listType}>${listItems.map((item) => `<li>${inlineMarkdown(item)}</li>`).join('')}</${listType}>`
+    );
+
     listType = null;
     listItems = [];
   };
@@ -138,61 +184,111 @@ function markdownToHtml(markdown) {
       if (/^\s*```/.test(line)) {
         output.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
         codeLines = null;
-      } else codeLines.push(line);
+      } else {
+        codeLines.push(line);
+      }
+
       continue;
     }
+
     if (/^\s*```/.test(line)) {
-      flushParagraph(); flushList(); codeLines = []; continue;
+      flushParagraph();
+      flushList();
+      codeLines = [];
+      continue;
     }
-    if (!line.trim()) { flushParagraph(); flushList(); continue; }
+
+    if (!line.trim()) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
 
     const heading = line.match(/^\s{0,3}(#{1,4})\s+(.+?)\s*#*\s*$/);
+
     if (heading) {
-      flushParagraph(); flushList();
+      flushParagraph();
+      flushList();
+
       const level = heading[1].length;
       output.push(`<h${level + 1}>${inlineMarkdown(heading[2])}</h${level + 1}>`);
       continue;
     }
+
     if (/^\s{0,3}(---|___|\*\s*\*\s*\*)\s*$/.test(line)) {
-      flushParagraph(); flushList(); output.push('<hr>'); continue;
+      flushParagraph();
+      flushList();
+      output.push('<hr>');
+      continue;
     }
+
     const quote = line.match(/^\s{0,3}>\s?(.*)$/);
+
     if (quote) {
-      flushParagraph(); flushList();
+      flushParagraph();
+      flushList();
       output.push(`<blockquote><p>${inlineMarkdown(quote[1])}</p></blockquote>`);
       continue;
     }
+
     const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
     const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+
     if (unordered || ordered) {
       flushParagraph();
+
       const nextType = unordered ? 'ul' : 'ol';
-      if (listType && listType !== nextType) flushList();
+
+      if (listType && listType !== nextType) {
+        flushList();
+      }
+
       listType = nextType;
       listItems.push((unordered || ordered)[1]);
       continue;
     }
+
     flushList();
     paragraph.push(line.trim());
   }
+
   flushParagraph();
   flushList();
-  if (codeLines) output.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+
+  if (codeLines) {
+    output.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+  }
+
   return output.join('\n');
 }
 
 function formatDate(date) {
   if (!date) return '';
+
   const parsed = new Date(`${date}T12:00:00Z`);
-  return Number.isNaN(parsed.getTime()) ? date : new Intl.DateTimeFormat('en-IN', {
-    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'
-  }).format(parsed);
+
+  return Number.isNaN(parsed.getTime())
+    ? date
+    : new Intl.DateTimeFormat('en-IN', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC'
+      }).format(parsed);
 }
 
 function absoluteImageUrl(image) {
-  if (!image) return '';
-  if (/^https?:\/\//i.test(image)) return image;
-  return `${SITE_URL}/${String(image).replace(/^\/+/, '')}`;
+  const raw = String(image || '').trim();
+
+  if (!raw) return '';
+
+  // Only allow safe HTTP(S) URLs or local site paths for images.
+  if (/^https?:\/\//i.test(raw)) return safeUrl(raw, true);
+  if (/^[a-z][a-z0-9+.-]*:/i.test(raw) || raw.startsWith('#')) return '';
+
+  const cleanPath = raw.replace(/^\/+/, '');
+
+  return cleanPath ? `${SITE_URL}/${cleanPath}` : '';
 }
 
 function readTime(text) {
@@ -228,9 +324,11 @@ function head({ title, description, canonical, image = '', type = 'website', dat
   const safeDesc = escapeHtml(description);
   const safeCanonical = escapeHtml(canonical);
   const safeImage = escapeHtml(image);
+
   const articleTags = type === 'article' ? `
     <meta property="article:published_time" content="${escapeHtml(date)}">
     <meta property="article:author" content="Swyft Media Productions">` : '';
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -289,15 +387,22 @@ function header(active = false) {
     <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg></a>
     <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fb" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg></a>
   </div>`;
+
   const navLinks = [
-    ['Home','../index.html'],['About Us','../about.html'],['Services','../services.html'],['Projects','../projects.html'],
-    ['Business Stories','../blog/'],['Swyft Pass','../swyft-pass.html'],['Contact','../contact.html']
+    ['Home','../index.html'],
+    ['About Us','../about.html'],
+    ['Services','../services.html'],
+    ['Projects','../projects.html'],
+    ['Business Stories','../blog/'],
+    ['Swyft Pass','../swyft-pass.html'],
+    ['Contact','../contact.html']
   ];
+
   return `<header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../index.html" aria-label="Swyft Media home"><img src="../swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-controls="swyft-main-nav" aria-expanded="false" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <nav class="main-nav" id="swyft-main-nav" aria-label="Main navigation">${navLinks.map(([label, href]) => `<a${(active && label==='Business Stories') ? ' aria-current="page"' : ''} href="${href}">${label}</a>`).join('')}</nav>
+      <nav class="main-nav" id="swyft-main-nav" aria-label="Main navigation">${navLinks.map(([label, href]) => `<a${(active && label === 'Business Stories') ? ' aria-current="page"' : ''} href="${href}">${label}</a>`).join('')}</nav>
       ${social}
     </div>
   </header>`;
@@ -326,7 +431,8 @@ function jsonLd(obj) {
 function listingPage(posts, legacyPosts) {
   const cards = posts.map((post) => {
     const image = absoluteImageUrl(post.featuredImage);
-    return `<article class="card">
+
+    return `<article class="card" data-story-slug="${escapeHtml(post.slug)}">
       <a class="card-image" href="/${escapeHtml(post.slug)}/" aria-label="Read ${escapeHtml(post.title)}">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async">` : `<span class="card-placeholder">Swyft Media Insights</span>`}</a>
       <div class="card-content">
         <div class="meta">${escapeHtml(formatDate(post.date))}${post.category ? ` &nbsp;·&nbsp; <span class="category">${escapeHtml(post.category)}</span>` : ''}</div>
@@ -337,26 +443,82 @@ function listingPage(posts, legacyPosts) {
     </article>`;
   }).join('\n');
 
-  const archive = legacyPosts.length ? `<section class="archive" aria-labelledby="archive-title">
+  const publishedSlugs = new Set(posts.map((post) => post.slug.toLowerCase()));
+  const publishedTitles = new Set(posts.map((post) => post.title.trim().toLowerCase()));
+  const seenLegacyKeys = new Set();
+
+  const uniqueLegacyPosts = legacyPosts.filter((post) => {
+    const titleKey = post.title.trim().toLowerCase();
+    let slugKey = '';
+
+    try {
+      slugKey = new URL(post.link).pathname.replace(/\/+$/, '').split('/').filter(Boolean).pop() || '';
+    } catch {
+      /* loadLegacyPosts already validates the link */
+    }
+
+    const normalizedSlug = slugKey.toLowerCase();
+    const key = normalizedSlug || titleKey;
+
+    if (
+      publishedTitles.has(titleKey) ||
+      (normalizedSlug && publishedSlugs.has(normalizedSlug)) ||
+      seenLegacyKeys.has(key)
+    ) {
+      return false;
+    }
+
+    seenLegacyKeys.add(key);
+    return true;
+  });
+
+  const archive = uniqueLegacyPosts.length ? `<section class="archive" aria-labelledby="archive-title">
     <div class="wrap"><h2 id="archive-title">From the existing Swyft Media blog archive</h2>
     <p style="color:#666;max-width:760px">Explore earlier Swyft Media perspectives on branding, content, marketing and business growth. These archived stories open at their original publishing location.</p>
-    <div class="posts">${legacyPosts.map((post) => {
-      const archiveImage = post.image ? `<img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async">` : `<span class="card-placeholder">Swyft Media Stories</span>`;
+    <div class="posts">${uniqueLegacyPosts.map((post) => {
+      const archiveImage = post.image
+        ? `<img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async">`
+        : `<span class="card-placeholder">Swyft Media Stories</span>`;
+
       return `<article class="card"><a class="card-image" href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" aria-label="Read ${escapeHtml(post.title)}">${archiveImage}</a><div class="card-content"><div class="meta">${escapeHtml(post.date)} &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(post.title)}</a></h2><p>${escapeHtml(post.description)}</p><a class="read-link" href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>`;
     }).join('')}</div></div>
   </section>` : '';
 
   const itemList = posts.map((post, index) => ({
-    '@type': 'ListItem', position: index + 1,
-    item: { '@type': 'BlogPosting', headline: post.title, url: `${SITE_URL}/${post.slug}/`, datePublished: post.date, description: post.description, ...(post.featuredImage ? { image: absoluteImageUrl(post.featuredImage) } : {}) }
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'BlogPosting',
+      headline: post.title,
+      url: `${SITE_URL}/${post.slug}/`,
+      datePublished: post.date,
+      description: post.description,
+      ...(post.featuredImage ? { image: absoluteImageUrl(post.featuredImage) } : {})
+    }
   }));
-  const schema = { '@context': 'https://schema.org', '@type': 'Blog', name: 'Business Stories', url: `${SITE_URL}/blog/`, publisher: { '@type': 'Organization', name: 'Swyft Media Productions', url: SITE_URL }, blogPost: itemList.map((entry) => entry.item) };
-  const latestSection = posts.length ? `<section class="wrap" aria-label="Latest articles"><div class="posts">${cards}</div></section>` : '';
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Business Stories',
+    url: `${SITE_URL}/blog/`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Swyft Media Productions',
+      url: SITE_URL
+    },
+    blogPost: itemList.map((entry) => entry.item)
+  };
+
+  const latestSection = posts.length
+    ? `<section class="wrap" aria-label="Latest articles"><div class="posts">${cards}</div></section>`
+    : '';
 
   return `${head({
     title: 'Business Stories | Branding, Marketing & Creative Insights',
     description: 'Explore Swyft Media Business Stories covering brand strategy, digital marketing, public relations, creative thinking and business growth.',
-    canonical: `${SITE_URL}/blog/`, image: `${SITE_URL}/swyft-media-logo-horizontal.png`
+    canonical: `${SITE_URL}/blog/`,
+    image: `${SITE_URL}/swyft-media-logo-horizontal.png`
   })}
 <body>${jsonLd(schema)}${header(true)}
 <main>
@@ -370,30 +532,131 @@ function listingPage(posts, legacyPosts) {
 </main>${footer()}<script src="../cms-config.js"></script><script>
 (function(){
   'use strict';
-  var api=String(window.SWYFT_CMS_API_URL||'').trim().replace(/\\/+$/,'');
-  var panel=document.getElementById('cmsRuntimeStories'), grid=document.getElementById('cmsStoriesGrid');
-  if(!api||!panel||!grid)return;
-  function make(tag,cls,text){var node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=String(text);return node;}
-  function render(stories){
-    if(!Array.isArray(stories)||!stories.length)return;
-    stories=stories.filter(function(s){return s&&s.title&&s.slug&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.slug);});
-    if(!stories.length)return;
-    stories.forEach(function(story){
-      var href='story.html?slug='+encodeURIComponent(story.slug);
-      var card=make('article','card');
-      var imageLink=make('a','card-image');imageLink.href=href;imageLink.setAttribute('aria-label','Read '+story.title);
-      var cover=String(story.coverImage||'');
-      if(/^https:\\/\\//i.test(cover)){var img=make('img');img.src=cover;img.alt=story.title;img.loading='lazy';img.decoding='async';imageLink.appendChild(img);}
-      else imageLink.appendChild(make('span','card-placeholder','Swyft Media Insights'));
-      var content=make('div','card-content');var d=new Date(String(story.date||'')+'T00:00:00Z');var dateText=Number.isNaN(d.getTime())?'':d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
-      content.appendChild(make('div','meta',dateText+' · Published'));
-      var h=make('h2');var titleLink=make('a','',story.title);titleLink.href=href;h.appendChild(titleLink);content.appendChild(h);
-      content.appendChild(make('p','',story.description||''));var read=make('a','read-link','Read article →');read.href=href;content.appendChild(read);
-      card.appendChild(imageLink);card.appendChild(content);grid.appendChild(card);
-    });
-    if(grid.children.length)panel.hidden=false;
+
+  var api = String(window.SWYFT_CMS_API_URL || '').trim().replace(/\\/+$/, '');
+  var panel = document.getElementById('cmsRuntimeStories');
+  var grid = document.getElementById('cmsStoriesGrid');
+
+  if (!api || !panel || !grid) return;
+
+  function make(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = String(text);
+    return node;
   }
-  fetch(api+'/api/stories',{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('Stories unavailable');return r.json();}).then(render).catch(function(){/* Gracefully retain static/archive content if the API is offline. */});
+
+  function render(stories) {
+    if (!Array.isArray(stories) || !stories.length) return;
+
+    var staticCards = document.querySelectorAll('[data-story-slug]');
+    var existingSlugs = new Set();
+    var existingTitles = new Set();
+
+    staticCards.forEach(function(card) {
+      var slug = String(card.getAttribute('data-story-slug') || '').toLowerCase();
+      var titleNode = card.querySelector('.card-content h2');
+      var title = String(titleNode ? titleNode.textContent : '').trim().toLowerCase();
+
+      if (slug) existingSlugs.add(slug);
+      if (title) existingTitles.add(title);
+    });
+
+    var seenApiSlugs = new Set();
+
+    stories = stories.filter(function(story) {
+      if (
+        !story ||
+        !story.title ||
+        !story.slug ||
+        !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(story.slug)
+      ) {
+        return false;
+      }
+
+      var slug = String(story.slug).toLowerCase();
+      var title = String(story.title).trim().toLowerCase();
+
+      if (
+        existingSlugs.has(slug) ||
+        existingTitles.has(title) ||
+        seenApiSlugs.has(slug)
+      ) {
+        return false;
+      }
+
+      seenApiSlugs.add(slug);
+      return true;
+    });
+
+    if (!stories.length) return;
+
+    stories.forEach(function(story) {
+      var href = 'story.html?slug=' + encodeURIComponent(story.slug);
+      var card = make('article', 'card');
+      var imageLink = make('a', 'card-image');
+
+      imageLink.href = href;
+      imageLink.setAttribute('aria-label', 'Read ' + story.title);
+
+      var cover = String(story.coverImage || '');
+
+      if (/^https:\/\//i.test(cover)) {
+        var img = make('img');
+        img.src = cover;
+        img.alt = story.title;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        imageLink.appendChild(img);
+      } else {
+        imageLink.appendChild(make('span', 'card-placeholder', 'Swyft Media Insights'));
+      }
+
+      var content = make('div', 'card-content');
+      var d = new Date(String(story.date || '') + 'T00:00:00Z');
+
+      var dateText = Number.isNaN(d.getTime())
+        ? ''
+        : d.toLocaleDateString('en-IN', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            timeZone: 'UTC'
+          });
+
+      content.appendChild(make('div', 'meta', dateText + ' · Published'));
+
+      var h = make('h2');
+      var titleLink = make('a', '', story.title);
+      titleLink.href = href;
+      h.appendChild(titleLink);
+      content.appendChild(h);
+
+      content.appendChild(make('p', '', story.description || ''));
+
+      var read = make('a', 'read-link', 'Read article →');
+      read.href = href;
+      content.appendChild(read);
+
+      card.appendChild(imageLink);
+      card.appendChild(content);
+      grid.appendChild(card);
+    });
+
+    if (grid.children.length) panel.hidden = false;
+  }
+
+  fetch(api + '/api/stories', {
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(function(response) {
+      if (!response.ok) throw new Error('Stories unavailable');
+      return response.json();
+    })
+    .then(render)
+    .catch(function() {
+      // Keep static and archived stories available if the API is offline.
+    });
 })();
 </script><script src="../assets/site.js" defer></script></body></html>`;
 }
@@ -401,19 +664,52 @@ function listingPage(posts, legacyPosts) {
 function articlePage(post) {
   const url = `${SITE_URL}/${post.slug}/`;
   const canonicalImage = absoluteImageUrl(post.featuredImage);
+
   const structuredData = {
-    '@context': 'https://schema.org', '@type': 'BlogPosting', '@id': `${url}#article`,
-    headline: post.title, description: post.description, datePublished: post.date,
-    dateModified: post.date, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    author: { '@type': 'Organization', name: post.author || 'Swyft Media Productions', url: SITE_URL },
-    publisher: { '@type': 'Organization', name: 'Swyft Media Productions', url: SITE_URL, logo: { '@type': 'ImageObject', url: `${SITE_URL}/swyft-media-logo-horizontal.png` } },
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url
+    },
+    author: {
+      '@type': 'Organization',
+      name: post.author || 'Swyft Media Productions',
+      url: SITE_URL
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Swyft Media Productions',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/swyft-media-logo-horizontal.png`
+      }
+    },
     ...(canonicalImage ? { image: [canonicalImage] } : {}),
     ...(post.category ? { articleSection: post.category } : {}),
     ...(post.tags.length ? { keywords: post.tags.join(', ') } : {})
   };
+
   const featuredImageUrl = absoluteImageUrl(post.featuredImage);
-  const featured = featuredImageUrl ? `<img class="featured" src="${escapeHtml(featuredImageUrl)}" alt="${escapeHtml(post.title)}" fetchpriority="high" decoding="async">` : '';
-  return `${head({ title: `${post.title} | Swyft Media Productions`, description: post.description, canonical: url, image: canonicalImage, type: 'article', date: post.date })}
+
+  const featured = featuredImageUrl
+    ? `<img class="featured" src="${escapeHtml(featuredImageUrl)}" alt="${escapeHtml(post.title)}" fetchpriority="high" decoding="async">`
+    : '';
+
+  return `${head({
+    title: `${post.title} | Swyft Media Productions`,
+    description: post.description,
+    canonical: url,
+    image: canonicalImage,
+    type: 'article',
+    date: post.date
+  })}
 <body>${jsonLd(structuredData)}${header(true)}
 <main class="article-shell">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> &nbsp;›&nbsp; <a href="../blog/">Business Stories</a> &nbsp;›&nbsp; <span>${escapeHtml(post.title)}</span></nav>
@@ -435,8 +731,13 @@ function articlePage(post) {
 
 function loadLegacyPosts() {
   if (!fs.existsSync(LEGACY_POSTS_FILE)) return [];
+
   const parsed = JSON.parse(fs.readFileSync(LEGACY_POSTS_FILE, 'utf8'));
-  if (!Array.isArray(parsed)) throw new Error('content/legacy-blog-posts.json must contain an array.');
+
+  if (!Array.isArray(parsed)) {
+    throw new Error('content/legacy-blog-posts.json must contain an array.');
+  }
+
   return parsed.map((post) => ({
     date: String(post.date || '').trim(),
     title: String(post.title || '').trim(),
@@ -449,53 +750,111 @@ function loadLegacyPosts() {
 function copyPublicRoot() {
   fs.rmSync(SITE_DIR, { recursive: true, force: true });
   fs.mkdirSync(SITE_DIR, { recursive: true });
+
   for (const name of fs.readdirSync(ROOT)) {
     if (EXCLUDED_ROOT_ITEMS.has(name)) continue;
+
     const sourcePath = path.join(ROOT, name);
     const targetPath = path.join(SITE_DIR, name);
     const stat = fs.lstatSync(sourcePath);
+
     if (stat.isSymbolicLink()) continue;
-    if (stat.isDirectory()) fs.cpSync(sourcePath, targetPath, { recursive: true });
-    else if (stat.isFile()) fs.copyFileSync(sourcePath, targetPath);
+
+    if (stat.isDirectory()) {
+      fs.cpSync(sourcePath, targetPath, { recursive: true });
+    } else if (stat.isFile()) {
+      fs.copyFileSync(sourcePath, targetPath);
+    }
   }
+
   fs.writeFileSync(path.join(SITE_DIR, '.nojekyll'), '');
 }
 
 function writeSitemap(posts) {
-  // Rebuild from authoritative public routes on every build. Do not carry URLs for
-  // deleted/unpublished articles forward from a previous sitemap.
+  // Rebuild from authoritative public routes on every build.
+  // Do not carry URLs for deleted or unpublished articles forward.
   const urls = new Map();
-  for (const route of ['/', '/about.html', '/services.html', '/projects.html', '/people.html', '/swyft-pass.html', '/contact.html', '/blog/']) {
+
+  for (const route of [
+    '/',
+    '/about.html',
+    '/services.html',
+    '/projects.html',
+    '/people.html',
+    '/swyft-pass.html',
+    '/contact.html',
+    '/blog/'
+  ]) {
     urls.set(`${SITE_URL}${route}`, '');
   }
-  for (const post of posts) urls.set(`${SITE_URL}/${post.slug}/`, post.date);
-  const xmlEscape = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...urls.entries()].map(([url, lastmod]) => `  <url>\n    <loc>${xmlEscape(url)}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}\n  </url>`).join('\n')}\n</urlset>\n`;
-  // Keep the source sitemap useful for local/static preview as well as the deployed build.
+
+  for (const post of posts) {
+    urls.set(`${SITE_URL}/${post.slug}/`, post.date);
+  }
+
+  const xmlEscape = (value) => value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${[...urls.entries()].map(([url, lastmod]) => `  <url>
+    <loc>${xmlEscape(url)}</loc>${lastmod ? `
+    <lastmod>${lastmod}</lastmod>` : ''}
+  </url>`).join('\n')}
+</urlset>
+`;
+
+  // Keep the source sitemap useful for local/static preview and deployment.
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
   fs.writeFileSync(path.join(SITE_DIR, 'sitemap.xml'), xml);
 }
 
 function main() {
-  if (!fs.existsSync(CONTENT_DIR)) fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  const files = fs.readdirSync(CONTENT_DIR).filter((name) => name.endsWith('.md') && name.toLowerCase() !== 'readme.md').sort();
-  const posts = files.map((name) => parsePost(path.join(CONTENT_DIR, name))).filter((post) => post.published);
+  if (!fs.existsSync(CONTENT_DIR)) {
+    fs.mkdirSync(CONTENT_DIR, { recursive: true });
+  }
+
+  const files = fs.readdirSync(CONTENT_DIR)
+    .filter((name) => name.endsWith('.md') && name.toLowerCase() !== 'readme.md')
+    .sort();
+
+  const posts = files
+    .map((name) => parsePost(path.join(CONTENT_DIR, name)))
+    .filter((post) => post.published);
+
   const seen = new Set();
+
   for (const post of posts) {
-    if (seen.has(post.slug)) throw new Error(`Duplicate published slug: ${post.slug}`);
-    if (RESERVED_SLUGS.has(post.slug) || fs.existsSync(path.join(ROOT, post.slug))) {
-      throw new Error(`The slug "${post.slug}" conflicts with a reserved route or existing root-level path. Choose a different slug.`);
+    if (seen.has(post.slug)) {
+      throw new Error(`Duplicate published slug: ${post.slug}`);
     }
+
+    if (
+      RESERVED_SLUGS.has(post.slug) ||
+      fs.existsSync(path.join(ROOT, post.slug))
+    ) {
+      throw new Error(
+        `The slug "${post.slug}" conflicts with a reserved route or existing root-level path. Choose a different slug.`
+      );
+    }
+
     seen.add(post.slug);
   }
+
   posts.sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+
   copyPublicRoot();
 
   const blogDir = path.join(SITE_DIR, 'blog');
   fs.mkdirSync(blogDir, { recursive: true });
+
   const legacyPosts = loadLegacyPosts();
   const generatedListing = listingPage(posts, legacyPosts);
+
   fs.writeFileSync(path.join(blogDir, 'index.html'), generatedListing);
+
   for (const post of posts) {
     const postDir = path.join(SITE_DIR, post.slug);
     fs.mkdirSync(postDir, { recursive: true });
@@ -503,24 +862,37 @@ function main() {
   }
 
   // Also create a source-tree listing for VS Code / Live Server previews.
-  // Production still deploys only _site, where article links stay root-relative.
+  // Production deploys only _site, where article links stay root-relative.
   const sourceBlogDir = path.join(ROOT, 'blog');
   fs.mkdirSync(sourceBlogDir, { recursive: true });
-  const sourcePreviewListing = generatedListing.replace(/href=\"\/([a-z0-9]+(?:-[a-z0-9]+)*)\/\"/g, (match, slug) =>
-    seen.has(slug) ? `href=\"../_site/${slug}/\"` : match
+
+  const sourcePreviewListing = generatedListing.replace(
+    /href=\"\/([a-z0-9]+(?:-[a-z0-9]+)*)\/\"/g,
+    (match, slug) => seen.has(slug)
+      ? `href=\"../_site/${slug}/\"`
+      : match
   );
+
   fs.writeFileSync(path.join(sourceBlogDir, 'index.html'), sourcePreviewListing);
+
   writeSitemap(posts);
 
-  // Ensure the correct plural filename for the crawler rules is in the deployed output.
-  fs.writeFileSync(path.join(SITE_DIR, 'robots.txt'), 'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://swyftmedia.in/sitemap.xml\n');
+  // Ensure the correct plural filename for crawler rules in the deployed output.
+  fs.writeFileSync(
+    path.join(SITE_DIR, 'robots.txt'),
+    'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://swyftmedia.in/sitemap.xml\n'
+  );
 
-  console.log(`Built blog listing with ${posts.length} published article(s) and ${legacyPosts.length} legacy archive link(s).`);
+  console.log(
+    `Built blog listing with ${posts.length} published article(s) and ${legacyPosts.length} legacy archive link(s).`
+  );
+
   console.log(`Output directory: ${path.relative(ROOT, SITE_DIR)}`);
 }
 
-try { main(); }
-catch (error) {
+try {
+  main();
+} catch (error) {
   console.error(`Blog build failed: ${error.message}`);
   process.exitCode = 1;
 }
