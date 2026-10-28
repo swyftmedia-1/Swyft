@@ -4,12 +4,19 @@
 
   // Responsive navigation.
   document.querySelectorAll('.menu-toggle').forEach(function (toggle, index) {
-    var header = toggle.closest('.site-header') || toggle.closest('header') || document;
+    var header =
+      toggle.closest('.site-header') ||
+      toggle.closest('header') ||
+      document;
+
     var controlledId = toggle.getAttribute('aria-controls');
-    var nav = controlledId ? document.getElementById(controlledId) : null;
+    var nav = controlledId
+      ? document.getElementById(controlledId)
+      : null;
 
     if (!nav) {
-      nav = header.querySelector('.main-nav') ||
+      nav =
+        header.querySelector('.main-nav') ||
         document.querySelector('.main-nav');
     }
 
@@ -24,7 +31,10 @@
     function setMenuOpen(open, returnFocus) {
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.setAttribute(
+        'aria-label',
+        open ? 'Close menu' : 'Open menu'
+      );
 
       if (!open && returnFocus) {
         toggle.focus();
@@ -136,48 +146,62 @@
   }
 
   // SWYFT ONE popup.
-  // Show at most once per tab session, but only mark it as seen
-  // after it has actually opened.
-  // Do not show it on the dedicated Swyft Pass page.
+  // Show once per tab session after successfully opening.
   var sessionKey = 'swyftPassPopupSeen';
   var pathname = window.location.pathname.toLowerCase();
+  var hostname = window.location.hostname.toLowerCase();
 
-var isPassPage =
-  /(?:^|\/)swyft-pass\.html$/.test(pathname);
+  // Show only on the SWYFT Media homepage.
+  var isSwyftMediaDomain =
+    hostname === 'swyftmedia.in' ||
+    hostname === 'www.swyftmedia.in';
 
-// Show the popup only on the SWYFT Media homepage.
-var hostname = window.location.hostname.toLowerCase();
+  var isHomePage =
+    pathname === '/' ||
+    pathname === '/home/' ||
+    pathname === '/home' ||
+    pathname === '/index.html';
 
-var isSwyftMediaDomain =
-  hostname === 'swyftmedia.in' ||
-  hostname === 'www.swyftmedia.in';
+  var isPassPage =
+    /(?:^|\/)swyft-pass\.html$/.test(pathname);
 
-var isHomePage =
-  pathname === '/' ||
-  pathname === '/home/' ||
-  pathname === '/home' ||
-  pathname === '/index.html';
+  if (
+    !isSwyftMediaDomain ||
+    !isHomePage ||
+    isPassPage
+  ) {
+    return;
+  }
 
-if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
-
+  // Check whether the popup has already appeared this tab session.
   var popupAlreadySeen = false;
 
   try {
     popupAlreadySeen =
       window.sessionStorage.getItem(sessionKey) === '1';
   } catch (storageError) {
-    // Continue without session storage if the browser blocks it.
+    // Continue if session storage is unavailable.
   }
 
   if (popupAlreadySeen) return;
 
-  // Avoid duplicate dialogs if another script has already created one.
+  // Avoid duplicate popup dialogs.
   if (document.querySelector('dialog.pass-popup')) return;
 
-  // Wait for the page to settle before displaying the invitation.
-  // Normal scrolling, tapping, clicking or keyboard use will not
-  // cancel the popup.
-  window.setTimeout(function () {
+  // Show immediately when the DOM is ready.
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      function () {
+        showPassPopup();
+      },
+      { once: true }
+    );
+  } else {
+    showPassPopup();
+  }
+
+  function showPassPopup() {
     if (!document.body) return;
 
     if (document.querySelector('dialog.pass-popup')) return;
@@ -188,29 +212,11 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
         '.menu-toggle[aria-expanded="true"]'
       )
     ) {
-      // Retry later rather than permanently cancelling the popup.
-      window.setTimeout(showPassPopup, 1500);
+      window.setTimeout(showPassPopup, 300);
       return;
     }
 
-    showPassPopup();
-  }, 2500);
-
-  function showPassPopup() {
-    if (!document.body) return;
-
-    if (document.querySelector('dialog.pass-popup')) return;
-
-    if (
-      document.querySelector(
-        '.menu-toggle[aria-expanded="true"]'
-      )
-    ) {
-      window.setTimeout(showPassPopup, 1500);
-      return;
-    }
-
-    // Find the correct destination, including from nested blog pages.
+    // Find the Swyft Pass destination.
     var navPassLink = document.querySelector(
       '.main-nav a[href*="swyft-pass.html"]'
     );
@@ -220,12 +226,8 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
     if (navPassLink) {
       passUrl = navPassLink.href;
     } else {
-      var isBlogPath = pathname.indexOf('/blog/') !== -1;
-
       passUrl = new URL(
-        isBlogPath
-          ? '../swyft-pass.html'
-          : '/swyft-pass.html',
+        '/swyft-pass.html',
         window.location.origin
       ).href;
     }
@@ -233,7 +235,10 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
     var dialog = document.createElement('dialog');
 
     dialog.className = 'pass-popup';
-    dialog.setAttribute('aria-labelledby', 'pass-popup-title');
+    dialog.setAttribute(
+      'aria-labelledby',
+      'pass-popup-title'
+    );
 
     var safePassUrl = passUrl
       .replace(/&/g, '&amp;')
@@ -241,6 +246,7 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
+    // Popup HTML content — keep this innerHTML.
     dialog.innerHTML =
       '<div class="pass-popup-card">' +
         '<button class="pass-popup-close" type="button" ' +
@@ -280,7 +286,10 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
     var popupOpened = false;
 
     function closePopup() {
-      if (typeof dialog.close === 'function' && dialog.open) {
+      if (
+        typeof dialog.close === 'function' &&
+        dialog.open
+      ) {
         dialog.close();
       } else {
         dialog.removeAttribute('open');
@@ -288,35 +297,42 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
       }
     }
 
-    dialog.querySelector('.pass-popup-close')
+    dialog
+      .querySelector('.pass-popup-close')
       .addEventListener('click', closePopup);
 
-    dialog.querySelector('.pass-popup-later')
+    dialog
+      .querySelector('.pass-popup-later')
       .addEventListener('click', closePopup);
 
+    // Close when the user clicks the backdrop.
     dialog.addEventListener('click', function (event) {
       if (event.target === dialog) {
         closePopup();
       }
     });
 
-    dialog.addEventListener('close', function () {
-      dialog.remove();
-    }, { once: true });
+    dialog.addEventListener(
+      'close',
+      function () {
+        dialog.remove();
+      },
+      { once: true }
+    );
 
     try {
       if (typeof dialog.showModal === 'function') {
         dialog.showModal();
         popupOpened = dialog.open;
       } else {
-        // Fallback for browsers without native dialog support.
+        // Compatibility fallback for older browsers.
         dialog.setAttribute('open', '');
         dialog.setAttribute('role', 'dialog');
         dialog.setAttribute('aria-modal', 'true');
         popupOpened = true;
       }
     } catch (popupError) {
-      // If native dialog opening fails, try the compatibility fallback.
+      // Try the compatibility fallback if showModal fails.
       try {
         dialog.setAttribute('open', '');
         dialog.setAttribute('role', 'dialog');
@@ -328,12 +344,12 @@ if (isPassPage || !isSwyftMediaDomain || !isHomePage) return;
       }
     }
 
-    // Save the session flag only after the dialog opens successfully.
+    // Mark as seen only after opening successfully.
     if (popupOpened) {
       try {
         window.sessionStorage.setItem(sessionKey, '1');
       } catch (storageError) {
-        // The popup still works if session storage is unavailable.
+        // Popup still works if session storage is unavailable.
       }
     } else {
       dialog.remove();
