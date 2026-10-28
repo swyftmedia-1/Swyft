@@ -1,8 +1,10 @@
-/* SWYFT ONE entry popup — deliberately isolated from each page's existing theme. */
+
+/* SWYFT ONE entry popup — isolated from each page's existing theme. */
+
 dialog.pass-popup {
   width: min(420px, calc(100vw - 30px));
   max-width: none;
-  max-height: calc(100vh - 32px); 
+  max-height: calc(100vh - 32px);
   max-height: calc(100dvh - 32px);
   margin: auto;
   padding: 0;
@@ -13,14 +15,17 @@ dialog.pass-popup {
   background: transparent;
   box-shadow: 0 28px 90px rgba(4, 22, 38, .28);
 }
+
 dialog.pass-popup::backdrop {
   background: rgba(5, 22, 37, .48);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
+
 dialog.pass-popup[open] {
   animation: pass-popup-enter .24s cubic-bezier(.2, .75, .25, 1) both;
 }
+
 .pass-popup-card {
   position: relative;
   overflow: hidden;
@@ -29,6 +34,7 @@ dialog.pass-popup[open] {
   border-radius: 20px;
   background: #fff;
 }
+
 .pass-popup-card::before {
   position: absolute;
   inset: 0 0 auto;
@@ -36,6 +42,7 @@ dialog.pass-popup[open] {
   content: "";
   background: linear-gradient(90deg, #d2a653 0%, #efd58c 55%, #0b6d9f 100%);
 }
+
 .pass-popup-close {
   position: absolute;
   top: 15px;
@@ -52,14 +59,22 @@ dialog.pass-popup[open] {
   cursor: pointer;
   transition: background .18s ease, color .18s ease, transform .18s ease;
 }
-.pass-popup-close:hover { color: #0b2238; background: #edf2f5; transform: rotate(5deg); }
+
+.pass-popup-close:hover {
+  color: #0b2238;
+  background: #edf2f5;
+  transform: rotate(5deg);
+}
+
 .pass-popup-close:focus-visible,
 .pass-popup-cta:focus-visible,
+.pass-popup-call-link:focus-visible,
 .pass-popup-later:focus-visible,
 a.hero-image-note:focus-visible {
   outline: 3px solid #167db1;
   outline-offset: 3px;
 }
+
 .pass-popup-eyebrow {
   display: flex;
   align-items: center;
@@ -70,6 +85,7 @@ a.hero-image-note:focus-visible {
   letter-spacing: .15em;
   text-transform: uppercase;
 }
+
 .pass-popup-dot {
   flex: 0 0 auto;
   width: 8px;
@@ -78,34 +94,103 @@ a.hero-image-note:focus-visible {
   background: #d2a653;
   box-shadow: 0 0 0 4px rgba(210, 166, 83, .15);
 }
+
 .pass-popup-card h2 {
   margin: 0 0 12px;
   color: #0b2238;
   font: 800 clamp(24px, 5vw, 29px)/1.14 Manrope, "DM Sans", Arial, sans-serif;
   letter-spacing: -.045em;
 }
+
 .pass-popup-card p {
   margin: 0 0 21px;
   color: #5c6f7d;
   font: 400 14px/1.7 "DM Sans", Arial, sans-serif;
 }
+
+/* Main CTA box containing both the page link and phone number. */
 .pass-popup-cta {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  min-height: 48px;
-  padding: 13px 16px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  min-height: 84px;
+  box-sizing: border-box;
+  padding: 14px 18px 12px;
   border: 1px solid #0b2238;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #fff;
   background: #0b2238;
-  font: 800 12px/1.3 Manrope, "DM Sans", Arial, sans-serif;
+  font-family: Manrope, "DM Sans", Arial, sans-serif;
   text-decoration: none;
   transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
 }
-.pass-popup-cta span { color: #f0cd7c; font-size: 17px; }
-.pass-popup-cta:hover { color: #fff; background: #103b5c; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(11, 34, 56, .16); }
+
+.pass-popup-cta:hover {
+  color: #fff;
+  background: #103b5c;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(11, 34, 56, .16);
+}
+
+.pass-popup-cta-title {
+  display: block;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 800;
+  text-align: center;
+}
+
+.pass-popup-cta-title span {
+  color: #f0cd7c;
+  font-size: 19px;
+}
+
+.pass-popup-cta-divider {
+  display: block;
+  height: 1px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, .2);
+}
+
+.pass-popup-call-link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3px 0 1px;
+  border-radius: 5px;
+  color: #f0cd7c;
+  background: transparent;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 800;
+  letter-spacing: .025em;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.pass-popup-call-link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.pass-popup-call-label {
+  display: block;
+  margin-bottom: 2px;
+  color: #dce7ef;
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
 .pass-popup-later {
   display: block;
   margin: 11px auto 0;
@@ -116,7 +201,13 @@ a.hero-image-note:focus-visible {
   font: 700 12px/1.3 "DM Sans", Arial, sans-serif;
   cursor: pointer;
 }
-.pass-popup-later:hover { color: #0b2238; text-decoration: underline; text-underline-offset: 3px; }
+
+.pass-popup-later:hover {
+  color: #0b2238;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .pass-popup-footnote {
   margin-top: 14px;
   padding-top: 13px;
@@ -126,16 +217,52 @@ a.hero-image-note:focus-visible {
   letter-spacing: .16em;
   text-align: center;
 }
+
 @keyframes pass-popup-enter {
-  from { opacity: 0; transform: translateY(8px) scale(.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
+
 @media (max-width: 480px) {
-  .pass-popup-card { padding: 28px 22px 19px; }
-  .pass-popup-card h2 { font-size: 25px; }
-  .pass-popup-card p { font-size: 13px; }
+  .pass-popup-card {
+    padding: 28px 22px 19px;
+  }
+
+  .pass-popup-card h2 {
+    font-size: 25px;
+  }
+
+  .pass-popup-card p {
+    font-size: 13px;
+  }
+
+  .pass-popup-cta {
+    padding: 13px 12px 11px;
+  }
+
+  .pass-popup-cta-title {
+    font-size: 16px;
+  }
+
+  .pass-popup-call-link {
+    font-size: 17px;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  dialog.pass-popup[open] { animation: none; }
-  .pass-popup-close, .pass-popup-cta { transition: none; }
+  dialog.pass-popup[open] {
+    animation: none;
+  }
+
+  .pass-popup-close,
+  .pass-popup-cta {
+    transition: none;
+  }
 }
