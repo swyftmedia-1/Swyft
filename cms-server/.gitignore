@@ -1,7 +1,10 @@
 node_modules/
+_site/
+.DS_Store
+npm-debug.log*
 .env
 .env.*
 !.env.example
-data/
-*.log
-npm-debug.log*
+cms-server/.env
+cms-server/.env.*
+!cms-server/.env.example
