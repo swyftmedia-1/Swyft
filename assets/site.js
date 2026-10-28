@@ -269,9 +269,9 @@
           '<span class="pass-popup-visit-label">' +
             'HOMEPAGE VISIT' +
           '</span>' +
-          '<span class="pass-popup-visit-number">' +
-            '#' + homepageViewCount +
-          '</span>' +
+          // '<span class="pass-popup-visit-number">' +
+          //   '#' + homepageViewCount +
+          // '</span>' +
         '</div>' +
 
         // One unified navy box containing all contact actions.
