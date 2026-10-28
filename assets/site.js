@@ -255,7 +255,7 @@
         '</div>' +
 
         '<h2 id="pass-popup-title">' +
-          'Your Creative Team,<br>One Pass.' +
+          'Your Creative Team<br>One Pass.' +
         '</h2>' +
 
         '<p>' +
