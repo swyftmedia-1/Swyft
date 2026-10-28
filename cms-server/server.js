@@ -1,4 +1,3 @@
-
 'use strict';
 
 require('dotenv').config();
@@ -324,6 +323,173 @@ async function getGitHubFileSha(config, filePath) {
 
   const data = await response.json();
   return data.sha;
+}
+
+/* -------------------------------------------------------
+   PUBLIC MARKDOWN STORY FALLBACK
+------------------------------------------------------- */
+
+const MARKDOWN_STORY_CACHE_MS = 60 * 1000;
+const markdownStoryCache = {
+  expiresAt: 0,
+  stories: [],
+  pending: null
+};
+
+function parseMarkdownScalar(raw) {
+  const value = String(raw || '').trim();
+
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+
+  if (value.startsWith('"') && value.endsWith('"')) {
+    try {
+      return JSON.parse(value);
+    } catch (_) {
+      return value.slice(1, -1);
+    }
+  }
+
+  if (value.startsWith("'") && value.endsWith("'")) {
+    return value.slice(1, -1).replace(/''/g, "'");
+  }
+
+  return value;
+}
+
+function parsePublishedMarkdownStory(source, filename) {
+  const match = String(source || '')
+    .replace(/^\uFEFF/, '')
+    .match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)([\s\S]*)$/);
+
+  if (!match) return null;
+
+  const metadata = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const field = line.match(/^([a-zA-Z_][\w-]*):\s*(.*?)\s*$/);
+    if (field) metadata[field[1]] = parseMarkdownScalar(field[2]);
+  }
+
+  const slug = String(
+    metadata.slug || String(filename || '').replace(/\.md$/i, '')
+  ).trim();
+  const title = String(metadata.title || '').trim();
+  const date = String(metadata.date || '').trim().slice(0, 10);
+  const description = String(metadata.description || '').trim();
+  const body = match[2].trim();
+  const published = metadata.published === true;
+
+  if (
+    !published ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) ||
+    !title ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+    !description ||
+    !body
+  ) {
+    return null;
+  }
+
+  return {
+    title,
+    slug,
+    date,
+    description,
+    coverImage: String(
+      metadata.coverImage || metadata.cover_image || metadata.featured_image || ''
+    ).trim(),
+    body,
+    published: true
+  };
+}
+
+async function fetchPublishedMarkdownStoriesFromGitHub() {
+  const config = getGitHubConfig();
+  const directoryUrl =
+    `${githubFileUrl(config, 'content/blog')}?ref=${encodeURIComponent(config.branch)}`;
+  const listing = await githubRequest(directoryUrl, config);
+
+  if (!Array.isArray(listing)) return [];
+
+  const markdownFiles = listing.filter(
+    (item) =>
+      item &&
+      item.type === 'file' &&
+      typeof item.name === 'string' &&
+      item.name.toLowerCase().endsWith('.md')
+  );
+
+  const results = await Promise.allSettled(
+    markdownFiles.map(async (file) => {
+      const fileUrl =
+        `${githubFileUrl(config, file.path)}?ref=${encodeURIComponent(config.branch)}`;
+      const data = await githubRequest(fileUrl, config);
+      if (!data || typeof data.content !== 'string') return null;
+
+      const source = Buffer.from(
+        data.content.replace(/\s/g, ''),
+        'base64'
+      ).toString('utf8');
+
+      return parsePublishedMarkdownStory(source, file.name);
+    })
+  );
+
+  return results
+    .filter((result) => result.status === 'fulfilled' && result.value)
+    .map((result) => result.value);
+}
+
+async function readPublishedMarkdownStories() {
+  const now = Date.now();
+  if (markdownStoryCache.expiresAt > now) {
+    return markdownStoryCache.stories;
+  }
+  if (markdownStoryCache.pending) return markdownStoryCache.pending;
+
+  markdownStoryCache.pending = (async () => {
+    try {
+      const stories = await fetchPublishedMarkdownStoriesFromGitHub();
+      markdownStoryCache.stories = stories;
+    } catch (error) {
+      // Keep CMS/database stories available even if GitHub cannot be reached.
+      console.error(
+        'Could not load published Markdown stories from GitHub:',
+        error.message
+      );
+      markdownStoryCache.stories = [];
+    }
+
+    markdownStoryCache.expiresAt = Date.now() + MARKDOWN_STORY_CACHE_MS;
+    return markdownStoryCache.stories;
+  })();
+
+  try {
+    return await markdownStoryCache.pending;
+  } finally {
+    markdownStoryCache.pending = null;
+  }
+}
+
+async function readPublicStories() {
+  const [cmsStories, markdownStories] = await Promise.all([
+    readStories(),
+    readPublishedMarkdownStories()
+  ]);
+
+  // Prefer CMS records on duplicate slugs; Markdown fills missing CMS records.
+  const bySlug = new Map();
+  for (const story of markdownStories) {
+    if (story && story.published && story.slug) bySlug.set(story.slug, story);
+  }
+  for (const story of cmsStories) {
+    if (story && story.published && story.slug) bySlug.set(story.slug, story);
+  }
+
+  return Array.from(bySlug.values()).sort((a, b) =>
+    String(b.date || '').localeCompare(String(a.date || ''))
+  );
 }
 
 /* -------------------------------------------------------
@@ -695,9 +861,7 @@ app.post(
 
 app.get('/api/stories', async (_req, res, next) => {
   try {
-    const stories = (await readStories())
-      .filter((story) => story.published)
-      .sort((a, b) => b.date.localeCompare(a.date));
+    const stories = await readPublicStories();
 
     res.set(
       'Cache-Control',
@@ -706,14 +870,7 @@ app.get('/api/stories', async (_req, res, next) => {
 
     res.json(
       stories.map(
-        ({
-          title,
-          slug,
-          date,
-          description,
-          coverImage,
-          body
-        }) => ({
+        ({ title, slug, date, description, coverImage, body }) => ({
           title,
           slug,
           date,
@@ -730,12 +887,8 @@ app.get('/api/stories', async (_req, res, next) => {
 
 app.get('/api/stories/:slug', async (req, res, next) => {
   try {
-    const stories = await readStories();
-
-    const story = stories.find(
-      (item) =>
-        item.slug === req.params.slug && item.published
-    );
+    const stories = await readPublicStories();
+    const story = stories.find((item) => item.slug === req.params.slug);
 
     if (!story) {
       return res.status(404).json({
@@ -748,23 +901,8 @@ app.get('/api/stories/:slug', async (req, res, next) => {
       'public, max-age=60, stale-while-revalidate=300'
     );
 
-    const {
-      title,
-      slug,
-      date,
-      description,
-      coverImage,
-      body
-    } = story;
-
-    res.json({
-      title,
-      slug,
-      date,
-      description,
-      coverImage,
-      body
-    });
+    const { title, slug, date, description, coverImage, body } = story;
+    res.json({ title, slug, date, description, coverImage, body });
   } catch (error) {
     next(error);
   }
