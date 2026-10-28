@@ -115,7 +115,7 @@
     stories=stories.filter(function(s){return s&&s.title&&s.slug&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.slug);});
     if(!stories.length)return;
     stories.forEach(function(story){
-      var href='story.html?slug='+encodeURIComponent(story.slug);
+      var href='/' + story.slug + '/';
       var card=make('article','card');
       var imageLink=make('a','card-image');imageLink.href=href;imageLink.setAttribute('aria-label','Read '+story.title);
       var cover=String(story.coverImage||'');
