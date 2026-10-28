@@ -1,5 +1,4 @@
-
-/* SWYFT ONE entry popup — isolated from each page's existing theme. */
+/* SWYFT ONE entry popup — isolated from the existing site theme. */
 
 dialog.pass-popup {
   width: min(420px, calc(100vw - 30px));
@@ -40,13 +39,19 @@ dialog.pass-popup[open] {
   inset: 0 0 auto;
   height: 5px;
   content: "";
-  background: linear-gradient(90deg, #d2a653 0%, #efd58c 55%, #0b6d9f 100%);
+  background: linear-gradient(
+    90deg,
+    #d2a653 0%,
+    #efd58c 55%,
+    #0b6d9f 100%
+  );
 }
 
 .pass-popup-close {
   position: absolute;
   top: 15px;
   right: 15px;
+  z-index: 2;
   display: grid;
   width: 32px;
   height: 32px;
@@ -57,7 +62,10 @@ dialog.pass-popup[open] {
   background: #f7f9fa;
   font: 400 21px/1 Arial, sans-serif;
   cursor: pointer;
-  transition: background .18s ease, color .18s ease, transform .18s ease;
+  transition:
+    background .18s ease,
+    color .18s ease,
+    transform .18s ease;
 }
 
 .pass-popup-close:hover {
@@ -67,10 +75,10 @@ dialog.pass-popup[open] {
 }
 
 .pass-popup-close:focus-visible,
-.pass-popup-cta:focus-visible,
+.pass-popup-cta-title:focus-visible,
+.pass-popup-whatsapp-link:focus-visible,
 .pass-popup-call-link:focus-visible,
-.pass-popup-later:focus-visible,
-a.hero-image-note:focus-visible {
+.pass-popup-later:focus-visible {
   outline: 3px solid #167db1;
   outline-offset: 3px;
 }
@@ -98,17 +106,43 @@ a.hero-image-note:focus-visible {
 .pass-popup-card h2 {
   margin: 0 0 12px;
   color: #0b2238;
-  font: 800 clamp(24px, 5vw, 29px)/1.14 Manrope, "DM Sans", Arial, sans-serif;
+  font: 800 clamp(24px, 5vw, 29px)/1.14
+    Manrope, "DM Sans", Arial, sans-serif;
   letter-spacing: -.045em;
 }
 
 .pass-popup-card p {
-  margin: 0 0 21px;
+  margin: 0 0 16px;
   color: #5c6f7d;
   font: 400 14px/1.7 "DM Sans", Arial, sans-serif;
 }
 
-/* Main CTA box containing both the page link and phone number. */
+/* Homepage visit number. */
+.pass-popup-visit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 17px;
+  padding: 10px 13px;
+  border: 1px solid #e7edf1;
+  border-radius: 9px;
+  background: #f7f9fa;
+}
+
+.pass-popup-visit-label {
+  color: #657987;
+  font: 800 9px/1.4 Manrope, "DM Sans", Arial, sans-serif;
+  letter-spacing: .13em;
+}
+
+.pass-popup-visit-number {
+  color: #0b2238;
+  font: 800 17px/1.2 Manrope, "DM Sans", Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Unified navy contact box. */
 .pass-popup-cta {
   display: flex;
   flex-direction: column;
@@ -116,7 +150,6 @@ a.hero-image-note:focus-visible {
   justify-content: center;
   gap: 0;
   width: 100%;
-  min-height: 84px;
   box-sizing: border-box;
   padding: 14px 18px 12px;
   border: 1px solid #0b2238;
@@ -124,15 +157,20 @@ a.hero-image-note:focus-visible {
   color: #fff;
   background: #0b2238;
   font-family: Manrope, "DM Sans", Arial, sans-serif;
-  text-decoration: none;
-  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+  transition: background .18s ease, box-shadow .18s ease;
 }
 
 .pass-popup-cta:hover {
-  color: #fff;
-  background: #103b5c;
-  transform: translateY(-1px);
+  background: #10314c;
   box-shadow: 0 8px 20px rgba(11, 34, 56, .16);
+}
+
+.pass-popup-cta-divider {
+  display: block;
+  flex: 0 0 auto;
+  height: 1px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, .2);
 }
 
 .pass-popup-cta-title {
@@ -142,6 +180,7 @@ a.hero-image-note:focus-visible {
   line-height: 1.4;
   font-weight: 800;
   text-align: center;
+  text-decoration: none;
 }
 
 .pass-popup-cta-title span {
@@ -149,13 +188,45 @@ a.hero-image-note:focus-visible {
   font-size: 19px;
 }
 
-.pass-popup-cta-divider {
-  display: block;
-  height: 1px;
-  margin: 10px 0;
-  background: rgba(255, 255, 255, .2);
+.pass-popup-cta-title:hover {
+  color: #f0cd7c;
 }
 
+/* WhatsApp link. */
+.pass-popup-whatsapp-link {
+  display: block;
+  padding: 2px 0;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.pass-popup-whatsapp-label {
+  display: block;
+  margin-bottom: 3px;
+  color: #dce7ef;
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+
+.pass-popup-whatsapp-title {
+  display: block;
+  color: #f0cd7c;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+.pass-popup-whatsapp-link:hover .pass-popup-whatsapp-title {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Click-to-call phone number. */
 .pass-popup-call-link {
   display: block;
   width: 100%;
@@ -188,9 +259,9 @@ a.hero-image-note:focus-visible {
   line-height: 1.4;
   font-weight: 700;
   letter-spacing: .12em;
-  text-transform: uppercase;
 }
 
+/* Maybe later. */
 .pass-popup-later {
   display: block;
   margin: 11px auto 0;
@@ -208,6 +279,7 @@ a.hero-image-note:focus-visible {
   text-underline-offset: 3px;
 }
 
+/* Footer text. */
 .pass-popup-footnote {
   margin-top: 14px;
   padding-top: 13px;
@@ -249,6 +321,10 @@ a.hero-image-note:focus-visible {
 
   .pass-popup-cta-title {
     font-size: 16px;
+  }
+
+  .pass-popup-whatsapp-title {
+    font-size: 15px;
   }
 
   .pass-popup-call-link {
