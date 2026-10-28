@@ -9,19 +9,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
 const multer = require('multer');
-const fs = require('node:fs/promises');
-const path = require('node:path');
 const crypto = require('node:crypto');
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const isProduction = process.env.NODE_ENV === 'production';
-
-const DATA_DIR = path.resolve(
-  process.env.DATA_DIR || path.join(__dirname, 'data')
-);
-const UPLOADS_DIR = path.join(DATA_DIR, 'uploads');
-const STORIES_FILE = path.join(DATA_DIR, 'stories.json');
 
 const PUBLIC_API_URL = String(process.env.PUBLIC_API_URL || '')
   .trim()
@@ -35,7 +27,7 @@ const allowedOrigins = new Set(
 );
 
 const sameSiteValue = String(
-  process.env.COOKIE_SAME_SITE || 'lax'
+  process.env.COOKIE_SAME_SITE || (isProduction ? 'none' : 'lax')
 ).toLowerCase();
 
 const cookieSameSite = ['lax', 'strict', 'none'].includes(sameSiteValue)
@@ -79,6 +71,15 @@ if (allowedOrigins.size === 0) {
 if (isProduction && !PUBLIC_API_URL.startsWith('https://')) {
   throw new Error(
     'In production, PUBLIC_API_URL must be the HTTPS origin where this API is reachable.'
+  );
+}
+
+if (
+  isProduction &&
+  (!process.env.GITHUB_OWNER || !process.env.GITHUB_REPO || !process.env.GITHUB_TOKEN)
+) {
+  throw new Error(
+    'Set GITHUB_OWNER, GITHUB_REPO, and GITHUB_TOKEN in Render Environment. GITHUB_BRANCH defaults to main; the CMS uses GitHub for storage and does not require DATA_DIR.'
   );
 }
 
@@ -196,54 +197,11 @@ app.use((req, _res, next) => {
 });
 
 /* -------------------------------------------------------
-   LOCAL CMS STORAGE
+   STORAGE
+
+   Stories and images are stored in GitHub. No Render filesystem path or
+   persistent disk is required for CMS content.
 ------------------------------------------------------- */
-
-async function ensureStorage() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-
-  try {
-    await fs.access(STORIES_FILE);
-  } catch (_) {
-    await fs
-      .writeFile(STORIES_FILE, '[]\n', { flag: 'wx' })
-      .catch((error) => {
-        if (error.code !== 'EEXIST') throw error;
-      });
-  }
-}
-
-async function readStories() {
-  const content = await fs.readFile(STORIES_FILE, 'utf8');
-  const stories = JSON.parse(content);
-
-  if (!Array.isArray(stories)) {
-    throw new Error('The stories database must be a JSON array.');
-  }
-
-  return stories;
-}
-
-/*
- * Write to a temporary file first, then rename it into place.
- * This reduces the risk of leaving partially written JSON.
- */
-async function writeStories(stories) {
-  const tempFile = `${STORIES_FILE}.${process.pid}.${crypto.randomUUID()}.tmp`;
-
-  try {
-    await fs.writeFile(
-      tempFile,
-      JSON.stringify(stories, null, 2) + '\n',
-      { mode: 0o600 }
-    );
-
-    await fs.rename(tempFile, STORIES_FILE);
-  } catch (error) {
-    await fs.unlink(tempFile).catch(() => {});
-    throw error;
-  }
-}
 
 /* -------------------------------------------------------
    GITHUB CONFIGURATION AND API HELPERS
@@ -303,7 +261,8 @@ async function githubRequest(url, config, options = {}) {
 }
 
 async function getGitHubFileSha(config, filePath) {
-  const response = await fetch(githubFileUrl(config, filePath), {
+  const url = `${githubFileUrl(config, filePath)}?ref=${encodeURIComponent(config.branch)}`;
+  const response = await fetch(url, {
     headers: {
       Accept: 'application/vnd.github+json',
       Authorization: `Bearer ${config.token}`,
@@ -326,7 +285,7 @@ async function getGitHubFileSha(config, filePath) {
 }
 
 /* -------------------------------------------------------
-   PUBLIC MARKDOWN STORY FALLBACK
+   GITHUB MARKDOWN STORAGE
 ------------------------------------------------------- */
 
 const MARKDOWN_STORY_CACHE_MS = 60 * 1000;
@@ -357,7 +316,7 @@ function parseMarkdownScalar(raw) {
   return value;
 }
 
-function parsePublishedMarkdownStory(source, filename) {
+function parseMarkdownStory(source, filename) {
   const match = String(source || '')
     .replace(/^\uFEFF/, '')
     .match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)([\s\S]*)$/);
@@ -381,17 +340,17 @@ function parsePublishedMarkdownStory(source, filename) {
   const published = metadata.published === true;
 
   if (
-    !published ||
     !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) ||
     !title ||
     !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
-    !description ||
-    !body
+    !body ||
+    (published && !description)
   ) {
     return null;
   }
 
   return {
+    id: String(metadata.id || slug),
     title,
     slug,
     date,
@@ -400,11 +359,19 @@ function parsePublishedMarkdownStory(source, filename) {
       metadata.coverImage || metadata.cover_image || metadata.featured_image || ''
     ).trim(),
     body,
-    published: true
+    published,
+    createdAt: String(metadata.created_at || metadata.createdAt || '').trim(),
+    updatedAt: String(metadata.updated_at || metadata.updatedAt || '').trim()
   };
 }
 
-async function fetchPublishedMarkdownStoriesFromGitHub() {
+function invalidateStoryCache() {
+  markdownStoryCache.expiresAt = 0;
+  markdownStoryCache.stories = [];
+  markdownStoryCache.pending = null;
+}
+
+async function fetchGitHubStoriesFromGitHub() {
   const config = getGitHubConfig();
   const directoryUrl =
     `${githubFileUrl(config, 'content/blog')}?ref=${encodeURIComponent(config.branch)}`;
@@ -417,7 +384,8 @@ async function fetchPublishedMarkdownStoriesFromGitHub() {
       item &&
       item.type === 'file' &&
       typeof item.name === 'string' &&
-      item.name.toLowerCase().endsWith('.md')
+      item.name.toLowerCase().endsWith('.md') &&
+      item.name.toLowerCase() !== 'readme.md'
   );
 
   const results = await Promise.allSettled(
@@ -432,13 +400,19 @@ async function fetchPublishedMarkdownStoriesFromGitHub() {
         'base64'
       ).toString('utf8');
 
-      return parsePublishedMarkdownStory(source, file.name);
+      return parseMarkdownStory(source, file.name);
     })
   );
 
   return results
     .filter((result) => result.status === 'fulfilled' && result.value)
-    .map((result) => result.value);
+    .map((result) => result.value)
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+}
+
+// All records, including drafts, are Markdown files in content/blog/.
+async function readStories() {
+  return fetchGitHubStoriesFromGitHub();
 }
 
 async function readPublishedMarkdownStories() {
@@ -450,15 +424,11 @@ async function readPublishedMarkdownStories() {
 
   markdownStoryCache.pending = (async () => {
     try {
-      const stories = await fetchPublishedMarkdownStoriesFromGitHub();
-      markdownStoryCache.stories = stories;
+      const stories = await fetchGitHubStoriesFromGitHub();
+      markdownStoryCache.stories = stories.filter((story) => story.published);
     } catch (error) {
-      // Keep CMS/database stories available even if GitHub cannot be reached.
-      console.error(
-        'Could not load published Markdown stories from GitHub:',
-        error.message
-      );
-      markdownStoryCache.stories = [];
+      // Keep the last successful public cache if GitHub is temporarily unavailable.
+      console.error('Could not load blog stories from GitHub:', error.message);
     }
 
     markdownStoryCache.expiresAt = Date.now() + MARKDOWN_STORY_CACHE_MS;
@@ -473,27 +443,14 @@ async function readPublishedMarkdownStories() {
 }
 
 async function readPublicStories() {
-  const [cmsStories, markdownStories] = await Promise.all([
-    readStories(),
-    readPublishedMarkdownStories()
-  ]);
-
-  // Prefer CMS records on duplicate slugs; Markdown fills missing CMS records.
-  const bySlug = new Map();
-  for (const story of markdownStories) {
-    if (story && story.published && story.slug) bySlug.set(story.slug, story);
-  }
-  for (const story of cmsStories) {
-    if (story && story.published && story.slug) bySlug.set(story.slug, story);
-  }
-
-  return Array.from(bySlug.values()).sort((a, b) =>
-    String(b.date || '').localeCompare(String(a.date || ''))
-  );
+  const stories = await readPublishedMarkdownStories();
+  return stories
+    .filter((story) => story && story.published && story.slug)
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 }
 
 /* -------------------------------------------------------
-   MARKDOWN GENERATION AND GITHUB SYNCHRONISATION
+   WRITE / DELETE MARKDOWN IN GITHUB
 ------------------------------------------------------- */
 
 async function deleteGitHubMarkdown(config, slug) {
@@ -501,93 +458,73 @@ async function deleteGitHubMarkdown(config, slug) {
 
   const filePath = `content/blog/${slug}.md`;
   const sha = await getGitHubFileSha(config, filePath);
-
-  // Already absent: deletion is effectively complete.
   if (!sha) return;
 
   await githubRequest(githubFileUrl(config, filePath), config, {
     method: 'DELETE',
     body: JSON.stringify({
-      message: `Remove unpublished blog: ${slug}`,
+      message: `Delete blog: ${slug}`,
       sha,
       branch: config.branch
     })
   });
+
+  invalidateStoryCache();
 }
 
-/*
- * Synchronisation rules:
- *
- * 1. Publishing creates or updates the Markdown file.
- * 2. Renaming publishes the new slug before removing the previous slug.
- * 3. Unpublishing removes the old published Markdown file.
- * 4. Deleting an unpublished draft does not call GitHub.
- *
- * GitHub and the local JSON database are separate systems. The routes below
- * attempt rollback if the local save fails, but no cross-system transaction
- * can guarantee rollback when GitHub itself is unavailable.
- */
 async function syncGitHubStory(story, previousSlug = '') {
-  const shouldPublish = Boolean(story && story.published);
-
-  if (!shouldPublish && !previousSlug) return;
-
   const config = getGitHubConfig();
 
-  if (shouldPublish) {
-    const filePath = `content/blog/${story.slug}.md`;
-    const sha = await getGitHubFileSha(config, filePath);
-
-    const yaml = (value) => JSON.stringify(String(value || ''));
-
-    const date = /^\d{4}-\d{2}-\d{2}$/.test(story.date)
-      ? story.date
-      : new Date().toISOString().slice(0, 10);
-
-    const markdown = [
-      '---',
-      `title: ${yaml(story.title)}`,
-      `slug: ${yaml(story.slug)}`,
-      `date: ${date}`,
-      `description: ${yaml(story.description)}`,
-      `featured_image: ${yaml(story.coverImage)}`,
-      `author: ${yaml('Swyft Media Productions')}`,
-      'published: true',
-      '---',
-      '',
-      story.body.trim(),
-      ''
-    ].join('\n');
-
-    const payload = {
-      message: `${sha ? 'Update' : 'Publish'} blog: ${story.title}`,
-      content: Buffer.from(markdown, 'utf8').toString('base64'),
-      branch: config.branch
-    };
-
-    if (sha) payload.sha = sha;
-
-    await githubRequest(
-      githubFileUrl(config, filePath),
-      config,
-      {
-        method: 'PUT',
-        body: JSON.stringify(payload)
-      }
-    );
+  if (!story) {
+    if (previousSlug) await deleteGitHubMarkdown(config, previousSlug);
+    return;
   }
 
-  /*
-   * Delete the previous file only after a replacement has been published.
-   * For an unpublish operation, story is absent or unpublished and the
-   * previous published file is removed.
-   */
-  if (
-    previousSlug &&
-    (!shouldPublish || previousSlug !== story.slug)
-  ) {
+  const filePath = `content/blog/${story.slug}.md`;
+  const sha = await getGitHubFileSha(config, filePath);
+  const yaml = (value) => JSON.stringify(String(value ?? ''));
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(story.date)
+    ? story.date
+    : new Date().toISOString().slice(0, 10);
+  const createdAt = story.createdAt || new Date().toISOString();
+  const updatedAt = story.updatedAt || new Date().toISOString();
+
+  const markdown = [
+    '---',
+    `title: ${yaml(story.title)}`,
+    `slug: ${yaml(story.slug)}`,
+    `id: ${yaml(story.id || story.slug)}`, 
+    `date: ${date}`,
+    `description: ${yaml(story.description)}`,
+    `featured_image: ${yaml(story.coverImage)}`,
+    `author: ${yaml('Swyft Media Productions')}`,
+    `published: ${story.published ? 'true' : 'false'}`,
+    `created_at: ${yaml(createdAt)}`,
+    `updated_at: ${yaml(updatedAt)}`,
+    '---',
+    '',
+    String(story.body || '').trim(),
+    ''
+  ].join('\n');
+
+  const payload = {
+    message: `${sha ? 'Update' : 'Save'} blog: ${story.title}`,
+    content: Buffer.from(markdown, 'utf8').toString('base64'),
+    branch: config.branch
+  };
+  if (sha) payload.sha = sha;
+
+  await githubRequest(githubFileUrl(config, filePath), config, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
+
+  // A renamed story writes the new file first, then removes the previous one.
+  if (previousSlug && previousSlug !== story.slug) {
     await deleteGitHubMarkdown(config, previousSlug);
   }
+
+  invalidateStoryCache();
 }
 
 /* -------------------------------------------------------
@@ -935,31 +872,8 @@ app.post(
         updatedAt: now
       };
 
-      /*
-       * Publish to GitHub first. If saving the local CMS database fails,
-       * attempt to remove the newly published Markdown file.
-       */
+      // GitHub Markdown is the authoritative store for drafts and published stories.
       await syncGitHubStory(story);
-
-      stories.push(story);
-
-      try {
-        await writeStories(stories);
-      } catch (saveError) {
-        if (story.published) {
-          try {
-            await syncGitHubStory(null, story.slug);
-          } catch (rollbackError) {
-            console.error(
-              'GitHub rollback failed after CMS create error:',
-              rollbackError.message
-            );
-          }
-        }
-
-        throw saveError;
-      }
-
       res.status(201).json(story);
     } catch (error) {
       if (error.status) {
@@ -1021,43 +935,8 @@ app.put(
         updatedAt: new Date().toISOString()
       };
 
-      /*
-       * The synchronisation helper writes the new published Markdown first.
-       * It then removes the previous published slug when necessary.
-       */
-      await syncGitHubStory(
-        updated,
-        previous.published ? previous.slug : ''
-      );
-
-      stories[index] = updated;
-
-      try {
-        await writeStories(stories);
-      } catch (saveError) {
-        /*
-         * Attempt to restore GitHub to the previous CMS state if the local
-         * database write fails.
-         */
-        try {
-          if (previous.published) {
-            await syncGitHubStory(
-              previous,
-              updated.published ? updated.slug : ''
-            );
-          } else if (updated.published) {
-            await syncGitHubStory(null, updated.slug);
-          }
-        } catch (rollbackError) {
-          console.error(
-            'GitHub rollback failed after CMS update error:',
-            rollbackError.message
-          );
-        }
-
-        throw saveError;
-      }
-
+      // Write draft/published state directly to GitHub Markdown.
+      await syncGitHubStory(updated, previous.slug);
       res.json(updated);
     } catch (error) {
       if (error.status) {
@@ -1105,39 +984,7 @@ app.delete(
         });
       }
 
-      /*
-       * Remove the published Markdown first. If GitHub deletion fails,
-       * the local CMS record remains unchanged.
-       */
-      if (existing.published) {
-        await syncGitHubStory(null, existing.slug);
-      }
-
-      const remaining = stories.filter(
-        (story) => story.slug !== req.params.slug
-      );
-
-      try {
-        await writeStories(remaining);
-      } catch (saveError) {
-        /*
-         * If the local deletion fails, attempt to restore the published
-         * Markdown file.
-         */
-        if (existing.published) {
-          try {
-            await syncGitHubStory(existing);
-          } catch (rollbackError) {
-            console.error(
-              'GitHub rollback failed after CMS delete error:',
-              rollbackError.message
-            );
-          }
-        }
-
-        throw saveError;
-      }
-
+      await syncGitHubStory(null, existing.slug);
       res.json({ ok: true });
     } catch (error) {
       if (error.status) {
@@ -1283,7 +1130,7 @@ app.post(
           extension;
 
         // Save images inside the GitHub repository.
-        const repoPath = `content/blog/images/${filename}`;
+        const repoPath = `content/blog/upload/${filename}`;
 
         // Prepare the GitHub Contents API request.
         const payload = {
@@ -1343,20 +1190,71 @@ app.post(
 );
 
 /* -------------------------------------------------------
-   SERVE UPLOADED IMAGES
+   IMAGES
+
+   CMS uploads are returned as raw.githubusercontent.com URLs. The API does
+   not need to create a local uploads directory or serve files from Render.
 ------------------------------------------------------- */
 
-app.use(
-  '/uploads',
-  express.static(UPLOADS_DIR, {
-    fallthrough: false,
-    maxAge: isProduction ? '7d' : 0,
+/* -------------------------------------------------------
+   LEGACY IMAGE URL COMPATIBILITY
 
-    setHeaders(res) {
-      res.setHeader('X-Content-Type-Options', 'nosniff');
+   Older blog Markdown may still contain /uploads/<filename> URLs. Resolve
+   those files from the GitHub upload folders, not from Render's local disk.
+------------------------------------------------------- */
+
+app.get('/uploads/:filename', async (req, res, next) => {
+  try {
+    const filename = String(req.params.filename || '');
+    if (!/^[A-Za-z0-9._-]{1,180}$/.test(filename) || filename.startsWith('.')) {
+      return res.status(400).json({ error: 'Invalid image filename.' });
     }
-  })
-);
+
+    const extension = filename.split('.').pop().toLowerCase();
+    const mimeTypes = {
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      png: 'image/png',
+      webp: 'image/webp',
+      gif: 'image/gif'
+    };
+    if (!mimeTypes[extension]) {
+      return res.status(404).json({ error: 'Image not found.' });
+    }
+
+    const config = getGitHubConfig();
+    for (const folder of ['content/blog/upload', 'content/blog/images']) {
+      const url = `${githubFileUrl(config, `${folder}/${filename}`)}?ref=${encodeURIComponent(config.branch)}`;
+      const response = await fetch(url, {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${config.token}`,
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+      });
+
+      if (response.status === 404) continue;
+      if (!response.ok) {
+        const error = new Error(`Could not load legacy image from GitHub (HTTP ${response.status}).`);
+        error.status = 502;
+        throw error;
+      }
+
+      const file = await response.json();
+      if (typeof file.content !== 'string') continue;
+
+      const bytes = Buffer.from(file.content.replace(/\s/g, ''), 'base64');
+      res.set('Content-Type', mimeTypes[extension]);
+      res.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+      res.set('X-Content-Type-Options', 'nosniff');
+      return res.send(bytes);
+    }
+
+    return res.status(404).json({ error: 'Image not found in GitHub storage.' });
+  } catch (error) {
+    next(error);
+  }
+});
 
 /* -------------------------------------------------------
    CENTRAL ERROR HANDLER
@@ -1385,19 +1283,8 @@ app.use((error, _req, res, _next) => {
    START SERVER
 ------------------------------------------------------- */
 
-ensureStorage()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(
-        `Swyft Media CMS API listening on port ${PORT}`
-      );
-    });
-  })
-  .catch((error) => {
-    console.error(
-      'Could not initialise CMS storage:',
-      error.message
-    );
-
-    process.exit(1);
-  });
+app.listen(PORT, () => {
+  console.log(`Swyft Media CMS API listening on port ${PORT}`);
+  console.log('CMS content storage: GitHub Markdown (content/blog/)');
+  console.log('CMS image storage: GitHub repository (content/blog/upload/)');
+});
