@@ -380,11 +380,11 @@ if (document.readyState === 'loading') {
   document.addEventListener(
     'DOMContentLoaded',
     function () {
-      window.setTimeout(showPassPopup, 2000);
+      window.setTimeout(showPassPopup, 3500);
     },
     { once: true }
   );
 } else {
-  window.setTimeout(showPassPopup, 2000);
+  window.setTimeout(showPassPopup, 3500);
 }
 })();
