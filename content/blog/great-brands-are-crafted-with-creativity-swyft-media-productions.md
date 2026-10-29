@@ -3,12 +3,12 @@ title: "Great Brands Are Crafted with Creativity | Swyft Media Productions"
 slug: "great-brands-are-crafted-with-creativity-swyft-media-productions"
 id: "7596a9a3-50c0-48ce-8f06-b45a9f9aabcb"
 date: 2026-10-29
-description: "Discover how creative branding, consistent communication, and digital marketing help businesses build memorable brands and connect with the right audience."
+description: "Swyft Media Productions is a creative and digital marketing agency in Ahmedabad offering branding, video production, social media marketing, creative design and SEO."
 featured_image: "https://raw.githubusercontent.com/swyftmedia-1/Swyft/main/content/blog/upload/1793259377243-fbbfac34a03e3f48.png"
 author: "Swyft Media Productions"
 published: true
 created_at: "2026-10-29T07:35:40.238Z"
-updated_at: "2026-10-29T07:36:21.343Z"
+updated_at: "2026-10-29T07:36:58.736Z"
 ---
 
 Great Brands Don't Just Exist, They're Crafted by Creative Minds
