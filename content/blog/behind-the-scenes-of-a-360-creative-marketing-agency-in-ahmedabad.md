@@ -3,7 +3,7 @@ title: "Behind the Scenes of a 360° Creative Marketing Agency in Ahmedabad"
 slug: "behind-the-scenes-of-a-360-creative-marketing-agency-in-ahmedabad"
 id: "e91f7bb2-85f3-43ac-9c69-da762198bb20"
 date: 2026-10-28
-description: "Discover how Swyft Media Productions, a 360° creative marketing agency in Ahmedabad, combines branding, digital marketing, SEO, and creative production to help businesses grow."
+description: "Discover how Swyft Media Productions, a creative agency in Ahmedabad, combines branding, digital marketing, SEO, and creative production to help businesses grow."
 featured_image: "https://raw.githubusercontent.com/swyftmedia-1/Swyft/main/content/blog/upload/1793192519392-56e7c2fb4e021647.png"
 author: "Swyft Media Productions"
 published: true
