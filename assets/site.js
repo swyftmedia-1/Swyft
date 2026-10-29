@@ -375,14 +375,16 @@
     }
   }
 
-  // Open immediately when the DOM is ready.
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      showPassPopup,
-      { once: true }
-    );
-  } else {
-    showPassPopup();
-  }
+  // Open 1.5 seconds after the DOM is ready.
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+      window.setTimeout(showPassPopup, 1500);
+    },
+    { once: true }
+  );
+} else {
+  window.setTimeout(showPassPopup, 1500);
+}
 })();
