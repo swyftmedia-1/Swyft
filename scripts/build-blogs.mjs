@@ -316,8 +316,8 @@ function layoutStyles() {
     .footer{margin-top:0;background:#081b2d;color:#fff;padding:60px 0 22px}
     .container{width:min(1180px,calc(100% - 44px));margin-inline:auto}
     .footer-grid{display:grid;grid-template-columns:1.15fr .8fr .8fr 1fr;gap:34px;padding-bottom:38px}
-    .footer-logo{display:block;width:min(158px,100%);max-height:48px;height:auto;object-fit:contain;background:#fff;border-radius:9px;padding:6px}
-    .footer-about p,.footer-col p{color:#b7c7d3;font-size:13px;line-height:1.8;margin:16px 0}
+    .footer-logo{display:block;width:min(138px,100%);max-height:42px;height:auto;object-fit:contain;background:#fff;border-radius:7px;padding:5px}
+    .footer-about p,.footer-col p{color:#b7c7d3;font-size:13px;line-height:1.8;margin:1em 0}
     .footer-social{display:flex;gap:8px;margin-top:18px}
     .footer-social a{width:34px;height:34px;border:1px solid #526879;border-radius:50%;display:grid;place-items:center;color:#fff}
     .footer-social a:hover{background:var(--accent);border-color:var(--accent);color:var(--navy)}
@@ -327,6 +327,9 @@ function layoutStyles() {
     .footer-col h3{font-size:12px;text-transform:uppercase;letter-spacing:.14em;margin:4px 0 17px}
     .footer-col a{display:block;font-size:13px;color:#b7c7d3;margin:10px 0;line-height:1.6}
     .footer-col a:hover{color:#fff;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+    /* Keep contact links inline inside footer address blocks, matching the homepage. */
+    .footer-col p a{display:inline;margin:0;color:inherit;font-size:inherit;line-height:inherit}
+    .footer-col p a:hover{color:#fff}
     .footer-bottom{border-top:1px solid #ffffff20;padding-top:18px;display:flex;justify-content:space-between;gap:20px;color:#91a5b5;font-size:11px}
     .footer-bottom p{margin:0}
 
@@ -429,59 +432,11 @@ function header(active = false) {
 }
 
 function footer() {
-  return `<footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <section class="footer-about">
-          <a href="../index.html" aria-label="Swyft Media home"><img class="footer-logo" src="../swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" loading="lazy" decoding="async"></a>
-          <p>From PR to pixels, we help brands build a clear voice, a stronger presence and measurable momentum.</p>
-          <div class="footer-social">
-            <a href="https://www.instagram.com/swyftmediapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-            <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg></a>
-            <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fb" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg></a>
-          </div>
-        </section>
-        <section class="footer-col"><h3>What we do</h3><a href="../services.html">Digital marketing</a><a href="../services.html">Web development</a><a href="../services.html">SEO &amp; performance</a><a href="../services.html">Public relations</a><a href="../services.html">Brand strategy</a></section>
-        <section class="footer-col"><h3>Explore</h3><a href="../about.html">About us</a><a href="../projects.html">Projects</a><a href="../people.html">People</a><a href="../blog/">Business Stories</a><a href="../admin/">Publisher access</a><a href="../swyft-pass.html">Swyft Pass</a><a href="../contact.html">Contact us</a></section>
-        <section class="footer-col"><h3>Talk to our team</h3><p><strong>Ahmedabad</strong><br>707, Iscon Elegance, Near Shapath-V, S.G. Highway, Ahmedabad 380015</p><p><strong>Gandhidham</strong><br>Plot No. 108, Sector 1A, Gandhidham-Kutch, Gujarat 370201</p><a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a><a href="tel:+917096427107">+91 70964 27107</a></section>
-      </div>
-      <div class="footer-bottom"><p>© ${new Date().getUTCFullYear()} Swyft Media Productions. All rights reserved.</p><p>Branding · Digital · PR · Creative</p></div>
-    </div>
-  </footer>`;
+  return `<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-about"><a aria-label="Swyft Media home" href="../index.html"><img alt="Swyft Media Productions" class="footer-logo" decoding="async" height="100" loading="lazy" src="../swyft-media-logo-horizontal.webp" width="460"/></a><p>From PR to pixels, we help brands build a clear voice, a stronger presence and measurable momentum.</p><div aria-label="Swyft Media social links" class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/swyftmediapr/" rel="noopener noreferrer" target="_blank" title="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8"></circle></svg></a><a aria-label="Linkedin" href="https://www.linkedin.com/company/swyft-media-productions" rel="noopener noreferrer" target="_blank" title="Linkedin"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"></path><circle cx="5" cy="5.5" r="1"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" rel="noopener noreferrer" target="_blank" title="Facebook"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z" fill="currentColor" stroke="none"></path></svg></a></div></div><div class="footer-col"><h3>What we do</h3><a href="../services.html">Brand strategy</a><a href="../services.html">Digital marketing</a><a href="../services.html">Public relations</a><a href="../services.html">Web development</a><a href="../services.html">SEO &amp; performance</a></div><div class="footer-col"><h3>Explore</h3><a href="../about.html">About us</a><a href="../projects.html">Projects</a><a href="../people.html">Our people</a><a href="../blog/index.html">Business Stories</a><a href="../admin/">Publisher access</a><a href="../swyft-pass.html">Swyft Pass</a><a href="../contact.html">Contact</a></div><div class="footer-col"><h3>Talk to our team</h3><p><strong>Ahmedabad</strong><br/>707, Iscon Elegance, Near Shapath-V, S.G. Highway, Ahmedabad 380015<br/><a href="tel:+917096427107">+91 70964 27107</a><br/><a href="tel:+919978994010">+91 99789 94010</a><br/><a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a></p><p><strong>Gandhidham</strong><br/>Plot No. 108, Sector 1A, Gandhidham-Kutch, Gujarat 370201<br/><a href="tel:+919512470015">+91 95124 70015</a><br/><a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a></p></div></div><div class="footer-bottom"><span>© <span data-current-year="">${new Date().getUTCFullYear()}</span> Swyft Media Productions. All rights reserved.</span><span>Branding · Digital · PR · Creative</span></div></div></footer>`;
 }
 
 function jsonLd(obj) {
   return `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
-}
-
-// The source blog/index.html is the editable source of truth for the blog footer.
-// The listing itself is still generated so published Markdown posts and CMS support work.
-function readSourceBlogFooter() {
-  const sourceBlogIndex = path.join(ROOT, 'blog', 'index.html');
-
-  if (!fs.existsSync(sourceBlogIndex)) return '';
-
-  const sourceHtml = fs.readFileSync(sourceBlogIndex, 'utf8');
-  const match = sourceHtml.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/i);
-
-  return match ? match[0] : '';
-}
-
-function applySourceBlogFooter(generatedListing) {
-  const sourceFooter = readSourceBlogFooter();
-
-  if (!sourceFooter) {
-    console.warn('No footer found in blog/index.html; using the build-script footer as a fallback.');
-    return generatedListing;
-  }
-
-  const generatedFooterPattern = /<footer\b[^>]*>[\s\S]*?<\/footer>/i;
-
-  if (!generatedFooterPattern.test(generatedListing)) {
-    throw new Error('Could not find the generated footer in the blog listing.');
-  }
-
-  return generatedListing.replace(generatedFooterPattern, sourceFooter);
 }
 
 function listingPage(posts, legacyPosts) {
@@ -907,10 +862,8 @@ function main() {
   fs.mkdirSync(blogDir, { recursive: true });
 
   const legacyPosts = loadLegacyPosts();
-  const generatedListing = applySourceBlogFooter(listingPage(posts, legacyPosts));
+  const generatedListing = listingPage(posts, legacyPosts);
 
-  // Deploy the generated listing to _site, with its footer taken from blog/index.html.
-  // Do not overwrite the source blog/index.html: edit its footer directly in GitHub.
   fs.writeFileSync(path.join(blogDir, 'index.html'), generatedListing);
 
   for (const post of posts) {
@@ -919,8 +872,19 @@ function main() {
     fs.writeFileSync(path.join(postDir, 'index.html'), articlePage(post));
   }
 
-  // Keep ROOT/blog/index.html untouched so footer edits remain maintainable there.
-  // Local/Live Server preview uses that source file; production deploys _site/blog/index.html.
+  // Also create a source-tree listing for VS Code / Live Server previews.
+  // Production deploys only _site, where article links stay root-relative.
+  const sourceBlogDir = path.join(ROOT, 'blog');
+  fs.mkdirSync(sourceBlogDir, { recursive: true });
+
+  const sourcePreviewListing = generatedListing.replace(
+    /href=\"\/([a-z0-9]+(?:-[a-z0-9]+)*)\/\"/g,
+    (match, slug) => seen.has(slug)
+      ? `href=\"../_site/${slug}/\"`
+      : match
+  );
+
+  fs.writeFileSync(path.join(sourceBlogDir, 'index.html'), sourcePreviewListing);
 
   writeSitemap(posts);
 
