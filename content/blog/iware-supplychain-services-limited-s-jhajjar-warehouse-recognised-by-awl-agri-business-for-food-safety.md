@@ -1,5 +1,5 @@
 ---
-title: "iWare Supplychain Services Limited’s Jhajjar Warehouse Recognised by AWL Agri Business for Food Safety"
+title: "iWare’s Jhajjar Warehouse Recognised for Food Safety by AWL Agri Business"
 slug: "iware-supplychain-services-limited-s-jhajjar-warehouse-recognised-by-awl-agri-business-for-food-safety"
 id: "1e6a622c-74e9-4e8e-a246-049093ff7076"
 date: 2026-10-28
@@ -8,7 +8,7 @@ featured_image: "https://raw.githubusercontent.com/swyftmedia-1/Swyft/main/conte
 author: "Swyft Media Productions"
 published: true
 created_at: "2026-10-28T11:15:37.950Z"
-updated_at: "2026-10-28T11:15:37.950Z"
+updated_at: "2026-10-30T05:57:37.776Z"
 ---
 
 iWare Supplychain Services Limited has received recognition from AWL Agri Business for its Jhajjar warehouse in Haryana, marking an important milestone in the company’s commitment to food safety, warehouse management and operational excellence.
