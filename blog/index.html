@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Business Stories | Branding, Marketing &amp; Creative Insights</title>
@@ -24,567 +24,115 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-:root{color-scheme:light;--ink:#101820;--muted:#64707b;--line:#e5eaee;--accent:#f4c84b;--navy:#082b46;--paper:#fff;--soft:#f6f8fa}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-a:hover{color:#087db1}
-img{max-width:100%;height:auto}
-button,a{outline-offset:4px}
+    :root{color-scheme:light;--ink:#101820;--muted:#64707b;--line:#e5eaee;--accent:#f4c84b;--navy:#082b46;--paper:#fff;--soft:#f6f8fa}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}a:hover{color:#087db1}img{max-width:100%;height:auto}button,a{outline-offset:4px}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.975);backdrop-filter:blur(18px);border-bottom:1px solid rgba(11,34,56,.09)}
+    .header-inner{max-width:1360px;min-height:78px;margin:auto;padding:10px clamp(18px,3vw,42px);display:flex;align-items:center;gap:clamp(12px,1.35vw,20px)}
+    .brand{display:flex;align-items:center;flex:0 0 auto}.brand img{display:block;width:clamp(142px,12.4vw,166px);max-height:44px;height:auto;object-fit:contain;object-position:left center}
+    .main-nav{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.05vw,15px);margin-left:auto}.main-nav a{font-family:Manrope,'DM Sans',Arial,sans-serif;font-size:10.5px;font-weight:750;letter-spacing:.035em;text-transform:uppercase;line-height:1;color:#314758;white-space:nowrap;position:relative;padding:12px 0;transition:color .18s}.main-nav a:after{position:absolute;left:0;bottom:4px;height:2px;width:100%;content:"";background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .18s}.main-nav a:hover:after,.main-nav a[aria-current="page"]:after{transform:scaleX(1)}.main-nav a:hover,.main-nav a[aria-current="page"]{color:#0b2238}
+    .social-links{display:flex;align-items:center;gap:6px;flex:0 0 auto}.social-links a{display:grid;place-items:center;width:29px;height:29px;border:1px solid #e1e7eb;border-radius:50%;color:#0b2238}.social-links a:hover{background:#0b2238;color:#fff;border-color:#0b2238}.social-links svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.social-links .fb{fill:currentColor;stroke:none}
+    .menu-toggle{display:none;background:#fff;border:1px solid #e5eaee;border-radius:10px;padding:8px;color:#0b2238}.menu-toggle svg{width:21px;height:21px;display:block}
+    .wrap{width:min(1120px,calc(100% - 40px));margin-inline:auto}.eyebrow{text-transform:uppercase;font-weight:800;letter-spacing:.16em;font-size:12px;color:#806700}.hero{padding:72px 0 44px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#fbfcfd 100%)}.hero h1{font-size:clamp(36px,4.35vw,58px);line-height:1.1;letter-spacing:-.055em;margin:14px 0 18px;max-width:880px}.hero p{max-width:720px;color:var(--muted);font-size:18px;line-height:1.75;margin:0}.publisher-link{margin-top:18px!important}.publisher-link a{display:inline-flex;align-items:center;border:1px solid #dbe3e9;border-radius:999px;padding:10px 15px;color:#0b2238;font-size:12px;font-weight:800;background:#fff}.publisher-link a:hover{border-color:#f4c84b;background:#fff8dc;color:#0b2238}
+    .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:42px 0 76px}.cms-runtime{padding:30px 0 20px}.cms-runtime[hidden]{display:none!important}.cms-runtime h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.035em;margin:10px 0 0}.cms-runtime .posts{padding:22px 0 34px}.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-width:0;transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #0000000b}.card-image{aspect-ratio:16/9;background:linear-gradient(135deg,#0c2235,#31546b);display:flex;align-items:center;justify-content:center;overflow:hidden}.card-image img{height:100%;width:100%;object-fit:cover}.card-placeholder{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}.card-content{padding:24px;display:flex;flex:1;flex-direction:column}.meta{color:var(--muted);font-size:12px;letter-spacing:.04em}.category{font-weight:800;color:#7a6500;text-transform:uppercase;font-size:11px;letter-spacing:.1em}.card h2{font-size:23px;line-height:1.2;letter-spacing:-.025em;margin:10px 0 12px}.card p{color:var(--muted);margin:0 0 20px;font-size:15px;line-height:1.7}.read-link{margin-top:auto;font-size:13px;font-weight:800;border-bottom:2px solid var(--accent);align-self:flex-start;padding-bottom:3px}.empty{padding:42px;border:1px dashed #c9c9c9;border-radius:16px;color:var(--muted);grid-column:1/-1}
+    .archive{padding:6px 0 74px;border-top:1px solid var(--line)}.archive h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.035em}.archive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}.archive-link{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline}.archive-link span{color:var(--muted);font-size:12px;min-width:95px}.archive-link strong{font-size:15px;line-height:1.4}
+    .article-shell{width:min(850px,calc(100% - 40px));margin:0 auto;padding:52px 0 84px}.breadcrumbs{font-size:13px;color:var(--muted);margin-bottom:30px}.breadcrumbs a{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}.article-head h1{font-size:clamp(34px,4.35vw,58px);line-height:1.1;letter-spacing:-.055em;margin:12px 0 20px}.article-description{font-size:20px;line-height:1.5;color:#555;max-width:760px}.article-meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:#666;font-size:13px;margin:24px 0}.featured{width:100%;max-height:500px;object-fit:cover;border-radius:20px;margin:14px 0 36px;background:#f3f3f3}.article-body{font-size:18px;line-height:1.85;color:#252525;overflow-wrap:anywhere}.article-body h2{font-size:clamp(28px,4vw,38px);line-height:1.18;letter-spacing:-.035em;margin:48px 0 12px;color:#111}.article-body h3{font-size:25px;line-height:1.25;margin:34px 0 12px}.article-body h4{font-size:21px;margin:28px 0 10px}.article-body p{margin:0 0 22px}.article-body a{color:#075d88;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}.article-body ul,.article-body ol{padding-left:28px;margin:0 0 24px}.article-body li{padding-left:5px;margin:8px 0}.article-body blockquote{margin:30px 0;padding:5px 0 5px 22px;border-left:4px solid var(--accent);color:#555}.article-body pre{white-space:pre-wrap;overflow:auto;background:#111;color:#eee;padding:18px;border-radius:10px;font-size:14px}.article-body code{font-size:.9em;background:#f1f1f1;padding:2px 5px;border-radius:4px}.article-body pre code{background:none;padding:0}.article-body img{border-radius:12px;margin:18px 0}.article-foot{border-top:1px solid var(--line);padding-top:28px;margin-top:54px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px}.button{display:inline-block;padding:12px 18px;border-radius:999px;background:#082b46;color:#fff;font-size:13px;font-weight:800}.button:hover{background:#087db1;color:#fff}.cta{background:#082b46;color:#fff;border-radius:20px;padding:34px;margin-top:46px}.cta p{color:#d0dbe3;margin:5px 0 18px}.cta .button{background:var(--accent);color:#111}
+    /* Homepage-matched footer */
+    .footer{margin-top:0;background:#081b2d;color:#fff;padding:60px 0 22px}
+    .container{width:min(1180px,calc(100% - 44px));margin-inline:auto}
+    .footer-grid{display:grid;grid-template-columns:1.15fr .8fr .8fr 1fr;gap:34px;padding-bottom:38px}
+    .footer-logo{display:block;width:min(138px,100%);max-height:42px;height:auto;object-fit:contain;background:#fff;border-radius:7px;padding:5px}
+    .footer-about p,.footer-col p{color:#b7c7d3;font-size:13px;line-height:1.8;margin:16px 0}
+    .footer-social{display:flex;gap:8px;margin-top:18px}
+    .footer-social a{width:34px;height:34px;border:1px solid #526879;border-radius:50%;display:grid;place-items:center;color:#fff}
+    .footer-social a:hover{background:var(--accent);border-color:var(--accent);color:var(--navy)}
+    .footer-social svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .footer-social .fb{fill:currentColor;stroke:none}
+    .footer-col h3{font-size:12px;text-transform:uppercase;letter-spacing:.14em;margin:4px 0 17px}
+    .footer-col a{display:block;font-size:13px;color:#b7c7d3;margin:10px 0;line-height:1.6}
+    .footer-col a:hover{color:#fff;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+    .footer-bottom{border-top:1px solid #ffffff20;padding-top:18px;display:flex;justify-content:space-between;gap:20px;color:#91a5b5;font-size:11px}
 
-.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.975);backdrop-filter:blur(18px);border-bottom:1px solid rgba(11,34,56,.09)}
-.header-inner{max-width:1360px;min-height:78px;margin:auto;padding:10px clamp(18px,3vw,42px);display:flex;align-items:center;gap:clamp(12px,1.35vw,20px)}
-.brand{display:flex;align-items:center;flex:0 0 auto}
-.brand img{display:block;width:clamp(142px,12.4vw,166px);max-height:44px;height:auto;object-fit:contain;object-position:left center}
-.main-nav{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.05vw,15px);margin-left:auto}
-.main-nav a{font-family:Manrope,'DM Sans',Arial,sans-serif;font-size:10.5px;font-weight:750;letter-spacing:.035em;text-transform:uppercase;line-height:1;color:#314758;white-space:nowrap;position:relative;padding:12px 0;transition:color .18s}
-.main-nav a:after{position:absolute;left:0;bottom:4px;height:2px;width:100%;content:"";background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .18s}
-.main-nav a:hover:after,.main-nav a[aria-current="page"]:after{transform:scaleX(1)}
-.main-nav a:hover,.main-nav a[aria-current="page"]{color:#0b2238}
+    @media(max-width:1200px){.header-inner{gap:12px}.brand img{width:146px}.main-nav{gap:9px}.main-nav a{font-size:9.5px}.social-links a{width:27px;height:27px}.footer-grid{grid-template-columns:1.2fr .8fr .8fr;gap:28px}.footer-col:last-child{grid-column:2/4}}
+    @media(max-width:980px){.header-inner{flex-wrap:wrap;gap:8px 14px;min-height:74px}.brand img{width:148px}.menu-toggle{display:block;margin-left:auto}.main-nav{display:none;order:4;flex:1 0 100%;margin:0;padding:8px 0 12px;align-items:stretch;flex-direction:column;gap:0}.main-nav.is-open{display:flex}.main-nav a{font-size:12px;padding:12px 5px;border-bottom:1px solid var(--line);line-height:1.3}.main-nav a:after{display:none}.social-links{margin-left:0}.posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:600px){.header-inner{padding:9px 16px;gap:8px}.brand img{width:140px;max-height:40px}.social-links{gap:4px}.social-links a{width:26px;height:26px}.wrap{width:calc(100% - 32px)}.hero{padding:50px 0 30px}.hero h1{font-size:clamp(36px,8.8vw,50px)}.hero p{font-size:16px}.posts{grid-template-columns:1fr;padding:28px 0 52px;gap:18px}.card-content{padding:20px}.archive-grid{grid-template-columns:1fr}.article-shell{width:calc(100% - 32px);padding:34px 0 60px}.article-head h1{font-size:clamp(34px,8.8vw,48px)}.article-description{font-size:18px}.article-body{font-size:17px}.article-body h2{margin-top:38px}.archive-link{gap:10px}.archive-link span{min-width:82px}.container{width:calc(100% - 34px)}.footer-grid{grid-template-columns:1fr;gap:24px;padding-bottom:28px}.footer-col:last-child{grid-column:auto}.footer-bottom{flex-direction:column;gap:5px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}.card:hover{transform:none}}
+  
 
-.social-links{display:flex;align-items:center;gap:6px;flex:0 0 auto}
-.social-links a{display:grid;place-items:center;width:29px;height:29px;border:1px solid #e1e7eb;border-radius:50%;color:#0b2238}
-.social-links a:hover{background:#0b2238;color:#fff;border-color:#0b2238}
-.social-links svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.social-links .fb{fill:currentColor;stroke:none}
-
-.menu-toggle{display:none;background:#fff;border:1px solid #e5eaee;border-radius:10px;padding:8px;color:#0b2238}
-.menu-toggle svg{width:21px;height:21px;display:block}
-
-.wrap{width:min(1120px,calc(100% - 40px));margin-inline:auto}
-.eyebrow{text-transform:uppercase;font-weight:800;letter-spacing:.16em;font-size:12px;color:#806700}
-.hero{padding:72px 0 44px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#fbfcfd 100%)}
-.hero h1{font-size:clamp(36px,4.35vw,58px);line-height:1.1;letter-spacing:-.055em;margin:14px 0 18px;max-width:880px}
-.hero p{max-width:720px;color:var(--muted);font-size:18px;line-height:1.75;margin:0}
-.publisher-link{margin-top:18px!important}
-.publisher-link a{display:inline-flex;align-items:center;border:1px solid #dbe3e9;border-radius:999px;padding:10px 15px;color:#0b2238;font-size:12px;font-weight:800;background:#fff}
-.publisher-link a:hover{border-color:#f4c84b;background:#fff8dc;color:#0b2238}
-
-.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:42px 0 76px}
-.cms-runtime{padding:30px 0 20px}
-.cms-runtime[hidden]{display:none!important}
-.cms-runtime h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.035em;margin:10px 0 0}
-.cms-runtime .posts{padding:22px 0 34px}
-.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-width:0;transition:transform .18s ease,box-shadow .18s ease}
-.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #0000000b}
-.card-image{aspect-ratio:16/9;background:linear-gradient(135deg,#0c2235,#31546b);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.card-image img{height:100%;width:100%;object-fit:cover}
-.card-placeholder{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
-.card-content{padding:24px;display:flex;flex:1;flex-direction:column}
-.meta{color:var(--muted);font-size:12px;letter-spacing:.04em}
-.category{font-weight:800;color:#7a6500;text-transform:uppercase;font-size:11px;letter-spacing:.1em}
-.card h2{font-size:23px;line-height:1.2;letter-spacing:-.025em;margin:10px 0 12px}
-.card p{color:var(--muted);margin:0 0 20px;font-size:15px;line-height:1.7}
-.read-link{margin-top:auto;font-size:13px;font-weight:800;border-bottom:2px solid var(--accent);align-self:flex-start;padding-bottom:3px}
-.empty{padding:42px;border:1px dashed #c9c9c9;border-radius:16px;color:var(--muted);grid-column:1/-1}
-
-.archive{padding:6px 0 74px;border-top:1px solid var(--line)}
-.archive h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.035em}
-.archive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
-.archive-link{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline}
-.archive-link span{color:var(--muted);font-size:12px;min-width:95px}
-.archive-link strong{font-size:15px;line-height:1.4}
-
-.article-shell{width:min(850px,calc(100% - 40px));margin:0 auto;padding:52px 0 84px}
-.breadcrumbs{font-size:13px;color:var(--muted);margin-bottom:30px}
-.breadcrumbs a{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
-.article-head h1{font-size:clamp(34px,4.35vw,58px);line-height:1.1;letter-spacing:-.055em;margin:12px 0 20px}
-.article-description{font-size:20px;line-height:1.5;color:#555;max-width:760px}
-.article-meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:#666;font-size:13px;margin:24px 0}
-.featured{width:100%;max-height:500px;object-fit:cover;border-radius:20px;margin:14px 0 36px;background:#f3f3f3}
-.article-body{font-size:18px;line-height:1.85;color:#252525;overflow-wrap:anywhere}
-.article-body h2{font-size:clamp(28px,4vw,38px);line-height:1.18;letter-spacing:-.035em;margin:48px 0 12px;color:#111}
-.article-body h3{font-size:25px;line-height:1.25;margin:34px 0 12px}
-.article-body h4{font-size:21px;margin:28px 0 10px}
-.article-body p{margin:0 0 22px}
-.article-body a{color:#075d88;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
-.article-body ul,.article-body ol{padding-left:28px;margin:0 0 24px}
-.article-body li{padding-left:5px;margin:8px 0}
-.article-body blockquote{margin:30px 0;padding:5px 0 5px 22px;border-left:4px solid var(--accent);color:#555}
-.article-body pre{white-space:pre-wrap;overflow:auto;background:#111;color:#eee;padding:18px;border-radius:10px;font-size:14px}
-.article-body code{font-size:.9em;background:#f1f1f1;padding:2px 5px;border-radius:4px}
-.article-body pre code{background:none;padding:0}
-.article-body img{border-radius:12px;margin:18px 0}
-.article-foot{border-top:1px solid var(--line);padding-top:28px;margin-top:54px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px}
-.button{display:inline-block;padding:12px 18px;border-radius:999px;background:#082b46;color:#fff;font-size:13px;font-weight:800}
-.button:hover{background:#087db1;color:#fff}
-.cta{background:#082b46;color:#fff;border-radius:20px;padding:34px;margin-top:46px}
-.cta p{color:#d0dbe3;margin:5px 0 18px}
-.cta .button{background:var(--accent);color:#111}
-
-/* Homepage footer styling */
-.footer{margin-top:0;background:#081b2d;color:#fff;padding:60px 0 22px}
-.container{width:min(1180px,calc(100% - 44px));margin-inline:auto}
-.footer-grid{display:grid;grid-template-columns:1.15fr .8fr .8fr 1fr;gap:34px;padding-bottom:38px}
-.footer-logo{display:block;width:min(158px,100%);max-height:48px;height:auto;object-fit:contain;background:#fff;border-radius:9px;padding:6px}
-.footer-about p,.footer-col p{color:#b7c7d3;font-size:13px;line-height:1.8;margin:16px 0}
-.footer-social{display:flex;gap:8px;margin-top:18px}
-.footer-social a{width:34px;height:34px;border:1px solid #526879;border-radius:50%;display:grid;place-items:center;color:#fff}
-.footer-social a:hover{background:var(--accent);border-color:var(--accent);color:var(--navy)}
-.footer-social svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.footer-social .fb{fill:currentColor;stroke:none}
-.footer-col h3{font-size:12px;text-transform:uppercase;letter-spacing:.14em;margin:4px 0 17px}
-.footer-col a{display:block;font-size:13px;color:#b7c7d3;margin:10px 0;line-height:1.6}
-.footer-col a:hover{color:#fff;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
-.footer-bottom{border-top:1px solid #ffffff20;padding-top:18px;display:flex;justify-content:space-between;gap:20px;color:#91a5b5;font-size:11px}
-
-@media(max-width:1200px){
-  .header-inner{gap:12px}
-  .brand img{width:146px}
-  .main-nav{gap:9px}
-  .main-nav a{font-size:9.5px}
-  .social-links a{width:27px;height:27px}
-  .footer-grid{grid-template-columns:1.2fr .8fr .8fr;gap:28px}
-  .footer-col:last-child{grid-column:2/4}
-}
-@media(max-width:980px){
-  .header-inner{flex-wrap:wrap;gap:8px 14px;min-height:74px}
-  .brand img{width:148px}
-  .menu-toggle{display:block;margin-left:auto}
-  .main-nav{display:none;order:4;flex:1 0 100%;margin:0;padding:8px 0 12px;align-items:stretch;flex-direction:column;gap:0}
-  .main-nav.is-open{display:flex}
-  .main-nav a{font-size:12px;padding:12px 5px;border-bottom:1px solid var(--line);line-height:1.3}
-  .main-nav a:after{display:none}
-  .social-links{margin-left:0}
-  .posts{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:600px){
-  .header-inner{padding:9px 16px;gap:8px}
-  .brand img{width:140px;max-height:40px}
-  .social-links{gap:4px}
-  .social-links a{width:26px;height:26px}
-  .wrap{width:calc(100% - 32px)}
-  .hero{padding:50px 0 30px}
-  .hero h1{font-size:clamp(36px,8.8vw,50px)}
-  .hero p{font-size:16px}
-  .posts{grid-template-columns:1fr;padding:28px 0 52px;gap:18px}
-  .card-content{padding:20px}
-  .archive-grid{grid-template-columns:1fr}
-  .article-shell{width:calc(100% - 32px);padding:34px 0 60px}
-  .article-head h1{font-size:clamp(34px,8.8vw,48px)}
-  .article-description{font-size:18px}
-  .article-body{font-size:17px}
-  .article-body h2{margin-top:38px}
-  .archive-link{gap:10px}
-  .archive-link span{min-width:82px}
-  .container{width:calc(100% - 34px)}
-  .footer-grid{grid-template-columns:1fr;gap:24px;padding-bottom:28px}
-  .footer-col:last-child{grid-column:auto}
-  .footer-bottom{flex-direction:column;gap:5px}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .card{transition:none}
-  .card:hover{transform:none}
-}
-
-/* Mobile menu visibility is controlled by .is-open, never by default flex display. */
-.header-inner .main-nav{display:flex!important;gap:clamp(10px,.9vw,14px)!important;flex:1 1 auto;min-width:0}
-.header-inner .main-nav>a{font-size:12px!important;letter-spacing:0!important;white-space:nowrap!important}
-.header-inner .menu-toggle{display:none!important;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-left:auto;border:1px solid #dbe5eb;border-radius:11px;background:#fff;color:#0b2238;cursor:pointer}
-@media(max-width:980px){
-  .site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-  .header-inner{flex-wrap:wrap!important;justify-content:space-between!important;gap:8px!important;padding:9px 12px!important}
-  .header-inner .brand{order:1;max-width:calc(100% - 158px)}
-  .header-inner .brand img{width:clamp(128px,36vw,160px)!important;max-height:42px!important}
-  .header-inner .menu-toggle{display:inline-flex!important;order:2}
-  .header-inner .social-links{order:3;margin-left:0!important;gap:4px!important}
-  .header-inner .social-links a{width:28px!important;height:28px!important}
-  .header-inner .main-nav{display:none!important;order:4;flex:1 0 100%!important;width:100%!important;min-width:100%!important;margin:0!important;padding:8px 0 12px!important;align-items:stretch!important;justify-content:flex-start!important;flex-direction:column!important;gap:0!important;border-top:1px solid #e4eaf0}
-  .header-inner .main-nav.is-open{display:flex!important}
-  .header-inner .main-nav>a{display:flex!important;min-height:44px!important;padding:12px 7px!important;border-bottom:1px solid #e4eaf0!important;font-size:14px!important;line-height:1.35!important;text-transform:none!important;white-space:normal!important}
-  .header-inner .main-nav>a:after{display:none!important}
-}
-@media(max-width:360px){
-  .header-inner .brand img{width:124px!important}
-  .header-inner .social-links a{width:26px!important;height:26px!important}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto!important}
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
+    /* Mobile menu visibility is controlled by .is-open, never by default flex display. */
+    .header-inner .main-nav{display:flex!important;gap:clamp(10px,.9vw,14px)!important;flex:1 1 auto;min-width:0}
+    .header-inner .main-nav>a{font-size:12px!important;letter-spacing:0!important;white-space:nowrap!important}
+    .header-inner .menu-toggle{display:none!important;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-left:auto;border:1px solid #dbe5eb;border-radius:11px;background:#fff;color:#0b2238;cursor:pointer}
+    @media(max-width:980px){
+      .site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+      .header-inner{flex-wrap:wrap!important;justify-content:space-between!important;gap:8px!important;padding:9px 12px!important}
+      .header-inner .brand{order:1;max-width:calc(100% - 158px)}
+      .header-inner .brand img{width:clamp(128px,36vw,160px)!important;max-height:42px!important}
+      .header-inner .menu-toggle{display:inline-flex!important;order:2}
+      .header-inner .social-links{order:3;margin-left:0!important;gap:4px!important}
+      .header-inner .social-links a{width:28px!important;height:28px!important}
+      .header-inner .main-nav{display:none!important;order:4;flex:1 0 100%!important;width:100%!important;min-width:100%!important;margin:0!important;padding:8px 0 12px!important;align-items:stretch!important;justify-content:flex-start!important;flex-direction:column!important;gap:0!important;border-top:1px solid #e4eaf0}
+      .header-inner .main-nav.is-open{display:flex!important}
+      .header-inner .main-nav>a{display:flex!important;min-height:44px!important;padding:12px 7px!important;border-bottom:1px solid #e4eaf0!important;font-size:14px!important;line-height:1.35!important;text-transform:none!important;white-space:normal!important}
+      .header-inner .main-nav>a:after{display:none!important}
+    }
+    @media(max-width:360px){.header-inner .brand img{width:124px!important}.header-inner .social-links a{width:26px!important;height:26px!important}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 <link rel="stylesheet" href="../assets/sitewide-nav.css">
 </head>
-
-<body>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Business Stories","url":"https://swyftmedia.in/blog/","publisher":{"@type":"Organization","name":"Swyft Media Productions","url":"https://swyftmedia.in"},"blogPost":[]}</script>
-
-<header class="site-header">
-  <div class="header-inner">
-    <a class="brand" href="../index.html" aria-label="Swyft Media home">
-      <img src="../swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" decoding="async">
-    </a>
-
-    <button class="menu-toggle" type="button" aria-controls="swyft-main-nav" aria-expanded="false" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-
-    <nav class="main-nav" id="swyft-main-nav" aria-label="Main navigation">
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About Us</a>
-      <a href="../services.html">Services</a>
-      <a href="../projects.html">Projects</a>
-      <a aria-current="page" href="../blog/">Business Stories</a>
-      <a href="../swyft-pass.html">Swyft Pass</a>
-      <a href="../contact.html">Contact</a>
-    </nav>
-
-    <div class="social-links" aria-label="Swyft Media social media links">
-      <a href="https://www.instagram.com/swyftmediapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg>
-      </a>
-      <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="fb" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg>
-      </a>
-    </div>
+<body><script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Business Stories","url":"https://swyftmedia.in/blog/","publisher":{"@type":"Organization","name":"Swyft Media Productions","url":"https://swyftmedia.in"},"blogPost":[]}</script><header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Swyft Media home"><img src="../swyft-media-logo-horizontal.webp" alt="Swyft Media Productions" width="460" height="100" decoding="async"></a>
+      <button class="menu-toggle" type="button" aria-controls="swyft-main-nav" aria-expanded="false" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <nav class="main-nav" id="swyft-main-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../services.html">Services</a><a href="../projects.html">Projects</a><a aria-current="page" href="../blog/">Business Stories</a><a href="../swyft-pass.html">Swyft Pass</a><a href="../contact.html">Contact</a></nav>
+      <div class="social-links" aria-label="Swyft Media social media links">
+    <a href="https://www.instagram.com/swyftmediapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+    <a href="https://www.linkedin.com/company/swyft-media-productions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5.5v.1M10 19v-6a4 4 0 0 1 8 0v6M10 9v10"/><circle cx="5" cy="5.5" r="1"/></svg></a>
+    <a href="https://www.facebook.com/p/SwYft-Media-ProductionS-61560788151421/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fb" d="M14.2 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.5 1.6-1.5h1.7V3.3c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6v2H7.5V13h2.8v8z"/></svg></a>
   </div>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Swyft Media · Ideas that move brands forward</div>
-      <h1>Business Stories</h1>
-      <p>Business wins, brand-building insights and practical perspectives on marketing, creative strategy and communication from the Swyft Media team.</p>
-      <p class="publisher-link"><a href="../admin/">Publish a new Business Story ↗</a></p>
     </div>
-  </section>
-
+  </header>
+<main>
+  <section class="hero"><div class="wrap"><div class="eyebrow">Swyft Media · Ideas that move brands forward</div><h1>Business Stories</h1><p>Business wins, brand-building insights and practical perspectives on marketing, creative strategy and communication from the Swyft Media team.</p><p class="publisher-link"><a href="../admin/">Publish a new Business Story ↗</a></p></div></section>
   <section class="wrap cms-runtime" id="cmsRuntimeStories" aria-labelledby="cmsRuntimeTitle" hidden>
-    <div class="eyebrow">Recently published</div>
-    <h2 id="cmsRuntimeTitle">Latest Business Stories</h2>
+    <div class="eyebrow">Recently published</div><h2 id="cmsRuntimeTitle">Latest Business Stories</h2>
     <div class="posts" id="cmsStoriesGrid"></div>
   </section>
-
+  
   <section class="archive" aria-labelledby="archive-title">
-    <div class="wrap">
-      <h2 id="archive-title">From the existing Swyft Media blog archive</h2>
-      <p style="color:#666;max-width:760px">Explore earlier Swyft Media perspectives on branding, content, marketing and business growth. These archived stories open at their original publishing location.</p>
-
-      <div class="posts">
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Great Products need Great Marketing">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjGoX1lAOf14dyNvU5viJc9LNcSixjpQk62P8vDTG4EVFpwAcDlOz1DCfh76UwDm1la8_oMtT9eDb9l8ZmfP0TiHuS7gIYOzR8_5xxODzvbaddngJx1D0wEsEnk93pXLi0WbVgJe6Aex89XqZxkynRNZ05ZqzmqULPMSJtQr9FywJruI8QE4UeFyQKj9Gs" alt="Why Great Products need Great Marketing" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">1 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer">Why Great Products need Great Marketing</a></h2>
-            <p>Great products need great marketing. Not as a crutch. Not as a shortcut. But as an equal partner in the journey from creation to impact.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Build a Brand That Outlasts Trends">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhsy_MtFU1fG31glN-iKnxVu1Jy8mTPpjLhlTxEthMXSVNM8neyIr0g5DMoFvH1fI0QnKY_ApPnFxQL67DAag7GGZiQsiXNr9z-InL3TqF8f3PpJAOOXIPrLyZhdirvK7BUE80V4j7xnfVV0ij58E3ulXGgUPF6MIAL5cVysgxJhvc5bXFOt8mUCy8GyyU" alt="How to Build a Brand That Outlasts Trends" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">2 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer">How to Build a Brand That Outlasts Trends</a></h2>
-            <p>Why Trends Feel Like Strategy (But Aren&#39;t)</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer" aria-label="Read Creative That Builds Brands and Drive Results">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjwirVgNM3xlDUkOwYydLe6DXsHZPtlhs6xbLnqaGwqjbPghIwcWYeUIQRZriCv9EEKZbxMWtcZDJ71rflqjQHpmynJFYn30IWbBEGUtqDJvTlbp8oM2qwJVJ6ld12P4JdRKy4Xq6d4jhtLW1ifPU_cm-dsjegaP9D8N5Tpy2MLp0Z6GuKVUVDX7diPVfg=w640-h360" alt="Creative That Builds Brands and Drive Results" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">3 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer">Creative That Builds Brands and Drive Results</a></h2>
-            <p>Fine is the enemy of great. And in today&#39;s attention economy, fine is functionally invisible.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Turn Casual Viewers To Buyers">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgsFbL4U9uq8XAc1-B4_scFp6KK7IjjxSd8lXDnl-mEips5Y4qXvJArVreLpagcLGgbysdSC6nP38v6ECH6O-O9HhC9joNnkFo4ygrNgsGEvj17AJzF_aTwVOy5tO8sGk3RDWkYLp8VdJ9ZdDwlOJufcu3TdBGFw052G1vlcYk0KBoeKKnML_SxX41684Y=w640-h360" alt="How to Turn Casual Viewers To Buyers" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">4 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer">How to Turn Casual Viewers To Buyers</a></h2>
-            <p>Understand Why People Watch But Don&#39;t Buy</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Unpolished Content Outperforms Studios.">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjEcuM3seq6xlrVodUZX__4RWvH1RghoURpY5wWejdIF2oKNPsX4VsLw1yN-qgH9Rr6LInEt-WAxAh8dfd-_4t6bQaef1DWBGn5HUbjpa0q19cp-Cc1z7iMHW_-P8EmqmG39_dXAg0SLXsQhzAH-tYE7prLyHtGGh9e85HetkWjHB_oTqoWylAziLqCVNU" alt="Why Unpolished Content Outperforms Studios." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">5 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer">Why Unpolished Content Outperforms Studios.</a></h2>
-            <p>The Trust Economy Has Replaced the Attention Economy</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Secret of Viral Brand Growth">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEin41xztLnXHjpOpxOtJGN563WbpVXRk0za3DxoKTK--kJJ4sbJrOoJIgt_9o0jr_ZvUAdF4OFekbOAk4brMhY07mNSooP42RuiyIT8RNhYHRN-428iO3ou1RHEbhBaGw4dYU_z4QSDNK6ubEW3-0d3kd0nrzv1c0VgJcpyKZVGPcc2Uuasz_RMagZvitI" alt="The Secret of Viral Brand Growth" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">6 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer">The Secret of Viral Brand Growth</a></h2>
-            <p>Virality is an emotion, not an algorithm</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer" aria-label="Read Make Ads that People Want to Watch">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjfL_9GLEUQ_kFvzmKxYEkeGtNZCHFppkQ3B_mr0XIqe30VMTpwfMpdteWFvCwg9oGJLnmCNQe_8CzLzLXWZNsq9fZBDkvq80WHe3vns-n-OpA9DtEZCAZCgN_XdoajbLyISW1RG_FrXu49Jva4bPgGYgF1Ce89B2AL9zbb-Sz8Nh0DzDf6rkdcB3bU15U=w686-h388" alt="Make Ads that People Want to Watch" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">7 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer">Make Ads that People Want to Watch</a></h2>
-            <p>People Don&#39;t Hate Ads. They Hate Bad Ads.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer" aria-label="Read Creative That Beats Big Budgets">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEi9IK-V_2cLS1zQg05QTAymlqIqfPChPKZkRGbE36gdX-Q5kEYKtfMBsKx39ZQuauRFBiaqr_O3pEMlD9BB5kvB4ld3LzjiNbUban3eHkH9Ei1lHaiNcY5K0oWXFkJtPC51wdi2YCUSh5-cR80nCK0Xrmj4Kn1eSOvFlkhEzC3jtCcwN6Gk8VI3wD94RFU=w640-h360" alt="Creative That Beats Big Budgets" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">7 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer">Creative That Beats Big Budgets</a></h2>
-            <p>Why This Matters for Your Brand Right Now</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Creative Framework We Use to Build Brands from Scratch">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjVXiF6Td3V-5ENoOQXOu--4Eytimmy3GmFaswLw0R5VYIAnZXUjk4RA2bXXVxIZSCqg8eQSc28FYfUvBNzvt3kn1lVlKzpOAg9-a82v7lSWZEJmYE6aPvRVbH9dtu2MTe5AHWtRI2c0vpW_I6MPUX596FQoBGNAugbpi1Su-JRy-tQyST_ZkN2CNfq0TU" alt="The Creative Framework We Use to Build Brands from Scratch" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer">The Creative Framework We Use to Build Brands from Scratch</a></h2>
-            <p>We Launch, Learn, and Keep It Alive</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer" aria-label="Read How Audio Identity is Shaping Modern Videos">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhZVTKYPlEPpwtwGs8KEyQhtF00GdVAg4kopSUawpI-hN5TcjTqSPItWxzyLUO0S6zwAcQ3SW2NFaEfuhzigUtTv2Jsd2TaVFLTwidzOE-Z6iNIydumrcNCeWkmiwTsPeOkKV19G9eTDlrA7oGQa4SoYSL2tYkmmm3ZGHMvE6WkibJISvzRLFPot3n74Yk=w640-h360" alt="How Audio Identity is Shaping Modern Videos" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer">How Audio Identity is Shaping Modern Videos</a></h2>
-            <p>Sound Is the First Thing Your Brain Processes</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Balance Bold Branding with Hard-Hitting Performance">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjM92i9Fzhqod5Wk0jBOCLCZugXh9T_0cHt8R8SewOBcRbG7cGwHr2Ibd3wQfgciZ9vv7D8hbOlyKzFbZu5K7HVY0QMZgOyoKsUefxSgImNjTlp7fwORRKMwQCNwgSQSccQIlezqt-zZ6P785P_iBbT0mclSToviQLAd9SFXSeAeQ_cPA6RGT_nQCnIT_4=w640-h360" alt="How to Balance Bold Branding with Hard-Hitting Performance" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer">How to Balance Bold Branding with Hard-Hitting Performance</a></h2>
-            <p>Why the Brand vs. Performance Divide Exists in the First Place</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer" aria-label="Read Behind the Scenes of a 360° Creative Marketing Agency">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjFcrMf_fcOJ_gORFeZpIjugFMc5ZwYbuxg4PEFpeXPm7r4R7vA9c4NZeR6TX3IKyDTJupe-c6asrMj93j_wJ3szrJ37xDgqOyUPX-cYrYSnzX4kzxJ3-XFB073w66lx-uotmyDiPguXXfScjEsFMhKMO7jiyNwavVUwhnkJc8Y_vKO-z5ur1ADngeBTS0=w640-h556" alt="Behind the Scenes of a 360° Creative Marketing Agency" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer">Behind the Scenes of a 360° Creative Marketing Agency</a></h2>
-            <p>Behind the scenes, every project starts with understanding the brand</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Turn Simple Ideas into Serious Revenue">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjAvU3nbgtuqYJGYXfV9qFcLoHg-r5zcBh5LopON-x6lyV13agAb1TP0FtQSgLLwPxo2mEsE9aGsqMEHZr0A90VaLUIynZSdC6YPBVMDopewAb1mmryeFo8RwJstoi5TlyhkNK2mjaz5Qy3oWoUjGgF8xVzZk14zOqHovxEvJ98AA9dEHFWsnBAlitvTEg" alt="How to Turn Simple Ideas into Serious Revenue" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">25 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer">How to Turn Simple Ideas into Serious Revenue</a></h2>
-            <p>The gap between an idea and real revenue isn&#39;t talent, luck, or some secret formula. It&#39;s the willingness to test, simplify, and consistently show up even when the version you start with is far from perfect.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer" aria-label="Read Think Bold. Grow Swyft. Build Something Powerful.">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhLm2dL7X3Hrgog5hILUYvEzvunQ-7oxM03BQLPfVjsJ-O2s7MUF5UOY32ht4WyEjm27AmjbSCGLoVHbv8xv1Bc-jGWAWbbkJWPSF8UZMcKqbJqjNiG7WOrVPOwSMk0NO2OtIpkUstgX16FxiSLgneh4doGQ0H4SPqELcEVfCFbE5ybleCwsKKIrwP0lMU" alt="Think Bold. Grow Swyft. Build Something Powerful." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">26 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer">Think Bold. Grow Swyft. Build Something Powerful.</a></h2>
-            <p>We don&#39;t just follow Trends, We create Impact.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer" aria-label="Read How To Build Trust With Brand Stories">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhCoLXDBed5DlNTOIxcr9UIS-VNPRneqXFJk54jtOujY5jL88Bt9dD43lAQXIF4qalogyYyUJ6TWoWGhojMTLiGxkxlRmUIMXmU0VSrRICjaGfASFa52avhun2zXTj-6PNqstm4dnpwGafTOdWag65xNlqKY3SCIjcETxpmYZi2gFHIVxkPdqGPraX4Zng=w640-h360" alt="How To Build Trust With Brand Stories" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">01 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer">How To Build Trust With Brand Stories</a></h2>
-            <p>A brand story is the honest, human account of why you exist told in a way that makes your audience feel something.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer" aria-label="Read Not Just Content, We Create Connections..">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiiWLen9-mZ7RrhfnnshhO5FKro-c_Zbmvmrij0Yc9xwnVvKCtui5sago--SzzYgb0FL2RanqgJsDemiNTP1t9nggTwDhhXKwFHWzWknDGZql7Z4AnH-FicxtKzD9byQ-kKJmLMI_2S529SlxV28q-O19GzciyOEvyustE8GYvod5n038Rau-Xft68uwFY" alt="Not Just Content, We Create Connections.." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">5 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer">Not Just Content, We Create Connections..</a></h2>
-            <p>That&#39;s because content, on its own, is just noise. A beautiful graphic. A clever caption. A well-edited video. These are tools, not outcomes.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer" aria-label="Read From Ideas to Impact, we bring your Brand&#39;s Story to Life.">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj-VGqy9pCEZkEzSmirxMGwFp9Gd3CSLekltSc5uiieYSjpuGsamkPmzoInB3h4BA6g1kCr9CwkeGI8iKQyG0ACucB37eXnynVIAfzkjldCu2xw2_UAC3qV0IrDeW2GfB5WE0_sVX-oTV3mqDgHw0S7Ha3Zw31j1wMudUMuSpRdK89SFzp1fpid5-oTooY" alt="From Ideas to Impact, we bring your Brand&#39;s Story to Life." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">6 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer">From Ideas to Impact, we bring your Brand&#39;s Story to Life.</a></h2>
-            <p>Between the spark of an idea and the moment it genuinely moves someone changes their mind, earns their trust, wins their loyalty there is a vast and often treacherous space. We call it the gap.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer" aria-label="Read Smart Marketing Strategies for Brand Growth">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhvJx3t1nrMAeay5flBJ8Na5xtsygfzZKyxdRuRfF2oBX5Z0rnDUiQEvKpsOyvSx2vutr13XMOvRXKcyUiEejXd9-CB-mCKRQ6cUVfJZHkZSOH9LOSBOY6ltUguMZ7VeI9MDrtDxIzjh9Nz_0pAg6YS0zqnmMbx9UBgybmplT-zVAKmNQBja22lCy7aG2o" alt="Smart Marketing Strategies for Brand Growth" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">7 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer">Smart Marketing Strategies for Brand Growth</a></h2>
-            <p>Content That Earns Attention, Not Rents It</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer" aria-label="Read Driving Brand Forward with Swyft Solutions">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgsGiIbgAqfiWmSzA7-0O8-TpJNGW6sVHyT5dWfRvVPxmxSEWS6UHuMjdJDw3lXjMKd3g8NjjJx5NaE5NCVaGbHSm5R-BDgw0Vb2FO8_v3A5pPqvBFYO-4ScCiCQ1KaR7hVYXBaO0KZ4FLbX_hS6wJVfO1iMRPh-1BNsnAKUxscY0565DiFFfMr9LL3phg" alt="Driving Brand Forward with Swyft Solutions" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer">Driving Brand Forward with Swyft Solutions</a></h2>
-            <p>Clarity Before Creativity</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer" aria-label="Read Ideas That Make Brands Move...">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjxHRkj8bVU5ZD74vYkkDsmqu5bntucjE5Pj7OO2JmpEfh-J_RTTL5VpDS8t9Fp2uzoyZLmzC1p1jyJe06w4tp1NKzE7t14RP5D4mH1GWgaYSz6Aa2LNBphF8tNowfLeti3Lu3jvAD5ajlzRAtZ8SCDucyI22Ej4NNaBIZ0RaTLhXllYSqaYckqyFZmwP8" alt="Ideas That Make Brands Move..." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">24 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer">Ideas That Make Brands Move...</a></h2>
-            <p>Strategy First. Always !! Creativity That Connects !!</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer" aria-label="Read Where Ideas Become Stories, The Swyft Media&#39;s Way">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjKAP-TS8C0bCGaJ8YtFjRBTSMBsU8dtlml2fR2KcRYloXUoZzcurghbLSKvWbZV0BjkYPqoupnGLivtostzIMze8tOrpgmLBAfporiuH_-9S5XrNZUr3EXPbu5Kmcf3XI-l3mBB0OGEPqgikWLYDhGs5Ec3z8Ul0TKtnxIThYbmFd0dTaOtpeT0SVy_84=w640-h360" alt="Where Ideas Become Stories, The Swyft Media&#39;s Way" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">5 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer">Where Ideas Become Stories, The Swyft Media&#39;s Way</a></h2>
-            <p>Your Brand. Our Creativity. Real Impact.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer" aria-label="Read Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds.">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1eEi0qTtKtPokQ_BgnPWHnN2AMgnNkWvte1UFZex2Vl8WGYKIzqVD0k-JowdpSR3QcJmjNsDjMmcpNQKdC906eqFrV0PPTKsfqMKFKzIDqt0BKNXmSXhh5KNzc3xTzvQWT56xe9w-fx3pM9ZfGCOsmCrXWZxxFzmD1cvSUQ50avfCmHrPGKNQiBiT-9E/w640-h358/Swyft%20Media%20Creative%20Solutions%20Banner.png" alt="Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds." loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">6 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer">Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds.</a></h2>
-            <p>Existence Is Easy. Impact Is the Hard Part.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Your Brand Needs a Dedicated Media Production Partner">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEicpyb1LoeOh3v5gkAKeHpUT4AWLgWE9kzwKDvkmZcNXwLgF6qzCZvnEvbh7lDWkOqCjTdiNWMCr2hICNhE7VFfJjoJs9uK1x9MEiw7jn58Jdq8BfVupREcL9KfsAHkQ-QPpPtMq1rxCaoXfo7AW4__NqcaNM9e9AvliaSCcBnsQJ2njdshDutBuq9zcNc" alt="Why Your Brand Needs a Dedicated Media Production Partner" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">7 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer">Why Your Brand Needs a Dedicated Media Production Partner</a></h2>
-            <p>Speed Without Sacrificing Quality.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Your Social Media Calendar is Boring Your Customers, How to Fix">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiB5-aT5XkEE_MEqRvZiz-IijdE7oKHkVMSfDa5dIrBJbpUQS1wb5k9MdHH-dz7Sm3wmhoCEAxJYcgT5EvQeNYoFwaqmt3H3BOY2Of45pjo1x5GLWCFN0ML7k1tjOaqfWojSKetImM2wFlwaIycjqnVXC3VBZ7piIFLXCyxzEPZ2K6mvZgXviTM-sfjbio" alt="Why Your Social Media Calendar is Boring Your Customers, How to Fix" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">8 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer">Why Your Social Media Calendar is Boring Your Customers, How to Fix</a></h2>
-            <p>The Problem with ..Fill the Calendar.. Thinking</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer" aria-label="Read How AI is Changing Digital Marketing in 2026">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1TaZnoeRnXgmC4TgwuTgeI1zlEEpZinFsDKwOJ2vQhyphenhyphen9sDGZNrzE-N3Ex0_Cm7txqvEny-Awr8GGKm14f3AznG0AWWsSnbfqYvTvz0Rf_WXq55B_czXCPVZbCNWSTP_r4e78GaAlgG8Ywu66IqqDLV-jHDEbveVrXKbtp3dq2ziaxBGjBdHWcJiZKIxo/w640-h360/ai.png" alt="How AI is Changing Digital Marketing in 2026" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">9 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer">How AI is Changing Digital Marketing in 2026</a></h2>
-            <p>AI is not replacing marketing. It is making marketing smarter, faster &amp; more effective for businesses ready to adapt.</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-image" href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Art of Standing Out, How Great Brands Rise Above the Noise">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvDkgkt93Oi09cmk6H-CgmcoPDk_CgMJ0JV7mZwDR4hmX1y7np2FccS1IPtuhh8p4yD_ofwoqxB71TZ-SzKnZufvPh1cKUkkUKiUrA9pcxSXcby038CCC_Rsa1PzM9rKrGedPchYaEZYB6j8wPg6O62LWv4X-wLkh6aMwTGdeR3IMZirmCS59hJ_uMBus/w640-h360/ChatGPT%20Image%20Oct%2012,%202026,%2004_04_08%20PM.jpg" alt="The Art of Standing Out, How Great Brands Rise Above the Noise" loading="lazy" decoding="async">
-          </a>
-          <div class="card-content">
-            <div class="meta">13 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div>
-            <h2><a href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer">The Art of Standing Out, How Great Brands Rise Above the Noise</a></h2>
-            <p>Visual Identity Is Your First Impression, and First Impressions Are Everything</p>
-            <a class="read-link" href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer">Read original story →</a>
-          </div>
-        </article>
-      </div>
-    </div>
+    <div class="wrap"><h2 id="archive-title">From the existing Swyft Media blog archive</h2>
+    <p style="color:#666;max-width:760px">Explore earlier Swyft Media perspectives on branding, content, marketing and business growth. These archived stories open at their original publishing location.</p>
+    <div class="posts">
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Great Products need Great Marketing"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjGoX1lAOf14dyNvU5viJc9LNcSixjpQk62P8vDTG4EVFpwAcDlOz1DCfh76UwDm1la8_oMtT9eDb9l8ZmfP0TiHuS7gIYOzR8_5xxODzvbaddngJx1D0wEsEnk93pXLi0WbVgJe6Aex89XqZxkynRNZ05ZqzmqULPMSJtQr9FywJruI8QE4UeFyQKj9Gs" alt="Why Great Products need Great Marketing" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">1 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer">Why Great Products need Great Marketing</a></h2><p>Great products need great marketing. Not as a crutch. Not as a shortcut. But as an equal partner in the journey from creation to impact.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/why-great-products-need-great-marketing.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Build a Brand That Outlasts Trends"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhsy_MtFU1fG31glN-iKnxVu1Jy8mTPpjLhlTxEthMXSVNM8neyIr0g5DMoFvH1fI0QnKY_ApPnFxQL67DAag7GGZiQsiXNr9z-InL3TqF8f3PpJAOOXIPrLyZhdirvK7BUE80V4j7xnfVV0ij58E3ulXGgUPF6MIAL5cVysgxJhvc5bXFOt8mUCy8GyyU" alt="How to Build a Brand That Outlasts Trends" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">2 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer">How to Build a Brand That Outlasts Trends</a></h2><p>Why Trends Feel Like Strategy (But Aren&#39;t)</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/how-to-build-brand-that-outlasts-trends.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer" aria-label="Read Creative That Builds Brands and Drive Results"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjwirVgNM3xlDUkOwYydLe6DXsHZPtlhs6xbLnqaGwqjbPghIwcWYeUIQRZriCv9EEKZbxMWtcZDJ71rflqjQHpmynJFYn30IWbBEGUtqDJvTlbp8oM2qwJVJ6ld12P4JdRKy4Xq6d4jhtLW1ifPU_cm-dsjegaP9D8N5Tpy2MLp0Z6GuKVUVDX7diPVfg=w640-h360" alt="Creative That Builds Brands and Drive Results" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">3 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer">Creative That Builds Brands and Drive Results</a></h2><p>Fine is the enemy of great. And in today&#39;s attention economy, fine is functionally invisible.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/creative-that-builds-brands-and-drive.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Turn Casual Viewers To Buyers"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgsFbL4U9uq8XAc1-B4_scFp6KK7IjjxSd8lXDnl-mEips5Y4qXvJArVreLpagcLGgbysdSC6nP38v6ECH6O-O9HhC9joNnkFo4ygrNgsGEvj17AJzF_aTwVOy5tO8sGk3RDWkYLp8VdJ9ZdDwlOJufcu3TdBGFw052G1vlcYk0KBoeKKnML_SxX41684Y=w640-h360" alt="How to Turn Casual Viewers To Buyers" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">4 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer">How to Turn Casual Viewers To Buyers</a></h2><p>Understand Why People Watch But Don&#39;t Buy</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-turn-casual-viewers-to-buyers.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Unpolished Content Outperforms Studios."><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjEcuM3seq6xlrVodUZX__4RWvH1RghoURpY5wWejdIF2oKNPsX4VsLw1yN-qgH9Rr6LInEt-WAxAh8dfd-_4t6bQaef1DWBGn5HUbjpa0q19cp-Cc1z7iMHW_-P8EmqmG39_dXAg0SLXsQhzAH-tYE7prLyHtGGh9e85HetkWjHB_oTqoWylAziLqCVNU" alt="Why Unpolished Content Outperforms Studios." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">5 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer">Why Unpolished Content Outperforms Studios.</a></h2><p>The Trust Economy Has Replaced the Attention Economy</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-unpolished-content-outperforms.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Secret of Viral Brand Growth"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEin41xztLnXHjpOpxOtJGN563WbpVXRk0za3DxoKTK--kJJ4sbJrOoJIgt_9o0jr_ZvUAdF4OFekbOAk4brMhY07mNSooP42RuiyIT8RNhYHRN-428iO3ou1RHEbhBaGw4dYU_z4QSDNK6ubEW3-0d3kd0nrzv1c0VgJcpyKZVGPcc2Uuasz_RMagZvitI" alt="The Secret of Viral Brand Growth" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">6 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer">The Secret of Viral Brand Growth</a></h2><p>Virality is an emotion, not an algorithm</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/the-secret-of-viral-brand-growth.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer" aria-label="Read Make Ads that People Want to Watch"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjfL_9GLEUQ_kFvzmKxYEkeGtNZCHFppkQ3B_mr0XIqe30VMTpwfMpdteWFvCwg9oGJLnmCNQe_8CzLzLXWZNsq9fZBDkvq80WHe3vns-n-OpA9DtEZCAZCgN_XdoajbLyISW1RG_FrXu49Jva4bPgGYgF1Ce89B2AL9zbb-Sz8Nh0DzDf6rkdcB3bU15U=w686-h388" alt="Make Ads that People Want to Watch" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">7 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer">Make Ads that People Want to Watch</a></h2><p>People Don&#39;t Hate Ads. They Hate Bad Ads.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/make-ads-that-people-want-to-watch.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer" aria-label="Read Creative That Beats Big Budgets"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi9IK-V_2cLS1zQg05QTAymlqIqfPChPKZkRGbE36gdX-Q5kEYKtfMBsKx39ZQuauRFBiaqr_O3pEMlD9BB5kvB4ld3LzjiNbUban3eHkH9Ei1lHaiNcY5K0oWXFkJtPC51wdi2YCUSh5-cR80nCK0Xrmj4Kn1eSOvFlkhEzC3jtCcwN6Gk8VI3wD94RFU=w640-h360" alt="Creative That Beats Big Budgets" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">7 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer">Creative That Beats Big Budgets</a></h2><p>Why This Matters for Your Brand Right Now</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/creative-that-beats-big-budgets.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Creative Framework We Use to Build Brands from Scratch"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjVXiF6Td3V-5ENoOQXOu--4Eytimmy3GmFaswLw0R5VYIAnZXUjk4RA2bXXVxIZSCqg8eQSc28FYfUvBNzvt3kn1lVlKzpOAg9-a82v7lSWZEJmYE6aPvRVbH9dtu2MTe5AHWtRI2c0vpW_I6MPUX596FQoBGNAugbpi1Su-JRy-tQyST_ZkN2CNfq0TU" alt="The Creative Framework We Use to Build Brands from Scratch" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer">The Creative Framework We Use to Build Brands from Scratch</a></h2><p>We Launch, Learn, and Keep It Alive</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/the-creative-framework-we-use-to-build.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer" aria-label="Read How Audio Identity is Shaping Modern Videos"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhZVTKYPlEPpwtwGs8KEyQhtF00GdVAg4kopSUawpI-hN5TcjTqSPItWxzyLUO0S6zwAcQ3SW2NFaEfuhzigUtTv2Jsd2TaVFLTwidzOE-Z6iNIydumrcNCeWkmiwTsPeOkKV19G9eTDlrA7oGQa4SoYSL2tYkmmm3ZGHMvE6WkibJISvzRLFPot3n74Yk=w640-h360" alt="How Audio Identity is Shaping Modern Videos" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer">How Audio Identity is Shaping Modern Videos</a></h2><p>Sound Is the First Thing Your Brain Processes</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/the-power-of-audio-in-modern-videos.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Balance Bold Branding with Hard-Hitting Performance"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjM92i9Fzhqod5Wk0jBOCLCZugXh9T_0cHt8R8SewOBcRbG7cGwHr2Ibd3wQfgciZ9vv7D8hbOlyKzFbZu5K7HVY0QMZgOyoKsUefxSgImNjTlp7fwORRKMwQCNwgSQSccQIlezqt-zZ6P785P_iBbT0mclSToviQLAd9SFXSeAeQ_cPA6RGT_nQCnIT_4=w640-h360" alt="How to Balance Bold Branding with Hard-Hitting Performance" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer">How to Balance Bold Branding with Hard-Hitting Performance</a></h2><p>Why the Brand vs. Performance Divide Exists in the First Place</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-balance-bold-branding-with-hard.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer" aria-label="Read Behind the Scenes of a 360° Creative Marketing Agency"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjFcrMf_fcOJ_gORFeZpIjugFMc5ZwYbuxg4PEFpeXPm7r4R7vA9c4NZeR6TX3IKyDTJupe-c6asrMj93j_wJ3szrJ37xDgqOyUPX-cYrYSnzX4kzxJ3-XFB073w66lx-uotmyDiPguXXfScjEsFMhKMO7jiyNwavVUwhnkJc8Y_vKO-z5ur1ADngeBTS0=w640-h556" alt="Behind the Scenes of a 360° Creative Marketing Agency" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer">Behind the Scenes of a 360° Creative Marketing Agency</a></h2><p>Behind the scenes, every project starts with understanding the brand</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/05/behind-scenes-of-360-creative-marketing.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer" aria-label="Read How to Turn Simple Ideas into Serious Revenue"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjAvU3nbgtuqYJGYXfV9qFcLoHg-r5zcBh5LopON-x6lyV13agAb1TP0FtQSgLLwPxo2mEsE9aGsqMEHZr0A90VaLUIynZSdC6YPBVMDopewAb1mmryeFo8RwJstoi5TlyhkNK2mjaz5Qy3oWoUjGgF8xVzZk14zOqHovxEvJ98AA9dEHFWsnBAlitvTEg" alt="How to Turn Simple Ideas into Serious Revenue" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">25 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer">How to Turn Simple Ideas into Serious Revenue</a></h2><p>The gap between an idea and real revenue isn&#39;t talent, luck, or some secret formula. It&#39;s the willingness to test, simplify, and consistently show up even when the version you start with is far from perfect.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/how-to-turn-simple-ideas-into-serious.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer" aria-label="Read Think Bold. Grow Swyft. Build Something Powerful."><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhLm2dL7X3Hrgog5hILUYvEzvunQ-7oxM03BQLPfVjsJ-O2s7MUF5UOY32ht4WyEjm27AmjbSCGLoVHbv8xv1Bc-jGWAWbbkJWPSF8UZMcKqbJqjNiG7WOrVPOwSMk0NO2OtIpkUstgX16FxiSLgneh4doGQ0H4SPqELcEVfCFbE5ybleCwsKKIrwP0lMU" alt="Think Bold. Grow Swyft. Build Something Powerful." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">26 Aug 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer">Think Bold. Grow Swyft. Build Something Powerful.</a></h2><p>We don&#39;t just follow Trends, We create Impact.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/08/theres-moment-every-brand-experiences.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer" aria-label="Read How To Build Trust With Brand Stories"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhCoLXDBed5DlNTOIxcr9UIS-VNPRneqXFJk54jtOujY5jL88Bt9dD43lAQXIF4qalogyYyUJ6TWoWGhojMTLiGxkxlRmUIMXmU0VSrRICjaGfASFa52avhun2zXTj-6PNqstm4dnpwGafTOdWag65xNlqKY3SCIjcETxpmYZi2gFHIVxkPdqGPraX4Zng=w640-h360" alt="How To Build Trust With Brand Stories" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">01 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer">How To Build Trust With Brand Stories</a></h2><p>A brand story is the honest, human account of why you exist told in a way that makes your audience feel something.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/how-to-build-trust-with-brand-stories.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer" aria-label="Read Not Just Content, We Create Connections.."><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiiWLen9-mZ7RrhfnnshhO5FKro-c_Zbmvmrij0Yc9xwnVvKCtui5sago--SzzYgb0FL2RanqgJsDemiNTP1t9nggTwDhhXKwFHWzWknDGZql7Z4AnH-FicxtKzD9byQ-kKJmLMI_2S529SlxV28q-O19GzciyOEvyustE8GYvod5n038Rau-Xft68uwFY" alt="Not Just Content, We Create Connections.." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">5 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer">Not Just Content, We Create Connections..</a></h2><p>That&#39;s because content, on its own, is just noise. A beautiful graphic. A clever caption. A well-edited video. These are tools, not outcomes.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/strategic-creativity-real-business.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer" aria-label="Read From Ideas to Impact, we bring your Brand&#39;s Story to Life."><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj-VGqy9pCEZkEzSmirxMGwFp9Gd3CSLekltSc5uiieYSjpuGsamkPmzoInB3h4BA6g1kCr9CwkeGI8iKQyG0ACucB37eXnynVIAfzkjldCu2xw2_UAC3qV0IrDeW2GfB5WE0_sVX-oTV3mqDgHw0S7Ha3Zw31j1wMudUMuSpRdK89SFzp1fpid5-oTooY" alt="From Ideas to Impact, we bring your Brand&#39;s Story to Life." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">6 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer">From Ideas to Impact, we bring your Brand&#39;s Story to Life.</a></h2><p>Between the spark of an idea and the moment it genuinely moves someone changes their mind, earns their trust, wins their loyalty there is a vast and often treacherous space. We call it the gap.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/from-ideas-to-impact-we-bring-your.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer" aria-label="Read Smart Marketing Strategies for Brand Growth"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhvJx3t1nrMAeay5flBJ8Na5xtsygfzZKyxdRuRfF2oBX5Z0rnDUiQEvKpsOyvSx2vutr13XMOvRXKcyUiEejXd9-CB-mCKRQ6cUVfJZHkZSOH9LOSBOY6ltUguMZ7VeI9MDrtDxIzjh9Nz_0pAg6YS0zqnmMbx9UBgybmplT-zVAKmNQBja22lCy7aG2o" alt="Smart Marketing Strategies for Brand Growth" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">7 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer">Smart Marketing Strategies for Brand Growth</a></h2><p>Content That Earns Attention, Not Rents It</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/smart-marketing-strategies-for-brand.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer" aria-label="Read Driving Brand Forward with Swyft Solutions"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgsGiIbgAqfiWmSzA7-0O8-TpJNGW6sVHyT5dWfRvVPxmxSEWS6UHuMjdJDw3lXjMKd3g8NjjJx5NaE5NCVaGbHSm5R-BDgw0Vb2FO8_v3A5pPqvBFYO-4ScCiCQ1KaR7hVYXBaO0KZ4FLbX_hS6wJVfO1iMRPh-1BNsnAKUxscY0565DiFFfMr9LL3phg" alt="Driving Brand Forward with Swyft Solutions" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer">Driving Brand Forward with Swyft Solutions</a></h2><p>Clarity Before Creativity</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/driving-brand-forward-with-swyft.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer" aria-label="Read Ideas That Make Brands Move..."><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjxHRkj8bVU5ZD74vYkkDsmqu5bntucjE5Pj7OO2JmpEfh-J_RTTL5VpDS8t9Fp2uzoyZLmzC1p1jyJe06w4tp1NKzE7t14RP5D4mH1GWgaYSz6Aa2LNBphF8tNowfLeti3Lu3jvAD5ajlzRAtZ8SCDucyI22Ej4NNaBIZ0RaTLhXllYSqaYckqyFZmwP8" alt="Ideas That Make Brands Move..." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">24 Sep 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer">Ideas That Make Brands Move...</a></h2><p>Strategy First. Always !! Creativity That Connects !!</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/ideas-that-make-brands-move.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer" aria-label="Read Where Ideas Become Stories, The Swyft Media&#39;s Way"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjKAP-TS8C0bCGaJ8YtFjRBTSMBsU8dtlml2fR2KcRYloXUoZzcurghbLSKvWbZV0BjkYPqoupnGLivtostzIMze8tOrpgmLBAfporiuH_-9S5XrNZUr3EXPbu5Kmcf3XI-l3mBB0OGEPqgikWLYDhGs5Ec3z8Ul0TKtnxIThYbmFd0dTaOtpeT0SVy_84=w640-h360" alt="Where Ideas Become Stories, The Swyft Media&#39;s Way" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">5 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer">Where Ideas Become Stories, The Swyft Media&#39;s Way</a></h2><p>Your Brand. Our Creativity. Real Impact.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/09/where-ideas-become-stories.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer" aria-label="Read Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds."><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1eEi0qTtKtPokQ_BgnPWHnN2AMgnNkWvte1UFZex2Vl8WGYKIzqVD0k-JowdpSR3QcJmjNsDjMmcpNQKdC906eqFrV0PPTKsfqMKFKzIDqt0BKNXmSXhh5KNzc3xTzvQWT56xe9w-fx3pM9ZfGCOsmCrXWZxxFzmD1cvSUQ50avfCmHrPGKNQiBiT-9E/w640-h358/Swyft%20Media%20Creative%20Solutions%20Banner.png" alt="Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds." loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">6 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer">Great Brands Don&#39;t Just Exist, They&#39;re Crafted with Creative Minds.</a></h2><p>Existence Is Easy. Impact Is the Hard Part.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/10/great-brands-dont-just-exist-theyre.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Your Brand Needs a Dedicated Media Production Partner"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEicpyb1LoeOh3v5gkAKeHpUT4AWLgWE9kzwKDvkmZcNXwLgF6qzCZvnEvbh7lDWkOqCjTdiNWMCr2hICNhE7VFfJjoJs9uK1x9MEiw7jn58Jdq8BfVupREcL9KfsAHkQ-QPpPtMq1rxCaoXfo7AW4__NqcaNM9e9AvliaSCcBnsQJ2njdshDutBuq9zcNc" alt="Why Your Brand Needs a Dedicated Media Production Partner" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">7 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer">Why Your Brand Needs a Dedicated Media Production Partner</a></h2><p>Speed Without Sacrificing Quality.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-your-brand-needs-dedicated-media.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer" aria-label="Read Why Your Social Media Calendar is Boring Your Customers, How to Fix"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiB5-aT5XkEE_MEqRvZiz-IijdE7oKHkVMSfDa5dIrBJbpUQS1wb5k9MdHH-dz7Sm3wmhoCEAxJYcgT5EvQeNYoFwaqmt3H3BOY2Of45pjo1x5GLWCFN0ML7k1tjOaqfWojSKetImM2wFlwaIycjqnVXC3VBZ7piIFLXCyxzEPZ2K6mvZgXviTM-sfjbio" alt="Why Your Social Media Calendar is Boring Your Customers, How to Fix" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">8 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer">Why Your Social Media Calendar is Boring Your Customers, How to Fix</a></h2><p>The Problem with ..Fill the Calendar.. Thinking</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/07/why-your-social-media-calendar-is.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer" aria-label="Read How AI is Changing Digital Marketing in 2026"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1TaZnoeRnXgmC4TgwuTgeI1zlEEpZinFsDKwOJ2vQhyphenhyphen9sDGZNrzE-N3Ex0_Cm7txqvEny-Awr8GGKm14f3AznG0AWWsSnbfqYvTvz0Rf_WXq55B_czXCPVZbCNWSTP_r4e78GaAlgG8Ywu66IqqDLV-jHDEbveVrXKbtp3dq2ziaxBGjBdHWcJiZKIxo/w640-h360/ai.png" alt="How AI is Changing Digital Marketing in 2026" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">9 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer">How AI is Changing Digital Marketing in 2026</a></h2><p>AI is not replacing marketing. It is making marketing smarter, faster &amp; more effective for businesses ready to adapt.</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/05/how-ai-is-changing-digital-marketing-in.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article>
+      <article class="card"><a class="card-image" href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer" aria-label="Read The Art of Standing Out, How Great Brands Rise Above the Noise"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvDkgkt93Oi09cmk6H-CgmcoPDk_CgMJ0JV7mZwDR4hmX1y7np2FccS1IPtuhh8p4yD_ofwoqxB71TZ-SzKnZufvPh1cKUkkUKiUrA9pcxSXcby038CCC_Rsa1PzM9rKrGedPchYaEZYB6j8wPg6O62LWv4X-wLkh6aMwTGdeR3IMZirmCS59hJ_uMBus/w640-h360/ChatGPT%20Image%20Oct%2012,%202026,%2004_04_08%20PM.jpg" alt="The Art of Standing Out, How Great Brands Rise Above the Noise" loading="lazy" decoding="async"></a><div class="card-content"><div class="meta">13 Oct 2026 &nbsp;·&nbsp; <span class="category">Archive</span></div><h2><a href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer">The Art of Standing Out, How Great Brands Rise Above the Noise</a></h2><p>Visual Identity Is Your First Impression, and First Impressions Are Everything</p><a class="read-link" href="https://swyftmedia01.blogspot.com/2026/10/the-art-of-standing-out-how-great.html" target="_blank" rel="noopener noreferrer">Read original story →</a></div></article></div></div>
   </section>
 </main>
-
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -631,12 +179,12 @@ button,a{outline-offset:4px}
       <section class="footer-col">
         <h3>Talk to our team</h3>
         <p><strong>Ahmedabad</strong><br>707, Iscon Elegance, Near Shapath-V, S.G. Highway, Ahmedabad 380015</p>
-        <a href="tel:+917096427107">+91 7096427107</a>
-        <a href="tel:+919978994010">+91 9978994010</a>
+        <a href="tel:+917096427107">+91 70964 27107</a>
+        <a href="tel:+917096427107">+91 9978994010</a>
         <a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a>
         <p><strong>Gandhidham</strong><br>Plot No. 108, Sector 1A, Gandhidham-Kutch, Gujarat 370201</p>
         <a href="mailto:info@swyftmedia.in">info@swyftmedia.in</a>
-        <a href="tel:+919512470015">+91 9512470015</a>
+        <a href="tel:+917096427107">+91 9512470015</a>
       </section>
 
     </div>
@@ -647,102 +195,32 @@ button,a{outline-offset:4px}
     </div>
   </div>
 </footer>
-
-<script src="../cms-config.js"></script>
-<script>
+<script src="../cms-config.js"></script><script>
 (function(){
   'use strict';
-
   var api=String(window.SWYFT_CMS_API_URL||'').trim().replace(/\/+$/,'');
-  var panel=document.getElementById('cmsRuntimeStories');
-  var grid=document.getElementById('cmsStoriesGrid');
-
+  var panel=document.getElementById('cmsRuntimeStories'), grid=document.getElementById('cmsStoriesGrid');
   if(!api||!panel||!grid)return;
-
-  function make(tag,cls,text){
-    var node=document.createElement(tag);
-    if(cls)node.className=cls;
-    if(text!==undefined)node.textContent=String(text);
-    return node;
-  }
-
+  function make(tag,cls,text){var node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=String(text);return node;}
   function render(stories){
     if(!Array.isArray(stories)||!stories.length)return;
-
-    stories=stories.filter(function(s){
-      return s&&s.title&&s.slug&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.slug);
-    });
-
+    stories=stories.filter(function(s){return s&&s.title&&s.slug&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.slug);});
     if(!stories.length)return;
-
     stories.forEach(function(story){
       var href='/' + story.slug + '/';
       var card=make('article','card');
-      var imageLink=make('a','card-image');
-
-      imageLink.href=href;
-      imageLink.setAttribute('aria-label','Read '+story.title);
-
+      var imageLink=make('a','card-image');imageLink.href=href;imageLink.setAttribute('aria-label','Read '+story.title);
       var cover=String(story.coverImage||'');
-
-      if(/^https:\/\//i.test(cover)){
-        var img=make('img');
-        img.src=cover;
-        img.alt=story.title;
-        img.loading='lazy';
-        img.decoding='async';
-        imageLink.appendChild(img);
-      }else{
-        imageLink.appendChild(make('span','card-placeholder','Swyft Media Insights'));
-      }
-
-      var content=make('div','card-content');
-      var d=new Date(String(story.date||'')+'T00:00:00Z');
-
-      var dateText=Number.isNaN(d.getTime())
-        ? ''
-        : d.toLocaleDateString('en-IN',{
-            day:'numeric',
-            month:'short',
-            year:'numeric',
-            timeZone:'UTC'
-          });
-
+      if(/^https:\/\//i.test(cover)){var img=make('img');img.src=cover;img.alt=story.title;img.loading='lazy';img.decoding='async';imageLink.appendChild(img);}
+      else imageLink.appendChild(make('span','card-placeholder','Swyft Media Insights'));
+      var content=make('div','card-content');var d=new Date(String(story.date||'')+'T00:00:00Z');var dateText=Number.isNaN(d.getTime())?'':d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
       content.appendChild(make('div','meta',dateText+' · Published'));
-
-      var h=make('h2');
-      var titleLink=make('a','',story.title);
-      titleLink.href=href;
-      h.appendChild(titleLink);
-      content.appendChild(h);
-
-      content.appendChild(make('p','',story.description||''));
-
-      var read=make('a','read-link','Read article →');
-      read.href=href;
-      content.appendChild(read);
-
-      card.appendChild(imageLink);
-      card.appendChild(content);
-      grid.appendChild(card);
+      var h=make('h2');var titleLink=make('a','',story.title);titleLink.href=href;h.appendChild(titleLink);content.appendChild(h);
+      content.appendChild(make('p','',story.description||''));var read=make('a','read-link','Read article →');read.href=href;content.appendChild(read);
+      card.appendChild(imageLink);card.appendChild(content);grid.appendChild(card);
     });
-
     if(grid.children.length)panel.hidden=false;
   }
-
-  fetch(api+'/api/stories',{
-    headers:{'Accept':'application/json'}
-  })
-    .then(function(r){
-      if(!r.ok)throw new Error('Stories unavailable');
-      return r.json();
-    })
-    .then(render)
-    .catch(function(){
-      /* Gracefully retain static/archive content if the API is offline. */
-    });
+  fetch(api+'/api/stories',{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('Stories unavailable');return r.json();}).then(render).catch(function(){/* Gracefully retain static/archive content if the API is offline. */});
 })();
-</script>
-<script src="../assets/site.js" defer></script>
-</body>
-</html>
+</script><script src="../assets/site.js" defer></script></body></html>
