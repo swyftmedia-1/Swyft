@@ -454,6 +454,36 @@ function jsonLd(obj) {
   return `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 }
 
+// The source blog/index.html is the editable source of truth for the blog footer.
+// The listing itself is still generated so published Markdown posts and CMS support work.
+function readSourceBlogFooter() {
+  const sourceBlogIndex = path.join(ROOT, 'blog', 'index.html');
+
+  if (!fs.existsSync(sourceBlogIndex)) return '';
+
+  const sourceHtml = fs.readFileSync(sourceBlogIndex, 'utf8');
+  const match = sourceHtml.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/i);
+
+  return match ? match[0] : '';
+}
+
+function applySourceBlogFooter(generatedListing) {
+  const sourceFooter = readSourceBlogFooter();
+
+  if (!sourceFooter) {
+    console.warn('No footer found in blog/index.html; using the build-script footer as a fallback.');
+    return generatedListing;
+  }
+
+  const generatedFooterPattern = /<footer\b[^>]*>[\s\S]*?<\/footer>/i;
+
+  if (!generatedFooterPattern.test(generatedListing)) {
+    throw new Error('Could not find the generated footer in the blog listing.');
+  }
+
+  return generatedListing.replace(generatedFooterPattern, sourceFooter);
+}
+
 function listingPage(posts, legacyPosts) {
   const cards = posts.map((post) => {
     const image = absoluteImageUrl(post.featuredImage);
@@ -877,8 +907,10 @@ function main() {
   fs.mkdirSync(blogDir, { recursive: true });
 
   const legacyPosts = loadLegacyPosts();
-  const generatedListing = listingPage(posts, legacyPosts);
+  const generatedListing = applySourceBlogFooter(listingPage(posts, legacyPosts));
 
+  // Deploy the generated listing to _site, with its footer taken from blog/index.html.
+  // Do not overwrite the source blog/index.html: edit its footer directly in GitHub.
   fs.writeFileSync(path.join(blogDir, 'index.html'), generatedListing);
 
   for (const post of posts) {
@@ -887,19 +919,8 @@ function main() {
     fs.writeFileSync(path.join(postDir, 'index.html'), articlePage(post));
   }
 
-  // Also create a source-tree listing for VS Code / Live Server previews.
-  // Production deploys only _site, where article links stay root-relative.
-  const sourceBlogDir = path.join(ROOT, 'blog');
-  fs.mkdirSync(sourceBlogDir, { recursive: true });
-
-  const sourcePreviewListing = generatedListing.replace(
-    /href=\"\/([a-z0-9]+(?:-[a-z0-9]+)*)\/\"/g,
-    (match, slug) => seen.has(slug)
-      ? `href=\"../_site/${slug}/\"`
-      : match
-  );
-
-  fs.writeFileSync(path.join(sourceBlogDir, 'index.html'), sourcePreviewListing);
+  // Keep ROOT/blog/index.html untouched so footer edits remain maintainable there.
+  // Local/Live Server preview uses that source file; production deploys _site/blog/index.html.
 
   writeSitemap(posts);
 
