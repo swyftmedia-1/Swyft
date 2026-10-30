@@ -4,7 +4,7 @@
 @media(max-width:580px){.container{width:calc(100% - 34px)}.header-inner{padding:10px 17px;gap:10px}.brand img{width:168px;max-height:46px}.social-links{gap:4px}.social-links a{width:28px;height:28px}.hero h1{font-size:clamp(39px,12vw,58px)}.hero-visual{min-height:315px}.hero-card{max-width:205px;padding:15px}.hero-stamp{width:86px;height:86px;font-size:10px}.section{padding:52px 0}.section-head{display:block}.section-head>.btn{margin-top:20px}.grid-3,.grid-2{grid-template-columns:1fr}.project-card img,.story-card img{height:220px}.page-hero{padding:55px 0 42px}.metric-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-col:last-child{grid-column:auto}.footer-bottom{flex-direction:column;gap:5px}.cta-band{padding:28px 23px;border-radius:22px}.contact-form,.contact-panel{padding:22px}.form-row{grid-template-columns:1fr;gap:0}.people-card img{height:300px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js-motion .reveal,.js-motion .reveal.is-visible{transition:none;transform:none;opacity:1}.btn,.service-card,.project-card,.story-card{transition:none}}
 
-
+ 
 /* Editorial homepage refresh inspired by the supplied reference */
 .site-header{background:rgba(255,255,255,.975);box-shadow:0 7px 26px rgba(11,34,56,.075);border-bottom:1px solid #dce5eb}
 .header-inner{max-width:1400px;gap:clamp(14px,1.7vw,24px)}
