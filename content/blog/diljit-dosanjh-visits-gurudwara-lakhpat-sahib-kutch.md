@@ -4,11 +4,11 @@ slug: "diljit-dosanjh-visits-gurudwara-lakhpat-sahib-kutch"
 id: "80a77b6e-6d58-4802-a546-4539692fdbcf"
 date: 2026-11-28
 description: "Diljit Dosanjh visits Gurudwara Lakhpat Sahib in Kutch, Gujarat, paying obeisance and meeting devotees at this historic Sikh spiritual destination. Discover more about the visit and its significance through Swyft Media."
-featured_image: ""
+featured_image: "https://raw.githubusercontent.com/swyftmedia-1/Swyft/main/content/blog/upload/1795865606853-00d889959b179d16.webp"
 author: "Swyft Media Productions"
 published: true
 created_at: "2026-11-28T06:55:17.456Z"
-updated_at: "2026-11-28T06:55:17.456Z"
+updated_at: "2026-11-28T11:33:30.886Z"
 ---
 
 Diljit Dosanjh Visits Historic Gurudwara Lakhpat Sahib in Kutch, Meets Devotees and Locals
